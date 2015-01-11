@@ -17,14 +17,13 @@ allprojects {
 	repositories {
 		jcenter()
 	}
-
-	ext {
-		minSdkVersion = 8
-		targetSdkVersion = 21
-		versionCode = 1
-		versionName = "1.0"
-		compileSdkVersion = 20
-		buildToolsVersion = "21.1.0"
-	}
-
+}
+ext {
+	applicationId = "android.com.smshelper"
+	minSdkVersion = 8
+	targetSdkVersion = 14
+	compileSdkVersion = 21
+	buildToolsVersion = "21.1"
+	versionCode = 1
+	versionName = "1.0"
 }

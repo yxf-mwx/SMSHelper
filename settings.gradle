@@ -1,2 +1,2 @@
 include ':app'
-include ':import_libs:menudrawer'
+include ':extra_libs:MenuDrawerLibrary'
