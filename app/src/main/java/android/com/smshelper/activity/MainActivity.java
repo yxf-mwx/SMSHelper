@@ -2,10 +2,9 @@ package android.com.smshelper.activity;
 
 import android.com.smshelper.R;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +26,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
 		setContentView(R.layout.activity_main);
 		mTextView = (TextView) findViewById(R.id.tv1_main_activity);
 		mTextView.setOnClickListener(this);
+		initActionBar();
 		initMenuDrawer();
+
 	}
 
 	@Override
@@ -43,12 +44,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-
-		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings) {
-			return true;
-		}
-
+		mMenuDrawer.openMenu();
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -75,16 +71,13 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
 	@Override
 	public void onDrawerStateChange(int oldState, int newState) {
 		int logoRes = 0;
-
 		if (newState == MenuDrawer.STATE_CLOSED) {
 			logoRes = R.drawable.ic_actionbar_menu;
 		} else {
 			logoRes = R.drawable.ic_actionbar_back;
 		}
-		Log.d(getClass().getName(), String.valueOf(logoRes));
-		Drawable drawable = getResources().getDrawable(logoRes);
 		if (logoRes != 0) {
-			getSupportActionBar().setLogo(drawable);
+			getSupportActionBar().setHomeAsUpIndicator(logoRes);
 		}
 	}
 
@@ -98,5 +91,14 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
 		super.onDestroy();
 		mMenuDrawer.setOnDrawerStateChangeListener(null);
 		mMenuDrawer = null;
+	}
+
+	private void initActionBar() {
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setDisplayShowCustomEnabled(true);
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+		actionBar.setCustomView(R.layout.layout_actionbar);
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setHomeAsUpIndicator(R.drawable.ic_actionbar_menu);
 	}
 }

@@ -20,11 +20,27 @@
 				<category android:name = "android.intent.category.LAUNCHER" />
 			</intent-filter >
 		</activity >
+
+		<activity android:name = ".activity.BlackListActivity" >
+			<intent-filter >
+				<action android:name = "android.intent.action.SMS_BLACKLIST" />
+				<category android:name = "android.intent.category.DEFAULT" />
+			</intent-filter >
+		</activity >
+
+		<activity android:name = ".activity.ManualInputActivity" >
+			<intent-filter >
+				<action android:name = "android.intent.action.SMS_MANUALINPUT" />
+				<category android:name = "android.intent.category.DEFAULT" />
+			</intent-filter >
+		</activity >
+
 		<receiver android:name = ".reciever.SmsReciever" >
 			<intent-filter android:priority = "1000" >
 				<action android:name = "android.provider.Telephony.SMS_RECEIVED" />
 			</intent-filter >
 		</receiver >
+
 	</application >
 
 </manifest >
