@@ -63,7 +63,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
 				MenuDrawer.MENU_DRAG_WINDOW
 		);
 		mMenuDrawer.setTouchMode(MenuDrawer.TOUCH_MODE_FULLSCREEN);
-		mMenuDrawer.setMenuView(R.layout.fragment_leftmenu_frame);
+		mMenuDrawer.setMenuView(R.layout.view_leftmenu);
 		mMenuDrawer.setMenuSize(menuSize);
 		mMenuDrawer.setOnDrawerStateChangeListener(this);
 	}

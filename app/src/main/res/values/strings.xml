@@ -9,5 +9,9 @@
 	<string name = "name_manualinput" >名称：</string >
 	<string name = "btn_save_manualinput" >保存</string >
 	<string name = "test_for_text" >测试文字</string >
+	<string name = "settings" >设置</string >
+	<string name = "blacklist" >黑名单</string >
+	<string name = "whitelist" >白名单</string >
+	<string name = "keyword" >关键字</string >
 
 </resources >

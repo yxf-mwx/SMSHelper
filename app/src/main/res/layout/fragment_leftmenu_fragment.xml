@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+              android:orientation = "vertical"
+              android:layout_width = "match_parent"
+              android:layout_height = "match_parent"
+              android:background = "@android:color/white" >
+
+
+	<LinearLayout
+			android:paddingLeft = "@dimen/sms_padding_frame"
+			android:orientation = "horizontal"
+			android:layout_width = "match_parent"
+			android:layout_height = "@dimen/abc_action_bar_default_height_material"
+			android:gravity = "center_vertical" >
+
+		<ImageView
+				android:layout_width = "34dp"
+				android:layout_height = "34dp"
+				android:src = "@drawable/ic_setting" />
+
+		<TextView
+				android:gravity = "center_vertical"
+				android:layout_width = "wrap_content"
+				android:layout_height = "wrap_content"
+				android:textSize = "25dp"
+				android:text = "@string/settings"
+				android:layout_marginLeft = "@dimen/sms_drawablepadding" />
+	</LinearLayout >
+
+	<include layout = "@layout/layout_common_divider" />
+
+	<TextView
+			android:id = "@+id/tv_blacklist_leftmenu"
+			android:text = "@string/blacklist"
+			style = "@style/TextViewLeftMenu"
+			/>
+
+	<include layout = "@layout/layout_common_divider" />
+
+	<TextView
+			android:id = "@+id/tv_whitelist_leftmenu"
+			android:text = "@string/whitelist"
+			style = "@style/TextViewLeftMenu" />
+
+	<include layout = "@layout/layout_common_divider" />
+
+	<TextView
+			android:id = "@+id/tv_keyword_leftmenu"
+			style = "@style/TextViewLeftMenu"
+			android:text = "@string/keyword" />
+
+	<include layout = "@layout/layout_common_divider" />
+</LinearLayout >
