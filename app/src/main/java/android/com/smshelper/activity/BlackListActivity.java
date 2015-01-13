@@ -3,7 +3,9 @@ package android.com.smshelper.activity;
 import android.com.smshelper.R;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,6 +24,7 @@ public class BlackListActivity extends ActionBarActivity implements View.OnClick
 		mLvMain = (ListView) findViewById(R.id.lv_blacklist);
 		mTvAdd = (TextView) findViewById(R.id.tv_add_blacklist);
 		mTvAdd.setOnClickListener(this);
+		initActionBar();
 	}
 
 	@Override
@@ -32,7 +35,24 @@ public class BlackListActivity extends ActionBarActivity implements View.OnClick
 				Intent intent = new Intent(BlackListActivity.this, ManualInputActivity.class);
 				startActivity(intent);
 				break;
-
 		}
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		final int id = item.getItemId();
+		switch (id) {
+			case android.R.id.home:
+				this.finish();
+				return true;
+			default:
+				return true;
+		}
+	}
+
+	private void initActionBar() {
+		final ActionBar actionBar = getSupportActionBar();
+		actionBar.setTitle(getString(R.string.blacklist_management));
+		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 }

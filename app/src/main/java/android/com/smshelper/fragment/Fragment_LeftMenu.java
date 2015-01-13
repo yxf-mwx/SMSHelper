@@ -1,8 +1,9 @@
 package android.com.smshelper.fragment;
 
 import android.com.smshelper.R;
+import android.com.smshelper.activity.BlackListActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +29,7 @@ public class Fragment_LeftMenu extends Fragment implements View.OnClickListener 
 	}
 
 	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		mTVBlackList = (TextView) view.findViewById(R.id.tv_blacklist_leftmenu);
 		mTVBlackList.setOnClickListener(this);
@@ -40,6 +41,17 @@ public class Fragment_LeftMenu extends Fragment implements View.OnClickListener 
 
 	@Override
 	public void onClick(View v) {
-
+		final int id = v.getId();
+		switch (id) {
+			case R.id.tv_blacklist_leftmenu:
+				Intent intent = new Intent(getActivity(), BlackListActivity.class);
+				getActivity().startActivity(intent);
+				return;
+			case R.id.tv_whitelist_leftmenu:
+				return;
+			case R.id.tv_keyword_leftmenu:
+			default:
+				return;
+		}
 	}
 }

@@ -27,7 +27,10 @@
 				android:layout_marginLeft = "@dimen/sms_drawablepadding" />
 	</LinearLayout >
 
-	<include layout = "@layout/layout_common_divider" />
+	<View
+			android:layout_width = "match_parent"
+			android:layout_height = "2dp"
+			android:background = "?attr/colorPrimary" />
 
 	<TextView
 			android:id = "@+id/tv_blacklist_leftmenu"
