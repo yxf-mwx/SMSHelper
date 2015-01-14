@@ -33,4 +33,10 @@ public class BlackListManager {
 	public List<PeopleInfo> getBlackList() {
 		return mList;
 	}
+
+	public void delInfo(int position) {
+		if (position < mList.size() && position >= 0) {
+			mList.remove(position);
+		}
+	}
 }

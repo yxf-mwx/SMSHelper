@@ -1,7 +1,9 @@
 package android.com.smshelper.adapter;
 
+import android.com.smshelper.AppConstant;
 import android.com.smshelper.R;
 import android.com.smshelper.entity.PeopleInfo;
+import android.com.smshelper.manager.BlackListManager;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,7 @@ import java.util.List;
 /**
  * Created by admin on 15-1-14.
  */
-public class AdapterBlackList extends BaseAdapter {
+public class AdapterBlackList extends BaseAdapter implements View.OnClickListener {
 	private List<PeopleInfo> mList;
 	private Context mContext;
 
@@ -55,7 +57,19 @@ public class AdapterBlackList extends BaseAdapter {
 		final String number = info.getNumber();
 		holder.name.setText(name);
 		holder.number.setText(number);
+		holder.btnDelete.setTag(AppConstant.TAG_POSTION, position);
+		holder.btnDelete.setOnClickListener(this);
 		return convertView;
+	}
+
+	@Override
+	public void onClick(View v) {
+		Object obj = v.getTag(AppConstant.TAG_POSTION);
+		if (obj != null) {
+			final int position = (Integer) obj;
+			BlackListManager.getInstance().delInfo(position);
+			notifyDataSetChanged();
+		}
 	}
 
 	private static class ViewHolder {
