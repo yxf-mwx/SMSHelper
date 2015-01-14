@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class BlackListActivity extends ActionBarActivity implements View.OnClick
 	private ListView mLvMain;
 	private List<PeopleInfo> mList;
 	private AdapterBlackList mAdapter;
+	private TextView mTvBottom;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +29,11 @@ public class BlackListActivity extends ActionBarActivity implements View.OnClick
 		setContentView(R.layout.activity_balcklist);
 		initActionBar();
 		mLvMain = (ListView) findViewById(R.id.lv_blacklist);
+		mTvBottom = (TextView) findViewById(R.id.tv_add_blacklist);
 		mList = BlackListManager.getInstance().getBlackList();
 		mAdapter = new AdapterBlackList(this, mList);
 		mLvMain.setAdapter(mAdapter);
+		mTvBottom.setOnClickListener(this);
 	}
 
 
@@ -37,6 +41,8 @@ public class BlackListActivity extends ActionBarActivity implements View.OnClick
 	public void onClick(View v) {
 		final int id = v.getId();
 		switch (id) {
+			case R.id.tv_add_blacklist:
+				return;
 		}
 	}
 
