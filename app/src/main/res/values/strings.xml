@@ -14,5 +14,6 @@
 	<string name = "whitelist" >白名单</string >
 	<string name = "keyword" >关键字</string >
 	<string name = "blacklist_management" >黑名单管理</string >
+	<string name = "delete" >删除</string >
 
 </resources >

@@ -1,6 +1,6 @@
 package android.com.smshelper.manager;
 
-import android.text.TextUtils;
+import android.com.smshelper.entity.PeopleInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +11,13 @@ import java.util.List;
 public class BlackListManager {
 	private static BlackListManager instance = null;
 
-	private List<String> mList = null;
+	private List<PeopleInfo> mList = null;
 
 	public BlackListManager() {
 		mList = new ArrayList<>();
+		mList.add(new PeopleInfo("Tom", "123"));
+		mList.add(new PeopleInfo("Kom", "456"));
+		mList.add(new PeopleInfo("Rom", "789"));
 	}
 
 	public static synchronized BlackListManager getInstance() {
@@ -24,12 +27,10 @@ public class BlackListManager {
 		return instance;
 	}
 
-	public void addInfo(String phoneNumber) {
-		if (!TextUtils.isEmpty(phoneNumber)) {
-			if (!phoneNumber.contains(phoneNumber)) {
-				mList.add(phoneNumber);
-			}
-		}
+	public void addInfo(PeopleInfo info) {
 	}
 
+	public List<PeopleInfo> getBlackList() {
+		return mList;
+	}
 }

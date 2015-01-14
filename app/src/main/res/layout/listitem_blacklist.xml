@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:paddingTop = "10dp"
+                android:paddingBottom = "10dp" >
+
+	<TextView
+			android:id = "@+id/tv_name_blacklist"
+			android:layout_width = "wrap_content"
+			android:layout_height = "wrap_content"
+			android:text = "@string/test_for_text"
+			android:singleLine = "true"
+			android:maxLength = "20"
+			android:layout_centerVertical = "true" />
+
+	<TextView
+			android:id = "@+id/tv_number_blacklist"
+			android:layout_width = "wrap_content"
+			android:layout_height = "wrap_content"
+			android:layout_marginLeft = "10dp"
+			android:text = "12345"
+			android:singleLine = "true"
+			android:layout_toRightOf = "@+id/tv_name_blacklist"
+			android:layout_centerVertical = "true"
+			android:maxLength = "16" />
+
+	<TextView
+			android:id = "@+id/btn_delete_blacklist"
+			android:text = "@string/delete"
+			android:layout_alignParentRight = "true"
+			style = "@style/TextViewButton"
+			android:background = "@drawable/selector_btn" />
+
+</RelativeLayout >
