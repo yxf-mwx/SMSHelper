@@ -5,14 +5,11 @@ package android.com.smshelper.entity;
  */
 public class PeopleInfo {
 	private String mName;
-	private String mNumber;
+	private String mPhone;
 
-	public PeopleInfo(String name, String number) {
+	public PeopleInfo(String name, String phone) {
 		mName = name;
-		mNumber = number;
-	}
-
-	public PeopleInfo() {
+		mPhone = phone;
 	}
 
 	public String getName() {
@@ -23,11 +20,19 @@ public class PeopleInfo {
 		mName = name;
 	}
 
-	public String getNumber() {
-		return mNumber;
+	public String getPhone() {
+		return mPhone;
 	}
 
-	public void setNumber(String number) {
-		mNumber = number;
+	public void setPhone(String phone) {
+		mPhone = phone;
+	}
+
+	@Override
+	public String toString() {
+		return "PeopleInfo{" +
+				"mName='" + mName + '\'' +
+				", mPhone='" + mPhone + '\'' +
+				'}';
 	}
 }

@@ -54,7 +54,7 @@ public class AdapterBlackList extends BaseAdapter implements View.OnClickListene
 		}
 		final PeopleInfo info = mList.get(position);
 		final String name = info.getName();
-		final String number = info.getNumber();
+		final String number = info.getPhone();
 		holder.name.setText(name);
 		holder.number.setText(number);
 		holder.btnDelete.setTag(AppConstant.TAG_POSTION, position);

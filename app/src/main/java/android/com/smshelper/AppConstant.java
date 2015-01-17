@@ -5,4 +5,5 @@ package android.com.smshelper;
  */
 public class AppConstant {
 	public final static int TAG_POSTION = 0xffffffff;
+	public static final String FRAGMENT_TAG_MANUALINPUT = "MANUAL_INPUT";
 }
