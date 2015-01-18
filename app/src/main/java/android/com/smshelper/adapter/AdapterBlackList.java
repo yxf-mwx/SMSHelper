@@ -67,7 +67,7 @@ public class AdapterBlackList extends BaseAdapter implements View.OnClickListene
 		Object obj = v.getTag(AppConstant.TAG_POSTION);
 		if (obj != null) {
 			final int position = (Integer) obj;
-			BlackListManager.getInstance().delInfo(position);
+			BlackListManager.getInstance(mContext).delInfo(position);
 			notifyDataSetChanged();
 		}
 	}

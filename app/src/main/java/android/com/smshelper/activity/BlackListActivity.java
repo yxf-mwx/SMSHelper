@@ -35,7 +35,7 @@ public class BlackListActivity extends ActionBarActivity implements View.OnClick
 		initActionBar();
 		mLvMain = (ListView) findViewById(R.id.lv_blacklist);
 		mTvBottom = (TextView) findViewById(R.id.tv_add_blacklist);
-		mList = BlackListManager.getInstance().getBlackList();
+		mList = BlackListManager.getInstance(this).getBlackList();
 		mAdapter = new AdapterBlackList(this, mList);
 		mLvMain.setAdapter(mAdapter);
 		mTvBottom.setOnClickListener(this);
@@ -81,7 +81,7 @@ public class BlackListActivity extends ActionBarActivity implements View.OnClick
 	@Override
 	public void callback(PeopleInfo info) {
 //		Toast.makeText(this, info.toString(), Toast.LENGTH_LONG).show();
-		BlackListManager.getInstance().addorUpdateInfo(info);
+		BlackListManager.getInstance(this).addorUpdateInfo(info);
 		mAdapter.notifyDataSetChanged();
 	}
 }
