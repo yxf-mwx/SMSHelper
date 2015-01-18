@@ -2,11 +2,11 @@ package android.com.smshelper.activity;
 
 import android.com.smshelper.AppConstant;
 import android.com.smshelper.R;
-import android.com.smshelper.adapter.AdapterInfoList;
+import android.com.smshelper.adapter.AdapterWhiteList;
 import android.com.smshelper.entity.PeopleInfo;
 import android.com.smshelper.fragment.DialogFragment_ManualInput;
 import android.com.smshelper.interfac.ManualInputCallback;
-import android.com.smshelper.manager.BlackListManager;
+import android.com.smshelper.manager.WhiteListManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -20,27 +20,27 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * Created by admin on 15-1-9.
+ * Created by admin on 15-1-18.
  */
-public class BlackListActivity extends ActionBarActivity implements View.OnClickListener, ManualInputCallback {
+public class WhiteListActivity extends ActionBarActivity implements View.OnClickListener, ManualInputCallback {
 	private ListView mLvMain;
+	private TextView mTvAdd;
+
 	private List<PeopleInfo> mList;
-	private AdapterInfoList mAdapter;
-	private TextView mTvBottom;
+	private AdapterWhiteList mAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list);
-		initActionBar();
 		mLvMain = (ListView) findViewById(R.id.lv_main_infolist);
-		mTvBottom = (TextView) findViewById(R.id.tv_add_infolist);
-		mList = BlackListManager.getInstance(this).getBlackList();
-		mAdapter = new AdapterInfoList(this, mList);
+		mTvAdd = (TextView) findViewById(R.id.tv_add_infolist);
+		mTvAdd.setOnClickListener(this);
+		mList = WhiteListManager.getInstance(this).getWhiteList();
+		mAdapter = new AdapterWhiteList(this, mList);
 		mLvMain.setAdapter(mAdapter);
-		mTvBottom.setOnClickListener(this);
+		initActionBar();
 	}
-
 
 	@Override
 	public void onClick(View v) {
@@ -48,25 +48,13 @@ public class BlackListActivity extends ActionBarActivity implements View.OnClick
 		switch (id) {
 			case R.id.tv_add_infolist:
 				showAddDialog();
-				return;
-		}
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		final int id = item.getItemId();
-		switch (id) {
-			case android.R.id.home:
-				this.finish();
-				return true;
-			default:
-				return true;
+				break;
 		}
 	}
 
 	private void initActionBar() {
-		final ActionBar actionBar = getSupportActionBar();
-		actionBar.setTitle(getString(R.string.blacklist_management));
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setTitle("白名单管理");
 		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 
@@ -80,7 +68,19 @@ public class BlackListActivity extends ActionBarActivity implements View.OnClick
 
 	@Override
 	public void callback(PeopleInfo info) {
-		BlackListManager.getInstance(this).addorUpdateInfo(info);
+		WhiteListManager.getInstance(this).addorUpdateInfo(info);
 		mAdapter.notifyDataSetChanged();
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		final int id = item.getItemId();
+		switch (id) {
+			case android.R.id.home:
+				this.finish();
+				return true;
+			default:
+				return true;
+		}
 	}
 }

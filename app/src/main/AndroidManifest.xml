@@ -21,17 +21,21 @@
 				<category android:name = "android.intent.category.LAUNCHER" />
 			</intent-filter >
 		</activity >
-
-		<activity android:name = ".activity.BlackListActivity" >
+		<!--BlackList-->
+		<activity
+				android:name = ".activity.BlackListActivity"
+				android:windowSoftInputMode = "adjustNothing" >
 			<intent-filter >
 				<action android:name = "android.intent.action.SMS_BLACKLIST" />
 				<category android:name = "android.intent.category.DEFAULT" />
 			</intent-filter >
 		</activity >
-
-		<activity android:name = ".activity.ManualInputActivity" >
+		<!--WhiteList-->
+		<activity
+				android:name = ".activity.WhiteListActivity"
+				android:windowSoftInputMode = "adjustNothing" >
 			<intent-filter >
-				<action android:name = "android.intent.action.SMS_MANUALINPUT" />
+				<action android:name = "android.intent.action.SMS_WHITELIST" />
 				<category android:name = "android.intent.category.DEFAULT" />
 			</intent-filter >
 		</activity >

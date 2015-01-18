@@ -5,13 +5,13 @@
               android:layout_height = "match_parent" >
 
 	<ListView
-			android:id = "@+id/lv_blacklist"
+			android:id = "@+id/lv_main_infolist"
 			android:layout_width = "match_parent"
 			android:layout_height = "0dp"
 			android:layout_weight = "1" />
 
 	<TextView
-			android:id = "@+id/tv_add_blacklist"
+			android:id = "@+id/tv_add_infolist"
 			style = "@style/TextViewButton"
 			android:layout_width = "match_parent"
 			android:layout_height = "50dp"

@@ -14,8 +14,8 @@ import java.util.List;
 /**
  * Created by admin on 15-1-9.
  */
-public class BlackList_DB extends SQLiteOpenHelper {
-	public static BlackList_DB instance = null;
+public class InfoList_DB extends SQLiteOpenHelper {
+	public static InfoList_DB instance = null;
 	public static Context mContext;
 	private final static int VERSION_NAME = 1;
 	private final static String DB_NAME = "INFO";
@@ -24,15 +24,15 @@ public class BlackList_DB extends SQLiteOpenHelper {
 	private final static String KEY_PHONE = "a";
 	private final static String KEY_NAME = "b";
 
-	public static synchronized BlackList_DB getInstance(Context context) {
+	public static synchronized InfoList_DB getInstance(Context context) {
 		if (instance == null) {
 			mContext = context.getApplicationContext();
-			instance = new BlackList_DB(mContext);
+			instance = new InfoList_DB(mContext);
 		}
 		return instance;
 	}
 
-	public BlackList_DB(Context context) {
+	public InfoList_DB(Context context) {
 		super(context, DB_NAME, null, VERSION_NAME);
 	}
 
@@ -80,9 +80,9 @@ public class BlackList_DB extends SQLiteOpenHelper {
 		int effectRows = db.update(listName, cv, KEY_PHONE + " = ?", new String[]{phone});
 		if (effectRows == 0) {
 			long effect = db.insert(listName, null, cv);
-//			Toast.makeText(mContext, "effect rows" + effect, Toast.LENGTH_LONG).show();
+			Toast.makeText(mContext, "insert effectRows" + effect + effect, Toast.LENGTH_LONG).show();
 		} else {
-			Toast.makeText(mContext, "update EffectRows", Toast.LENGTH_LONG).show();
+			Toast.makeText(mContext, "update EffectRows" + effectRows, Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -117,4 +117,7 @@ public class BlackList_DB extends SQLiteOpenHelper {
 		deleteList(TABLE_BLACKLIST, p);
 	}
 
+	public void deleteWhiteList(PeopleInfo p) {
+		deleteList(TABLE_WHITELIST, p);
+	}
 }

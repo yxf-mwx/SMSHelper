@@ -5,40 +5,31 @@ import android.com.smshelper.entity.PeopleInfo;
 import android.content.Context;
 import android.text.TextUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by admin on 15-1-9.
+ * Created by admin on 15-1-18.
  */
-public class BlackListManager {
-	private static BlackListManager instance = null;
+public class WhiteListManager {
+	private static WhiteListManager instance;
 	private Context mContext;
-	private List<PeopleInfo> mList = null;
+	private List<PeopleInfo> mList;
 
-	public BlackListManager(Context context) {
+	public WhiteListManager(Context context) {
 		mContext = context.getApplicationContext();
-		mList = new ArrayList<>();
-		List<PeopleInfo> dbList = InfoList_DB.getInstance(mContext).getBlackList();
-		for (PeopleInfo p : dbList) {
-			mList.add(p);
-		}
-		dbList.clear();
-		dbList = null;
+		mList = InfoList_DB.getInstance(context).getWhiteList();
 	}
 
-	public static synchronized BlackListManager getInstance(Context context) {
+	public synchronized static WhiteListManager getInstance(Context context) {
 		if (instance == null) {
-			instance = new BlackListManager(context);
+			instance = new WhiteListManager(context);
 		}
 		return instance;
 	}
 
-
 	public void addorUpdateInfo(PeopleInfo info) {
 		final String phone = info.getPhone();
 		final String name = info.getName();
-
 		if (TextUtils.isEmpty(phone)) {
 			return;
 		}
@@ -47,15 +38,15 @@ public class BlackListManager {
 			final String p = i.getPhone();
 			if (p.equals(phone)) {
 				i.setName(name);
-				InfoList_DB.getInstance(mContext).addorUpdateBlackList(info);
+				InfoList_DB.getInstance(mContext).addorUpdateWhiteList(info);
 				return;
 			}
 		}
-		InfoList_DB.getInstance(mContext).addorUpdateBlackList(info);
+		InfoList_DB.getInstance(mContext).addorUpdateWhiteList(info);
 		mList.add(info);
 	}
 
-	public List<PeopleInfo> getBlackList() {
+	public List<PeopleInfo> getWhiteList() {
 		return mList;
 	}
 
@@ -65,7 +56,7 @@ public class BlackListManager {
 			info = mList.remove(position);
 		}
 		if (info != null) {
-			InfoList_DB.getInstance(mContext).deleteBlackList(info);
+			InfoList_DB.getInstance(mContext).deleteWhiteList(info);
 		}
 	}
 }

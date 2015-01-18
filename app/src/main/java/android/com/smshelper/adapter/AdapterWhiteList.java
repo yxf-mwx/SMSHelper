@@ -3,7 +3,7 @@ package android.com.smshelper.adapter;
 import android.com.smshelper.AppConstant;
 import android.com.smshelper.R;
 import android.com.smshelper.entity.PeopleInfo;
-import android.com.smshelper.manager.BlackListManager;
+import android.com.smshelper.manager.WhiteListManager;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +13,13 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * Created by admin on 15-1-14.
+ * Created by admin on 15-1-18.
  */
-public class AdapterBlackList extends BaseAdapter implements View.OnClickListener {
+public class AdapterWhiteList extends BaseAdapter implements View.OnClickListener {
 	private List<PeopleInfo> mList;
 	private Context mContext;
 
-	public AdapterBlackList(Context context, List<PeopleInfo> list) {
+	public AdapterWhiteList(Context context, List<PeopleInfo> list) {
 		mList = list;
 		mContext = context;
 	}
@@ -67,7 +67,7 @@ public class AdapterBlackList extends BaseAdapter implements View.OnClickListene
 		Object obj = v.getTag(AppConstant.TAG_POSTION);
 		if (obj != null) {
 			final int position = (Integer) obj;
-			BlackListManager.getInstance(mContext).delInfo(position);
+			WhiteListManager.getInstance(mContext).delInfo(position);
 			notifyDataSetChanged();
 		}
 	}

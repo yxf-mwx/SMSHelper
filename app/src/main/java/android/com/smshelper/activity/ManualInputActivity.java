@@ -11,6 +11,6 @@ public class ManualInputActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_balcklist);
+		setContentView(R.layout.activity_list);
 	}
 }
