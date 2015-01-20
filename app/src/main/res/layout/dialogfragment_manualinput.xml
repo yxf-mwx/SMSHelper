@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
               android:orientation = "vertical"
               android:layout_width = "match_parent"
-              android:layout_height = "match_parent" >
+              android:layout_height = "match_parent"
+              android:background = "@android:color/white" >
 
 	<EditText
 			android:id = "@+id/edt_inputphone_dialogfragment"
@@ -24,41 +25,41 @@
 			/>
 
 	<!--<View-->
-			<!--android:layout_width = "match_parent"-->
-			<!--android:layout_height = "1dp"-->
-			<!--android:background = "@color/opacity_20"-->
-			<!--android:layout_marginTop = "@dimen/sms_padding_frame" />-->
+	<!--android:layout_width = "match_parent"-->
+	<!--android:layout_height = "1dp"-->
+	<!--android:background = "@color/opacity_20"-->
+	<!--android:layout_marginTop = "@dimen/sms_padding_frame" />-->
 
 	<!--<LinearLayout-->
-			<!--android:orientation = "horizontal"-->
-			<!--android:layout_width = "match_parent"-->
-			<!--android:layout_height = "wrap_content"-->
-			<!-->-->
+	<!--android:orientation = "horizontal"-->
+	<!--android:layout_width = "match_parent"-->
+	<!--android:layout_height = "wrap_content"-->
+	<!-->-->
 
-		<!--<TextView-->
-				<!--android:id = "@+id/tv_cancel_manualinput"-->
-				<!--style = "@style/TextViewButton"-->
-				<!--android:layout_width = "0dp"-->
-				<!--android:layout_height = "wrap_content"-->
-				<!--android:layout_weight = "1"-->
-				<!--android:text = "@string/cancel"-->
-				<!--android:singleLine = "true"-->
-				<!--android:background = "@drawable/selector_commonselector" />-->
+	<!--<TextView-->
+	<!--android:id = "@+id/tv_cancel_manualinput"-->
+	<!--style = "@style/TextViewButton"-->
+	<!--android:layout_width = "0dp"-->
+	<!--android:layout_height = "wrap_content"-->
+	<!--android:layout_weight = "1"-->
+	<!--android:text = "@string/cancel"-->
+	<!--android:singleLine = "true"-->
+	<!--android:background = "@drawable/selector_commonselector" />-->
 
-		<!--<View-->
-				<!--android:layout_width = "1dp"-->
-				<!--android:layout_height = "match_parent"-->
-				<!--android:background = "@color/opacity_20" />-->
+	<!--<View-->
+	<!--android:layout_width = "1dp"-->
+	<!--android:layout_height = "match_parent"-->
+	<!--android:background = "@color/opacity_20" />-->
 
-		<!--<TextView-->
-				<!--android:id = "@+id/tv_confirm_manualinput"-->
-				<!--style = "@style/TextViewButton"-->
-				<!--android:layout_width = "0dp"-->
-				<!--android:layout_height = "wrap_content"-->
-				<!--android:layout_weight = "1"-->
-				<!--android:text = "@string/confirm"-->
-				<!--android:singleLine = "true"-->
-				<!--android:background = "@drawable/selector_commonselector"-->
-				<!--/>-->
+	<!--<TextView-->
+	<!--android:id = "@+id/tv_confirm_manualinput"-->
+	<!--style = "@style/TextViewButton"-->
+	<!--android:layout_width = "0dp"-->
+	<!--android:layout_height = "wrap_content"-->
+	<!--android:layout_weight = "1"-->
+	<!--android:text = "@string/confirm"-->
+	<!--android:singleLine = "true"-->
+	<!--android:background = "@drawable/selector_commonselector"-->
+	<!--/>-->
 	<!--</LinearLayout >-->
 </LinearLayout >

@@ -1,0 +1,109 @@
+package android.com.smshelper.adapter;
+
+import android.com.smshelper.AppConstant;
+import android.com.smshelper.R;
+import android.com.smshelper.Util.DateUtils;
+import android.com.smshelper.entity.CallLogs;
+import android.content.Context;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.TextView;
+
+import java.util.Date;
+import java.util.List;
+
+/**
+ * Created by admin on 15-1-20.
+ */
+public class Adapter_CallLogs extends BaseAdapter implements CompoundButton.OnCheckedChangeListener {
+	List<CallLogs> mList;
+	private Context mContext;
+
+	public Adapter_CallLogs(Context context, List<CallLogs> list) {
+		mList = list;
+		mContext = context;
+	}
+
+	@Override
+	public int getCount() {
+		return mList.size();
+	}
+
+	@Override
+	public Object getItem(int position) {
+		return mList.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return position;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		ViewHolder holder;
+		if (convertView == null) {
+			holder = new ViewHolder();
+			convertView = View.inflate(mContext, R.layout.listitem_calllog, null);
+			holder.contact = (TextView) convertView.findViewById(R.id.tv_contacts_calllog);
+			holder.date = (TextView) convertView.findViewById(R.id.tv_date_calllog);
+			holder.type = (TextView) convertView.findViewById(R.id.tv_type_calllog);
+			holder.address = (TextView) convertView.findViewById(R.id.tv_address_calllog);
+			holder.checkBox = (CheckBox) convertView.findViewById(R.id.cb_check_callog);
+			convertView.setTag(holder);
+		} else {
+			holder = (ViewHolder) convertView.getTag();
+		}
+
+		final CallLogs log = mList.get(position);
+		if (log != null) {
+			final String phone = log.getPhone();
+			final String name = log.getName();
+			if (TextUtils.isEmpty(name)) {
+				holder.contact.setText(phone);
+			} else {
+				holder.contact.setText(name);
+			}
+
+			final Date date = log.getDate();
+			String dateStr = DateUtils.getDate(date);
+			holder.date.setText(dateStr);
+
+			final String type = log.getType();
+			holder.type.setText(type);
+			final String address = log.getAddress();
+			holder.address.setText(address);
+			final boolean isCheck = log.isCheck();
+			holder.checkBox.setTag(AppConstant.TAG_POSTION, position);
+			holder.checkBox.setOnCheckedChangeListener(this);
+			holder.checkBox.setChecked(isCheck);
+		}
+		return convertView;
+	}
+
+	@Override
+	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		final Object obj = buttonView.getTag(AppConstant.TAG_POSTION);
+		if (obj != null) {
+			int position = (Integer) obj;
+			Log.d(this.getClass().getSimpleName(), String.valueOf(position));
+			CallLogs log = mList.get(position);
+			log.setCheck(isChecked);
+			notifyDataSetChanged();
+		}
+	}
+
+	private static class ViewHolder {
+		TextView contact;
+		TextView date;
+		TextView type;
+		TextView address;
+		CheckBox checkBox;
+	}
+
+}

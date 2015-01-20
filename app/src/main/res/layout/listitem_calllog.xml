@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+                android:orientation = "vertical"
+                android:layout_width = "match_parent"
+                android:layout_height = "match_parent" >
+
+	<CheckBox
+			android:id = "@+id/cb_check_callog"
+			android:layout_width = "wrap_content"
+			android:layout_height = "wrap_content"
+			android:padding = "2dp"
+			android:layout_alignParentRight = "true" />
+
+	<View
+			android:id = "@+id/divider_calllog"
+			android:layout_width = "1dp"
+			android:layout_height = "match_parent"
+			android:layout_toLeftOf = "@+id/cb_check_callog"
+			android:background = "@color/opacity_15" />
+
+	<TextView
+			android:id = "@+id/tv_contacts_calllog"
+			android:layout_width = "wrap_content"
+			android:layout_height = "wrap_content"
+			android:singleLine = "true"
+			android:text = "@string/test_for_text"
+			/>
+
+	<TextView
+			android:id = "@+id/tv_date_calllog"
+			android:layout_width = "wrap_content"
+			android:layout_height = "wrap_content"
+			android:singleLine = "true"
+			android:layout_toLeftOf = "@+id/divider_calllog"
+			android:text = "@string/test_for_text"
+			/>
+
+	<TextView
+			android:id = "@+id/tv_type_calllog"
+			android:layout_width = "wrap_content"
+			android:layout_height = "wrap_content"
+			android:singleLine = "true"
+			android:text = "@string/test_for_text"
+			android:layout_below = "@+id/tv_contacts_calllog"
+			android:layout_marginTop = "5dp"
+			/>
+
+	<TextView
+			android:id = "@+id/tv_address_calllog"
+			android:layout_width = "wrap_content"
+			android:layout_height = "wrap_content"
+			android:layout_below = "@+id/tv_date_calllog"
+			android:layout_toLeftOf = "@+id/divider_calllog"
+			android:layout_marginTop = "5dp"
+			android:singleLine = "true"
+			android:text = "@string/test_for_text"
+			/>
+
+</RelativeLayout >

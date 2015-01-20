@@ -80,9 +80,9 @@ public class InfoList_DB extends SQLiteOpenHelper {
 		int effectRows = db.update(listName, cv, KEY_PHONE + " = ?", new String[]{phone});
 		if (effectRows == 0) {
 			long effect = db.insert(listName, null, cv);
-			Toast.makeText(mContext, "insert effectRows" + effect + effect, Toast.LENGTH_LONG).show();
+			Toast.makeText(mContext, "insert effectRows: " + effect, Toast.LENGTH_LONG).show();
 		} else {
-			Toast.makeText(mContext, "update EffectRows" + effectRows, Toast.LENGTH_LONG).show();
+			Toast.makeText(mContext, "update EffectRows: " + effectRows, Toast.LENGTH_LONG).show();
 		}
 	}
 

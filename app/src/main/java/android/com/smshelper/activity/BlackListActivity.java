@@ -4,7 +4,7 @@ import android.com.smshelper.AppConstant;
 import android.com.smshelper.R;
 import android.com.smshelper.adapter.AdapterInfoList;
 import android.com.smshelper.entity.PeopleInfo;
-import android.com.smshelper.fragment.DialogFragment_ManualInput;
+import android.com.smshelper.fragment.DialogFragment_AddList;
 import android.com.smshelper.interfac.ManualInputCallback;
 import android.com.smshelper.manager.BlackListManager;
 import android.os.Bundle;
@@ -23,6 +23,7 @@ import java.util.List;
  * Created by admin on 15-1-9.
  */
 public class BlackListActivity extends ActionBarActivity implements View.OnClickListener, ManualInputCallback {
+	private static final int TYPE = 1;
 	private ListView mLvMain;
 	private List<PeopleInfo> mList;
 	private AdapterInfoList mAdapter;
@@ -34,7 +35,7 @@ public class BlackListActivity extends ActionBarActivity implements View.OnClick
 		setContentView(R.layout.activity_list);
 		initActionBar();
 		mLvMain = (ListView) findViewById(R.id.lv_main_infolist);
-		mTvBottom = (TextView) findViewById(R.id.tv_add_infolist);
+		mTvBottom = (TextView) findViewById(R.id.tv_add_common);
 		mList = BlackListManager.getInstance(this).getBlackList();
 		mAdapter = new AdapterInfoList(this, mList);
 		mLvMain.setAdapter(mAdapter);
@@ -46,7 +47,7 @@ public class BlackListActivity extends ActionBarActivity implements View.OnClick
 	public void onClick(View v) {
 		final int id = v.getId();
 		switch (id) {
-			case R.id.tv_add_infolist:
+			case R.id.tv_add_common:
 				showAddDialog();
 				return;
 		}
@@ -73,8 +74,8 @@ public class BlackListActivity extends ActionBarActivity implements View.OnClick
 	private void showAddDialog() {
 		FragmentManager fm = getSupportFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();
-		DialogFragment_ManualInput dfmt = DialogFragment_ManualInput.newInstance(this);
-		ft.add(dfmt, AppConstant.FRAGMENT_TAG_MANUALINPUT);
+		DialogFragment_AddList dfal = DialogFragment_AddList.newInstance(this, TYPE);
+		ft.add(dfal, AppConstant.FRAGMENT_TAG_MANUALINPUT);
 		ft.commit();
 	}
 

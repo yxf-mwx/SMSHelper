@@ -5,6 +5,7 @@
 	<uses-permission android:name = "android.permission.RECEIVE_SMS" />
 	<uses-permission android:name = "android.permission.READ_SMS" />
 	<uses-permission android:name = "android.permission.WRITE_SMS" />
+	<uses-permission android:name = "android.permission.READ_CONTACTS" />
 
 	<application
 			android:allowBackup = "true"
@@ -36,6 +37,12 @@
 				android:windowSoftInputMode = "adjustNothing" >
 			<intent-filter >
 				<action android:name = "android.intent.action.SMS_WHITELIST" />
+				<category android:name = "android.intent.category.DEFAULT" />
+			</intent-filter >
+		</activity >
+		<activity android:name = ".activity.CallLogsActivity" >
+			<intent-filter >
+				<action android:name = "android.intent.action.SMS_CALLLOGS" />
 				<category android:name = "android.intent.category.DEFAULT" />
 			</intent-filter >
 		</activity >
