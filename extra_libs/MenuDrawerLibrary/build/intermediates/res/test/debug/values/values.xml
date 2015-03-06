@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/admin/Documents/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
+    <!-- From: file:/home/yxf/workspace/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="dimension" name="height"/>
     <attr format="boolean" name="isLightTheme"/>
-    <!-- From: file:/home/admin/Documents/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/bundles/debug/res/values/values.xml -->
+    <!-- From: file:/home/yxf/workspace/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/bundles/debug/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="menuDrawerStyle"/>
-    <!-- From: file:/home/admin/Documents/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
+    <!-- From: file:/home/yxf/workspace/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
     <eat-comment/>
     <attr format="string" name="title"/>
     <bool name="abc_action_bar_embed_tabs">true</bool>
@@ -50,10 +50,10 @@
     <color name="material_blue_grey_950">#ff21272b</color>
     <color name="material_deep_teal_200">#ff80cbc4</color>
     <color name="material_deep_teal_500">#ff009688</color>
-    <!-- From: file:/home/admin/Documents/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/bundles/debug/res/values/values.xml -->
+    <!-- From: file:/home/yxf/workspace/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/bundles/debug/res/values/values.xml -->
     <eat-comment/>
     <color name="md__defaultBackground">#FF555555</color>
-    <!-- From: file:/home/admin/Documents/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
+    <!-- From: file:/home/yxf/workspace/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
     <eat-comment/>
     <color name="primary_dark_material_dark">#ff000000</color>
     <color name="primary_dark_material_light">#ff757575</color>
@@ -143,7 +143,7 @@
     <item name="action_menu_divider" type="id"/>
     <item name="action_menu_presenter" type="id"/>
     <item name="home" type="id"/>
-    <!-- From: file:/home/admin/Documents/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/bundles/debug/res/values/values.xml -->
+    <!-- From: file:/home/yxf/workspace/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/bundles/debug/res/values/values.xml -->
     <eat-comment/>
     <item name="mdActiveViewPosition" type="id"/>
     <item name="mdContent" type="id"/>
@@ -153,7 +153,7 @@
     <item name="md__menu" type="id"/>
     <item name="md__translationX" type="id"/>
     <item name="md__translationY" type="id"/>
-    <!-- From: file:/home/admin/Documents/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
+    <!-- From: file:/home/yxf/workspace/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
     <eat-comment/>
     <item name="progress_circular" type="id"/>
     <item name="progress_horizontal" type="id"/>
@@ -175,11 +175,11 @@
     <string name="abc_searchview_description_voice">Voice search</string>
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
-    <!-- From: file:/home/admin/Documents/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/bundles/debug/res/values/values.xml -->
+    <!-- From: file:/home/yxf/workspace/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/bundles/debug/res/values/values.xml -->
     <eat-comment/>
     <string name="md__drawerClosedIndicatorDesc">Open drawer</string>
     <string name="md__drawerOpenIndicatorDesc">Close drawer</string>
-    <!-- From: file:/home/admin/Documents/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
+    <!-- From: file:/home/yxf/workspace/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
     <eat-comment/>
     <style name="Base.TextAppearance.AppCompat" parent="android:TextAppearance">
         <item name="android:textColor">?android:textColorPrimary</item>
@@ -1170,10 +1170,10 @@ m>        <item name="android:textColorLink">@color/link_text_material_dark</ite
     <style name="ThemeOverlay.AppCompat.Dark" parent="Base.ThemeOverlay.AppCompat.Dark"/>
     <style name="ThemeOverlay.AppCompat.Dark.ActionBar" parent="Base.ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="ThemeOverlay.AppCompat.Light" parent="Base.ThemeOverlay.AppCompat.Light"/>
-    <!-- From: file:/home/admin/Documents/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/bundles/debug/res/values/values.xml -->
+    <!-- From: file:/home/yxf/workspace/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/bundles/debug/res/values/values.xml -->
     <eat-comment/>
     <style name="Widget"/>
-    <!-- From: file:/home/admin/Documents/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
+    <!-- From: file:/home/yxf/workspace/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values/values.xml -->
     <eat-comment/>
     <style name="Widget.AppCompat.ActionBar" parent="Base.Widget.AppCompat.ActionBar"/>
     <style name="Widget.AppCompat.ActionBar.Solid" parent="Base.Widget.AppCompat.ActionBar.Solid"/>
@@ -1228,7 +1228,7 @@ m>        <item name="android:textColorLink">@color/link_text_material_dark</ite
     <style name="Widget.AppCompat.Spinner.DropDown.ActionBar" parent="Base.Widget.AppCompat.Spinner.DropDown.ActionBar"/>
     <style name="Widget.AppCompat.Toolbar" parent="Base.Widget.AppCompat.Toolbar"/>
     <style name="Widget.AppCompat.Toolbar.Button.Navigation" parent="Base.Widget.AppCompat.Toolbar.Button.Navigation"/>
-    <!-- From: file:/home/admin/Documents/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/bundles/debug/res/values/values.xml -->
+    <!-- From: file:/home/yxf/workspace/SMSHelper/extra_libs/MenuDrawerLibrary/build/intermediates/bundles/debug/res/values/values.xml -->
     <eat-comment/>
     <style name="Widget.MenuDrawer">
 		<item name="mdMenuBackground">@color/md__defaultBackground</item>

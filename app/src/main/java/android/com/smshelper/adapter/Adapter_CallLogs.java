@@ -5,8 +5,8 @@ import android.com.smshelper.R;
 import android.com.smshelper.Util.DateUtils;
 import android.com.smshelper.entity.CallLogs;
 import android.content.Context;
+import android.provider.CallLog;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -70,14 +70,23 @@ public class Adapter_CallLogs extends BaseAdapter implements CompoundButton.OnCh
 				holder.contact.setText(name);
 			}
 
-			final Date date = log.getDate();
+			final Date date = new Date(log.getDate());
 			String dateStr = DateUtils.getDate(date);
 			holder.date.setText(dateStr);
 
-			final String type = log.getType();
-			holder.type.setText(type);
-			final String address = log.getAddress();
-			holder.address.setText(address);
+			final int type = log.getType();
+			String typeStr = "";
+			switch (type) {
+				case CallLog.Calls.INCOMING_TYPE:
+					typeStr = "来电";
+					break;
+				case CallLog.Calls.OUTGOING_TYPE:
+					typeStr = "去电";
+					break;
+				case CallLog.Calls.MISSED_TYPE:
+					typeStr = "未接";
+			}
+			holder.type.setText(typeStr);
 			final boolean isCheck = log.isCheck();
 			holder.checkBox.setTag(AppConstant.TAG_POSTION, position);
 			holder.checkBox.setOnCheckedChangeListener(this);
@@ -91,7 +100,6 @@ public class Adapter_CallLogs extends BaseAdapter implements CompoundButton.OnCh
 		final Object obj = buttonView.getTag(AppConstant.TAG_POSTION);
 		if (obj != null) {
 			int position = (Integer) obj;
-			Log.d(this.getClass().getSimpleName(), String.valueOf(position));
 			CallLogs log = mList.get(position);
 			log.setCheck(isChecked);
 			notifyDataSetChanged();

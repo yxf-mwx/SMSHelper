@@ -1,23 +1,30 @@
 package android.com.smshelper.activity;
 
 import android.com.smshelper.R;
+import android.com.smshelper.db.DB_Dm_Mobile;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import net.simonvt.menudrawer.MenuDrawer;
 import net.simonvt.menudrawer.Position;
 
 
-public class MainActivity extends ActionBarActivity implements MenuDrawer.OnDrawerStateChangeListener {
+public class MainActivity extends ActionBarActivity implements MenuDrawer.OnDrawerStateChangeListener, View
+		.OnClickListener {
 	MenuDrawer mMenuDrawer;
+	TextView mTv1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		mTv1 = (TextView) findViewById(R.id.tv1_main_activity);
+		mTv1.setOnClickListener(this);
 		initActionBar();
 		initMenuDrawer();
 
@@ -92,5 +99,10 @@ public class MainActivity extends ActionBarActivity implements MenuDrawer.OnDraw
 		actionBar.setCustomView(R.layout.layout_actionbar);
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setHomeAsUpIndicator(R.drawable.ic_actionbar_menu);
+	}
+
+	@Override
+	public void onClick(View v) {
+		DB_Dm_Mobile.getInstance().getMobileArea("13450211406");
 	}
 }

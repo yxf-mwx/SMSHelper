@@ -1,25 +1,24 @@
 package android.com.smshelper.entity;
 
-import java.util.Date;
-
 /**
  * Created by admin on 15-1-20.
  */
 public class CallLogs {
 	private String mPhone;
 	private String mName;
-	private Date mDate;
-	private String mAddress;
-	private String mType;
+	private long mDate;
+	private int mType;
+	private String mNumArea;
+	private String mNumType;
 	private boolean isCheck;
 
-	public CallLogs(String phone, String name, Date date, String address, String type) {
+	public CallLogs(String phone, String name, long date, int type, String numArea, String numType) {
 		mPhone = phone;
 		mName = name;
 		mDate = date;
-		mAddress = address;
 		mType = type;
-		isCheck = false;
+		mNumArea = numArea;
+		mNumType = numType;
 	}
 
 	public String getPhone() {
@@ -38,20 +37,36 @@ public class CallLogs {
 		mName = name;
 	}
 
-	public Date getDate() {
+	public long getDate() {
 		return mDate;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(long date) {
 		mDate = date;
 	}
 
-	public String getAddress() {
-		return mAddress;
+	public int getType() {
+		return mType;
 	}
 
-	public void setAddress(String address) {
-		mAddress = address;
+	public void setType(int type) {
+		mType = type;
+	}
+
+	public String getNumArea() {
+		return mNumArea;
+	}
+
+	public void setNumArea(String numArea) {
+		mNumArea = numArea;
+	}
+
+	public String getNumType() {
+		return mNumType;
+	}
+
+	public void setNumType(String numType) {
+		mNumType = numType;
 	}
 
 	public boolean isCheck() {
@@ -60,13 +75,5 @@ public class CallLogs {
 
 	public void setCheck(boolean isCheck) {
 		this.isCheck = isCheck;
-	}
-
-	public String getType() {
-		return mType;
-	}
-
-	public void setType(String type) {
-		mType = type;
 	}
 }
