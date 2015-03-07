@@ -5,8 +5,9 @@ import android.com.smshelper.R;
 import android.com.smshelper.adapter.AdapterInfoList;
 import android.com.smshelper.entity.PeopleInfo;
 import android.com.smshelper.fragment.DialogFragment_AddList;
-import android.com.smshelper.interfac.ManualInputCallback;
+import android.com.smshelper.interfac.AddInfoListCallback;
 import android.com.smshelper.manager.BlackListManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -17,13 +18,15 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by admin on 15-1-9.
  */
-public class BlackListActivity extends ActionBarActivity implements View.OnClickListener, ManualInputCallback {
+public class BlackListActivity extends ActionBarActivity implements View.OnClickListener, AddInfoListCallback {
 	private static final int TYPE = 1;
+	private static final int REQUESTCODE = 0;
 	private ListView mLvMain;
 	private List<PeopleInfo> mList;
 	private AdapterInfoList mAdapter;
@@ -80,7 +83,24 @@ public class BlackListActivity extends ActionBarActivity implements View.OnClick
 	}
 
 	@Override
-	public void callback(List<PeopleInfo> infoList) {
+	public void callback(int type) {
+		Intent intent;
+		switch (type) {
+			case 0:
+			case 1:
+				intent = new Intent(this, CallLogsActivity.class);
+				startActivityForResult(intent, REQUESTCODE);
+				break;
+			case 2:
+			case 3:
+			default:
+		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		ArrayList<PeopleInfo> infoList = data.getParcelableArrayListExtra("resultlist");
 		BlackListManager.getInstance(this).addorUpdateInfoList(infoList);
 		mAdapter.notifyDataSetChanged();
 	}

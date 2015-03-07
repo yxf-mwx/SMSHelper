@@ -5,7 +5,9 @@ import android.com.smshelper.R;
 import android.com.smshelper.adapter.Adapter_CallLogs;
 import android.com.smshelper.db.DB_CallLogs_Cache;
 import android.com.smshelper.entity.CallLogs;
+import android.com.smshelper.entity.PeopleInfo;
 import android.com.smshelper.interfac.AsyncCallBack;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -19,8 +21,8 @@ import java.util.List;
  * Created by admin on 15-1-20.
  */
 public class CallLogsActivity extends ActionBarActivity implements View.OnClickListener, AsyncCallBack {
+	private final static int RESULTCODE = 0;
 	private List<CallLogs> mList;
-
 	private View mLayout;
 	private ListView mLvMain;
 	private TextView mTvConfirm;
@@ -47,7 +49,24 @@ public class CallLogsActivity extends ActionBarActivity implements View.OnClickL
 
 	@Override
 	public void onClick(View v) {
-
+		switch (v.getId()) {
+			case R.id.tv_add_common:
+				ArrayList<PeopleInfo> list = new ArrayList<>();
+				for (CallLogs log : mList) {
+					final boolean isCheck = log.isCheck();
+					if (isCheck) {
+						final String name = log.getName();
+						final String phone = log.getPhone();
+						PeopleInfo info = new PeopleInfo(name, phone);
+						list.add(info);
+					}
+				}
+				Intent intent = new Intent();
+				intent.putParcelableArrayListExtra("resultlist", list);
+				setResult(RESULTCODE, intent);
+				this.finish();
+				break;
+		}
 	}
 
 	private void synchronizeCallLog() {

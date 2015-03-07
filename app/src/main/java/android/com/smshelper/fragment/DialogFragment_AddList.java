@@ -2,11 +2,9 @@ package android.com.smshelper.fragment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.com.smshelper.activity.CallLogsActivity;
-import android.com.smshelper.interfac.ManualInputCallback;
+import android.com.smshelper.interfac.AddInfoListCallback;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -16,13 +14,13 @@ import android.support.v4.app.DialogFragment;
  */
 public class DialogFragment_AddList extends DialogFragment {
 	private Context mContext;
-	private ManualInputCallback mCallback;
+	private AddInfoListCallback mCallback;
 	private static String BLACKLIST = "黑名单管理";
 	private static String WHITELIST = "白名单管理";
 	private static String ARGS_TITLE = "title";
 	private String mTitle;
 
-	public static DialogFragment_AddList newInstance(ManualInputCallback callback, int type) {
+	public static DialogFragment_AddList newInstance(AddInfoListCallback callback, int type) {
 		DialogFragment_AddList fragment = new DialogFragment_AddList();
 		fragment.setCallback(callback);
 		Bundle args = new Bundle();
@@ -59,24 +57,17 @@ public class DialogFragment_AddList extends DialogFragment {
 						new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
-								switch (which) {
-									case 0:
-										DialogFragment_ManualInput fragment = DialogFragment_ManualInput.newInstance
-												(mCallback);
-										fragment.show(getFragmentManager(), "ManualInput");
-										return;
-									case 1:
-										Intent intent = new Intent(mContext, CallLogsActivity.class);
-										mContext.startActivity(intent);
-										return;
+								if (mCallback != null) {
+									mCallback.callback(which);
 								}
+								return;
 							}
 						});
 		AlertDialog alertDialog = builder.create();
 		return alertDialog;
 	}
 
-	public void setCallback(ManualInputCallback callback) {
+	public void setCallback(AddInfoListCallback callback) {
 		mCallback = callback;
 	}
 }
