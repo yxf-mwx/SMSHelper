@@ -114,7 +114,7 @@ public class BlackListActivity extends ActionBarActivity implements View.OnClick
 //					case AppConstant.RESULTCODE_MANUALINPUT:
 //					case AppConstant.RESULTCODE_SMSLOG:
 //				}
-				ArrayList<PeopleInfo> infoList = data.getParcelableArrayListExtra("resultlist");
+				ArrayList<PeopleInfo> infoList = data.getParcelableArrayListExtra(AppConstant.ARGS_SELECTLIST);
 				BlackListManager.getInstance(this).addorUpdateInfoList(infoList);
 				mAdapter.notifyDataSetChanged();
 				break;

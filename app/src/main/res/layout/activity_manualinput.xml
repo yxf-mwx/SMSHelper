@@ -10,22 +10,26 @@
 			android:text = "@string/phonenumber_manualinput" />
 
 	<EditText
-			android:id = "@+id/edt_manualinput"
+			android:id = "@+id/edt_manualinput_phone"
 			android:layout_width = "match_parent"
-			android:layout_height = "30dp" />
+			android:layout_height = "wrap_content"
+			android:inputType = "number"
+			android:maxLength = "15" />
 
 	<TextView
 			android:layout_width = "match_parent"
 			android:layout_height = "wrap_content"
-			android:text = "@string/name_manualinput" />
+			android:text = "@string/nick_manualinput" />
 
 	<EditText
-			android:layout_width = "match_parent"
-			android:layout_height = "30dp" />
-
-	<Button
-			android:id = "@+id/btn_save_manualinput"
+			android:id = "@+id/edt_manualinput_nick"
 			android:layout_width = "match_parent"
 			android:layout_height = "wrap_content"
-			android:text = "@string/btn_save_manualinput" />
+			/>
+
+	<Button
+			android:id = "@+id/btn_manualinput_save"
+			android:layout_width = "match_parent"
+			android:layout_height = "wrap_content"
+			android:text = "@string/btn_add_manualinput" />
 </LinearLayout >
