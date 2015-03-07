@@ -100,6 +100,10 @@ public class DB_CallLogs_Cache extends SQLiteOpenHelper {
 
 	public void insertAll(List<CallLogs> list) {
 		for (CallLogs log : list) {
+			final String phone = log.getPhone();
+			if (contains(phone)) {
+				delete(phone);
+			}
 			insert(log);
 		}
 		list.clear();
@@ -162,5 +166,20 @@ public class DB_CallLogs_Cache extends SQLiteOpenHelper {
 			}
 		}
 		return false;
+	}
+
+	private boolean delete(String phone) {
+		boolean result = false;
+		SQLiteDatabase db = getWritableDatabase();
+		try {
+			result = db.delete(TABLE_CACHE, KEY_NUMBER + "=?", new String[]{phone}) > 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (db != null) {
+				db.close();
+			}
+		}
+		return result;
 	}
 }
