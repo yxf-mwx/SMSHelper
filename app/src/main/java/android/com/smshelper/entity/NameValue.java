@@ -19,4 +19,12 @@ public class NameValue<K, V> {
 	public V getValue() {
 		return mValue;
 	}
+
+	public void setName(K name) {
+		mName = name;
+	}
+
+	public void setValue(V value) {
+		mValue = value;
+	}
 }

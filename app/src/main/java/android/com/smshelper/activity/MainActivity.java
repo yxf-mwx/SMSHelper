@@ -27,7 +27,6 @@ public class MainActivity extends ActionBarActivity implements MenuDrawer.OnDraw
 		mTv1.setOnClickListener(this);
 		initActionBar();
 		initMenuDrawer();
-
 	}
 
 	@Override

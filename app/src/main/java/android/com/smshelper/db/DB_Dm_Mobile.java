@@ -28,6 +28,7 @@ public class DB_Dm_Mobile {
 	}
 
 	public NameValue<String, String> getMobileArea(String phoneNumber) {
+		NameValue<String, String> result = new NameValue<>("", "");
 		Cursor cursor = mDb.query(
 				TABLE_DM,
 				new String[]{
@@ -44,11 +45,12 @@ public class DB_Dm_Mobile {
 		while (cursor.moveToNext()) {
 			String mobile_area = cursor.getString(cursor.getColumnIndex(MOBILE_AREA));
 			String mobile_type = cursor.getString(cursor.getColumnIndex(MOBILE_TYPE));
-			return new NameValue<String, String>(mobile_area, mobile_type);
+			result.setName(mobile_area);
+			result.setValue(mobile_type);
 		}
 		if (cursor != null) {
 			cursor.close();
 		}
-		return null;
+		return result;
 	}
 }
