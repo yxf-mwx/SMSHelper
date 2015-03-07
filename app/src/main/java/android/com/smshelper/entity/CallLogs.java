@@ -76,4 +76,17 @@ public class CallLogs {
 	public void setCheck(boolean isCheck) {
 		this.isCheck = isCheck;
 	}
+
+	@Override
+	public String toString() {
+		return "CallLogs{" +
+				"mPhone='" + mPhone + '\'' +
+				", mName='" + mName + '\'' +
+				", mDate=" + mDate +
+				", mType=" + mType +
+				", mNumArea='" + mNumArea + '\'' +
+				", mNumType='" + mNumType + '\'' +
+				", isCheck=" + isCheck +
+				'}';
+	}
 }

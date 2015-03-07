@@ -53,7 +53,7 @@ public class Adapter_CallLogs extends BaseAdapter implements CompoundButton.OnCh
 			holder.contact = (TextView) convertView.findViewById(R.id.tv_contacts_calllog);
 			holder.date = (TextView) convertView.findViewById(R.id.tv_date_calllog);
 			holder.type = (TextView) convertView.findViewById(R.id.tv_type_calllog);
-			holder.address = (TextView) convertView.findViewById(R.id.tv_address_calllog);
+			holder.mobilearea = (TextView) convertView.findViewById(R.id.tv_mobilearea_calllog);
 			holder.checkBox = (CheckBox) convertView.findViewById(R.id.cb_check_callog);
 			convertView.setTag(holder);
 		} else {
@@ -87,6 +87,7 @@ public class Adapter_CallLogs extends BaseAdapter implements CompoundButton.OnCh
 					typeStr = "未接";
 			}
 			holder.type.setText(typeStr);
+			holder.mobilearea.setText(log.getNumArea());
 			final boolean isCheck = log.isCheck();
 			holder.checkBox.setTag(AppConstant.TAG_POSTION, position);
 			holder.checkBox.setOnCheckedChangeListener(this);
@@ -110,7 +111,7 @@ public class Adapter_CallLogs extends BaseAdapter implements CompoundButton.OnCh
 		TextView contact;
 		TextView date;
 		TextView type;
-		TextView address;
+		TextView mobilearea;
 		CheckBox checkBox;
 	}
 

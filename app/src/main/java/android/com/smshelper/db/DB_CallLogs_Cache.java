@@ -9,6 +9,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by admin on 15-1-21.
  */
@@ -93,5 +96,45 @@ public class DB_CallLogs_Cache extends SQLiteOpenHelper {
 				db.close();
 			}
 		}
+	}
+
+	public List<CallLogs> getList() {
+		List<CallLogs> result = new ArrayList<>();
+		SQLiteDatabase db = getReadableDatabase();
+		try {
+			Cursor cursor = db.query(
+					TABLE_CACHE,
+					new String[]{
+							KEY_CACHENAME,
+							KEY_DATE,
+							KEY_NUMBER,
+							KEY_TYPE,
+							KEY_NUMBERAREA,
+							KEY_NUMBERTYPE,
+					}
+					,
+					null,
+					null,
+					null,
+					null,
+					KEY_DATE + " DESC");
+			while (cursor.moveToNext()) {
+				String cacheName = cursor.getString(cursor.getColumnIndex(KEY_CACHENAME));
+				long date = cursor.getLong(cursor.getColumnIndex(KEY_DATE));
+				String number = cursor.getString(cursor.getColumnIndex(KEY_NUMBER));
+				int type = cursor.getInt(cursor.getColumnIndex(KEY_TYPE));
+				String mobileArea = cursor.getString(cursor.getColumnIndex(KEY_NUMBERAREA));
+				String mobileType = cursor.getString(cursor.getColumnIndex(KEY_NUMBERTYPE));
+				CallLogs log = new CallLogs(number, cacheName, date, type, mobileArea, mobileType);
+				result.add(log);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (db != null) {
+				db.close();
+			}
+		}
+		return result;
 	}
 }

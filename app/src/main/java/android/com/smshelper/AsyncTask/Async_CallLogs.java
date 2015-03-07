@@ -45,15 +45,17 @@ public class Async_CallLogs implements Runnable {
 
 	private void copyToCache(long lastUpdateTime) {
 		ContentResolver resolver = mContext.getContentResolver();
-		Cursor cursor = resolver.query(CallLog.Calls.CONTENT_URI,
+		Cursor cursor = resolver.query(
+				CallLog.Calls.CONTENT_URI,
 				new String[]{
 						CallLog.Calls.NUMBER, CallLog.Calls.CACHED_NAME,
-						CallLog.Calls.TYPE, CallLog.Calls.DATE
+						CallLog.Calls.TYPE, CallLog.Calls.DATE,
+						CallLog.Calls.CACHED_NORMALIZED_NUMBER
 				},
 				CallLog.Calls.DATE + ">?",
 				new String[]{String.valueOf(lastUpdateTime)},
-				"date ASC");
-//		Log.d("Async_CallLogs", "cursorGetcount: " + String.valueOf(cursor.getCount()));
+				"date ASC"
+		);
 
 		CallLogs log = new CallLogs("", "", 0L, 1, "", "");
 		while (cursor.moveToNext()) {

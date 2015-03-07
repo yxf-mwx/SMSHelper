@@ -2,6 +2,7 @@ package android.com.smshelper.activity;
 
 import android.com.smshelper.R;
 import android.com.smshelper.adapter.Adapter_CallLogs;
+import android.com.smshelper.db.DB_CallLogs_Cache;
 import android.com.smshelper.entity.CallLogs;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -9,10 +10,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by admin on 15-1-20.
@@ -36,10 +34,8 @@ public class CallLogsActivity extends ActionBarActivity implements View.OnClickL
 	}
 
 	private List<CallLogs> getCallLogsList() {
-		Map<String, CallLogs> map = new HashMap<>();
-		List<CallLogs> result = new ArrayList<>();
 
-		return result;
+		return DB_CallLogs_Cache.getInstance(this).getList();
 	}
 
 	@Override
