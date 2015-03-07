@@ -10,7 +10,9 @@ import android.com.smshelper.entity.PeopleInfo;
 import android.com.smshelper.interfac.AsyncCallBack;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -41,6 +43,7 @@ public class CallLogsActivity extends ActionBarActivity implements View.OnClickL
 		mAdapter = new Adapter_CallLogs(this, mList);
 		mLvMain.setAdapter(mAdapter);
 		mTvConfirm.setOnClickListener(this);
+		initActionBar();
 		synchronizeCallLog();
 	}
 
@@ -88,5 +91,23 @@ public class CallLogsActivity extends ActionBarActivity implements View.OnClickL
 				}
 			}
 		});
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		final int id = item.getItemId();
+		switch (id) {
+			case android.R.id.home:
+				this.finish();
+				return true;
+			default:
+				return true;
+		}
+	}
+
+	private void initActionBar() {
+		final ActionBar actionBar = getSupportActionBar();
+		actionBar.setTitle(getString(R.string.activity_callogs));
+		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 }
