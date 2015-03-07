@@ -46,6 +46,12 @@ public class WhiteListManager {
 		mList.add(info);
 	}
 
+	public void addorUpdateInfoList(List<PeopleInfo> infoList) {
+		for (PeopleInfo info : infoList) {
+			addorUpdateInfo(info);
+		}
+	}
+
 	public List<PeopleInfo> getWhiteList() {
 		return mList;
 	}

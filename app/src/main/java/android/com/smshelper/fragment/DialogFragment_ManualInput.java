@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by admin on 15-1-14.
@@ -59,7 +61,9 @@ public class DialogFragment_ManualInput extends DialogFragment {
 						}
 						if (mManualInputCallback != null) {
 							PeopleInfo peopleInfo = new PeopleInfo(name, phone);
-							mManualInputCallback.callback(peopleInfo);
+							List<PeopleInfo> infoList = new ArrayList<PeopleInfo>();
+							infoList.add(peopleInfo);
+							mManualInputCallback.callback(infoList);
 						}
 						DialogFragment_ManualInput.this.dismiss();
 					}

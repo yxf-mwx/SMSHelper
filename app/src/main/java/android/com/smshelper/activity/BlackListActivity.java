@@ -80,8 +80,8 @@ public class BlackListActivity extends ActionBarActivity implements View.OnClick
 	}
 
 	@Override
-	public void callback(PeopleInfo info) {
-		BlackListManager.getInstance(this).addorUpdateInfo(info);
+	public void callback(List<PeopleInfo> infoList) {
+		BlackListManager.getInstance(this).addorUpdateInfoList(infoList);
 		mAdapter.notifyDataSetChanged();
 	}
 }

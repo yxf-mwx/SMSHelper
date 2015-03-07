@@ -67,8 +67,8 @@ public class WhiteListActivity extends ActionBarActivity implements View.OnClick
 	}
 
 	@Override
-	public void callback(PeopleInfo info) {
-		WhiteListManager.getInstance(this).addorUpdateInfo(info);
+	public void callback(List<PeopleInfo> infoList) {
+		WhiteListManager.getInstance(this).addorUpdateInfoList(infoList);
 		mAdapter.notifyDataSetChanged();
 	}
 

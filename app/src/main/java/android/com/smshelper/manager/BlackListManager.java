@@ -55,6 +55,12 @@ public class BlackListManager {
 		mList.add(info);
 	}
 
+	public void addorUpdateInfoList(List<PeopleInfo> infoList) {
+		for (PeopleInfo info : infoList) {
+			addorUpdateInfo(info);
+		}
+	}
+
 	public List<PeopleInfo> getBlackList() {
 		return mList;
 	}
