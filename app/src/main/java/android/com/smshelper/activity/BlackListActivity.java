@@ -87,6 +87,9 @@ public class BlackListActivity extends ActionBarActivity implements View.OnClick
 		Intent intent;
 		switch (type) {
 			case 0:
+				intent = new Intent(this, ManualInputActivity.class);
+				startActivityForResult(intent, REQUESTCODE);
+				break;
 			case 1:
 				intent = new Intent(this, CallLogsActivity.class);
 				startActivityForResult(intent, REQUESTCODE);
@@ -100,8 +103,21 @@ public class BlackListActivity extends ActionBarActivity implements View.OnClick
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		ArrayList<PeopleInfo> infoList = data.getParcelableArrayListExtra("resultlist");
-		BlackListManager.getInstance(this).addorUpdateInfoList(infoList);
-		mAdapter.notifyDataSetChanged();
+		if (data == null) {
+			return;
+		}
+		switch (requestCode) {
+			case REQUESTCODE:
+//				switch (resultCode) {
+//					case AppConstant.RESULTCODE_CALLLOGS:
+//					case AppConstant.RESULTCODE_CONTACTS:
+//					case AppConstant.RESULTCODE_MANUALINPUT:
+//					case AppConstant.RESULTCODE_SMSLOG:
+//				}
+				ArrayList<PeopleInfo> infoList = data.getParcelableArrayListExtra("resultlist");
+				BlackListManager.getInstance(this).addorUpdateInfoList(infoList);
+				mAdapter.notifyDataSetChanged();
+				break;
+		}
 	}
 }

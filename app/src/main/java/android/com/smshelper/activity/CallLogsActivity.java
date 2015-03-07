@@ -1,5 +1,6 @@
 package android.com.smshelper.activity;
 
+import android.com.smshelper.AppConstant;
 import android.com.smshelper.AsyncTask.Async_CallLogs;
 import android.com.smshelper.R;
 import android.com.smshelper.adapter.Adapter_CallLogs;
@@ -21,7 +22,7 @@ import java.util.List;
  * Created by admin on 15-1-20.
  */
 public class CallLogsActivity extends ActionBarActivity implements View.OnClickListener, AsyncCallBack {
-	private final static int RESULTCODE = 0;
+
 	private List<CallLogs> mList;
 	private View mLayout;
 	private ListView mLvMain;
@@ -63,7 +64,7 @@ public class CallLogsActivity extends ActionBarActivity implements View.OnClickL
 				}
 				Intent intent = new Intent();
 				intent.putParcelableArrayListExtra("resultlist", list);
-				setResult(RESULTCODE, intent);
+				setResult(AppConstant.RESULTCODE_CALLLOGS, intent);
 				this.finish();
 				break;
 		}

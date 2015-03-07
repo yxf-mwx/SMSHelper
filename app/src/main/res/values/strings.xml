@@ -19,5 +19,6 @@
 	<string name = "cancel" >取消</string >
 	<string name = "description" >备注</string >
 	<string name = "phone" >电话号码</string >
+	<string name = "activity_manualinput" >手工输入</string >
 
 </resources >

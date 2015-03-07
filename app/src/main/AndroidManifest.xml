@@ -48,6 +48,12 @@
 				<category android:name = "android.intent.category.DEFAULT" />
 			</intent-filter >
 		</activity >
+		<activity android:name = ".activity.ManualInputActivity" >
+			<intent-filter >
+				<action android:name = "android.intent.action.MANUALINPUT" />
+				<category android:name = "android.intent.category.DEFAULT" />
+			</intent-filter >
+		</activity >
 
 		<receiver android:name = ".reciever.SmsReciever" >
 			<intent-filter android:priority = "1000" >
