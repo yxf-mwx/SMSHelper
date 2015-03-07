@@ -5,6 +5,7 @@ import android.com.smshelper.db.DB_CallLogs_Cache;
 import android.com.smshelper.db.DB_Dm_Mobile;
 import android.com.smshelper.entity.CallLogs;
 import android.com.smshelper.entity.NameValue;
+import android.com.smshelper.interfac.AsyncCallBack;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -17,6 +18,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,25 +30,31 @@ import java.util.regex.Pattern;
  */
 public class Async_CallLogs implements Runnable {
 	private Context mContext;
+	private AsyncCallBack mListener;
 
-	public Async_CallLogs(Context context) {
+	public Async_CallLogs(Context context, AsyncCallBack listener) {
 		mContext = context;
+		mListener = listener;
 	}
 
 	@Override
 	public void run() {
 		//先检查字典是否已经就绪
 		copyDmMobile();
-
 		//拿最后通话的时间
 		final long lastUpdateCacheTime = DB_CallLogs_Cache.getInstance(mContext).getLastUpdateTime();
-//		Log.d("Async_CallLogs", "lastUpdateTime: " + String.valueOf(lastUpdateCacheTime));
-
 		//根据最后通话的时间选择copy到cache中
 		copyToCache(lastUpdateCacheTime);
+		if (mListener != null) {
+			mListener.onFinished();
+		}
+		mListener = null;
+		mContext = null;
 	}
 
 	private void copyToCache(long lastUpdateTime) {
+		Set<String> map = new HashSet<>();
+		List<CallLogs> insertList = new ArrayList<>();
 		ContentResolver resolver = mContext.getContentResolver();
 		Cursor cursor = resolver.query(
 				CallLog.Calls.CONTENT_URI,
@@ -54,11 +65,10 @@ public class Async_CallLogs implements Runnable {
 				},
 				CallLog.Calls.DATE + ">?",
 				new String[]{String.valueOf(lastUpdateTime)},
-				"date ASC"
+				"date DESC"
 		);
-
-		CallLogs log = new CallLogs("", "", 0L, 1, "", "");
 		while (cursor.moveToNext()) {
+			CallLogs log = new CallLogs("", "", 0L, 1, "", "");
 			String phone = "";
 			String name = "";
 			long date = 0L;
@@ -66,6 +76,11 @@ public class Async_CallLogs implements Runnable {
 			String mobileArea = "";
 			String mobileType = "";
 			phone = cursor.getString(cursor.getColumnIndex(CallLog.Calls.NUMBER));
+			if (map.contains(phone)) {
+				continue;
+			} else {
+				map.add(phone);
+			}
 			name = cursor.getString(cursor.getColumnIndex(CallLog.Calls.CACHED_NAME));
 			date = cursor.getLong(cursor.getColumnIndex(CallLog.Calls.DATE));
 			type = Integer.parseInt(cursor.getString(cursor.getColumnIndex(CallLog.Calls.TYPE)));
@@ -88,8 +103,9 @@ public class Async_CallLogs implements Runnable {
 			log.setType(type);
 			log.setNumArea(mobileArea);
 			log.setNumType(mobileType);
-			DB_CallLogs_Cache.getInstance(mContext).insert(log);
+			insertList.add(log);
 		}
+		DB_CallLogs_Cache.getInstance(mContext).insertAll(insertList);
 	}
 
 	private void copyDmMobile() {
@@ -148,4 +164,3 @@ public class Async_CallLogs implements Runnable {
 		}
 	}
 }
-

@@ -98,6 +98,13 @@ public class DB_CallLogs_Cache extends SQLiteOpenHelper {
 		}
 	}
 
+	public void insertAll(List<CallLogs> list) {
+		for (CallLogs log : list) {
+			insert(log);
+		}
+		list.clear();
+	}
+
 	public List<CallLogs> getList() {
 		List<CallLogs> result = new ArrayList<>();
 		SQLiteDatabase db = getReadableDatabase();
@@ -136,5 +143,24 @@ public class DB_CallLogs_Cache extends SQLiteOpenHelper {
 			}
 		}
 		return result;
+	}
+
+	public boolean contains(String phone) {
+		boolean result = false;
+		SQLiteDatabase db = getReadableDatabase();
+		try {
+			Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CACHE + "WHERE " + KEY_NUMBER + "=?",
+					new String[]{phone});
+			if (cursor.getCount() > 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (db != null) {
+				return false;
+			}
+		}
+		return false;
 	}
 }
