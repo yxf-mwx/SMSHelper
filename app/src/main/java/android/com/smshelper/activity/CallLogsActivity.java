@@ -66,7 +66,7 @@ public class CallLogsActivity extends ActionBarActivity implements View.OnClickL
 					}
 				}
 				Intent intent = new Intent();
-				intent.putParcelableArrayListExtra("resultlist", list);
+				intent.putParcelableArrayListExtra(AppConstant.ARGS_SELECTLIST, list);
 				setResult(AppConstant.RESULTCODE_CALLLOGS, intent);
 				this.finish();
 				break;
