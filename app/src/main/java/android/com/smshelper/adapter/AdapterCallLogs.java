@@ -20,11 +20,11 @@ import java.util.List;
 /**
  * Created by admin on 15-1-20.
  */
-public class Adapter_CallLogs extends BaseAdapter implements CompoundButton.OnCheckedChangeListener {
+public class AdapterCallLogs extends BaseAdapter implements CompoundButton.OnCheckedChangeListener {
 	List<CallLogs> mList;
 	private Context mContext;
 
-	public Adapter_CallLogs(Context context, List<CallLogs> list) {
+	public AdapterCallLogs(Context context, List<CallLogs> list) {
 		mList = list;
 		mContext = context;
 	}

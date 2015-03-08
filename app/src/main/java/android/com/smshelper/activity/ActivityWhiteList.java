@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * Created by admin on 15-1-18.
  */
-public class WhiteListActivity extends ActionBarActivity implements View.OnClickListener, AddInfoListCallback {
+public class ActivityWhiteList extends ActionBarActivity implements View.OnClickListener, AddInfoListCallback {
 	private static final int TYPE = 2;
 	private static final int REQUESTCODE = 0;
 	private ListView mLvMain;
@@ -75,7 +75,7 @@ public class WhiteListActivity extends ActionBarActivity implements View.OnClick
 		switch (type) {
 			case 0:
 			case 1:
-				intent = new Intent(this, CallLogsActivity.class);
+				intent = new Intent(this, ActivityCallLogs.class);
 				startActivityForResult(intent, REQUESTCODE);
 				break;
 			case 2:

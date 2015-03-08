@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * Created by admin on 15-1-9.
  */
-public class BlackListActivity extends ActionBarActivity implements View.OnClickListener, AddInfoListCallback {
+public class ActivityBlackList extends ActionBarActivity implements View.OnClickListener, AddInfoListCallback {
 	private static final int TYPE = 1;
 	private static final int REQUESTCODE = 0;
 	private ListView mLvMain;
@@ -87,15 +87,19 @@ public class BlackListActivity extends ActionBarActivity implements View.OnClick
 		Intent intent;
 		switch (type) {
 			case 0:
-				intent = new Intent(this, ManualInputActivity.class);
+				intent = new Intent(this, ActivityManualInput.class);
 				startActivityForResult(intent, REQUESTCODE);
 				break;
 			case 1:
-				intent = new Intent(this, CallLogsActivity.class);
+				intent = new Intent(this, ActivityCallLogs.class);
 				startActivityForResult(intent, REQUESTCODE);
 				break;
 			case 2:
+
 			case 3:
+				intent = new Intent(this, ActivityContacts.class);
+				startActivityForResult(intent, REQUESTCODE);
+				break;
 			default:
 		}
 	}

@@ -21,5 +21,6 @@
 	<string name = "phone" >电话号码</string >
 	<string name = "activity_manualinput" >手工输入</string >
 	<string name = "activity_callogs" >通话记录</string >
+	<string name = "activity_contacts" >联系人</string >
 
 </resources >

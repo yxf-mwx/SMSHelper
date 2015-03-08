@@ -19,7 +19,7 @@ import java.util.ArrayList;
 /**
  * Created by admin on 15-1-9.
  */
-public class ManualInputActivity extends ActionBarActivity implements View.OnClickListener {
+public class ActivityManualInput extends ActionBarActivity implements View.OnClickListener {
 	private EditText mEdtPhone;
 	private EditText mEdtNick;
 	private Button mBtnAdd;

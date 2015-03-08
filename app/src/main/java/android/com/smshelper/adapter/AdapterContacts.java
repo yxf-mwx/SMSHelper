@@ -1,6 +1,6 @@
 package android.com.smshelper.adapter;
 
-import android.com.smshelper.entity.PeopleInfo;
+import android.com.smshelper.entity.Contact;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +11,11 @@ import java.util.List;
 /**
  * Created by admin on 15-1-19.
  */
-public class Adapter_Contacts extends BaseAdapter {
+public class AdapterContacts extends BaseAdapter {
 	private Context mContext;
-	private List<PeopleInfo> mList;
+	private List<Contact> mList;
 
-	public Adapter_Contacts(Context context, List<PeopleInfo> list) {
+	public AdapterContacts(Context context, List<Contact> list) {
 		mContext = context;
 		mList = list;
 	}

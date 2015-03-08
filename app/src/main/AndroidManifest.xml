@@ -14,8 +14,9 @@
 			android:icon = "@drawable/ic_launcher"
 			android:label = "@string/app_name"
 			android:theme = "@style/AppTheme" >
+		<include />
 		<activity
-				android:name = ".activity.MainActivity"
+				android:name = ".activity.ActivityMain"
 				android:label = "@string/app_name"
 				android:launchMode = "singleTask" >
 			<intent-filter >
@@ -26,7 +27,7 @@
 		</activity >
 		<!--BlackList-->
 		<activity
-				android:name = ".activity.BlackListActivity"
+				android:name = ".activity.ActivityBlackList"
 				android:windowSoftInputMode = "adjustNothing" >
 			<intent-filter >
 				<action android:name = "android.intent.action.SMS_BLACKLIST" />
@@ -35,22 +36,31 @@
 		</activity >
 		<!--WhiteList-->
 		<activity
-				android:name = ".activity.WhiteListActivity"
+				android:name = ".activity.ActivityWhiteList"
 				android:windowSoftInputMode = "adjustNothing" >
 			<intent-filter >
 				<action android:name = "android.intent.action.SMS_WHITELIST" />
 				<category android:name = "android.intent.category.DEFAULT" />
 			</intent-filter >
 		</activity >
-		<activity android:name = ".activity.CallLogsActivity" >
+		<!--从通话记录添加-->
+		<activity android:name = ".activity.ActivityCallLogs" >
 			<intent-filter >
 				<action android:name = "android.intent.action.SMS_CALLLOGS" />
 				<category android:name = "android.intent.category.DEFAULT" />
 			</intent-filter >
 		</activity >
-		<activity android:name = ".activity.ManualInputActivity" >
+		<!--手工输入添加-->
+		<activity android:name = ".activity.ActivityManualInput" >
 			<intent-filter >
 				<action android:name = "android.intent.action.MANUALINPUT" />
+				<category android:name = "android.intent.category.DEFAULT" />
+			</intent-filter >
+		</activity >
+		<!--联系人添加-->
+		<activity android:name = ".activity.ActivityContacts" >
+			<intent-filter >
+				<action android:name = "annroid.intent.action.CONTACTS" />
 				<category android:name = "android.intent.category.DEFAULT" />
 			</intent-filter >
 		</activity >

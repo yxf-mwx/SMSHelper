@@ -14,7 +14,7 @@ import net.simonvt.menudrawer.MenuDrawer;
 import net.simonvt.menudrawer.Position;
 
 
-public class MainActivity extends ActionBarActivity implements MenuDrawer.OnDrawerStateChangeListener, View
+public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDrawerStateChangeListener, View
 		.OnClickListener {
 	MenuDrawer mMenuDrawer;
 	TextView mTv1;
@@ -55,7 +55,7 @@ public class MainActivity extends ActionBarActivity implements MenuDrawer.OnDraw
 	private void initMenuDrawer() {
 		final int menuSize = getResources().getDisplayMetrics().widthPixels * 2 / 3;
 		mMenuDrawer = MenuDrawer.attach(
-				MainActivity.this,
+				ActivityMain.this,
 				MenuDrawer.Type.BEHIND,
 				Position.LEFT,
 				MenuDrawer.MENU_DRAG_WINDOW

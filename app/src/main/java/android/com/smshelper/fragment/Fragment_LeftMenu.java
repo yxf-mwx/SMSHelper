@@ -1,8 +1,8 @@
 package android.com.smshelper.fragment;
 
 import android.com.smshelper.R;
-import android.com.smshelper.activity.BlackListActivity;
-import android.com.smshelper.activity.WhiteListActivity;
+import android.com.smshelper.activity.ActivityBlackList;
+import android.com.smshelper.activity.ActivityWhiteList;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -46,11 +46,11 @@ public class Fragment_LeftMenu extends Fragment implements View.OnClickListener 
 		final int id = v.getId();
 		switch (id) {
 			case R.id.tv_blacklist_leftmenu:
-				intent = new Intent(getActivity(), BlackListActivity.class);
+				intent = new Intent(getActivity(), ActivityBlackList.class);
 				getActivity().startActivity(intent);
 				return;
 			case R.id.tv_whitelist_leftmenu:
-				intent = new Intent(getActivity(), WhiteListActivity.class);
+				intent = new Intent(getActivity(), ActivityWhiteList.class);
 				getActivity().startActivity(intent);
 				return;
 			case R.id.tv_keyword_leftmenu:
