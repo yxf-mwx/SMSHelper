@@ -30,18 +30,22 @@ public class Async_Contacts extends AsyncTask<Void, Void, List<Contact>> {
 		ContentResolver cr = mContext.getContentResolver();
 		Uri contentUri = ContactsContract.Contacts.CONTENT_URI;
 		Cursor cursor = cr.query(contentUri, null, null, null, null);
-		String nick = cursor.getString(cursor.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
-		String contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-
 		Uri phoneUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
-		Cursor phone = cr.query(phoneUri, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=?",
-				new String[]{contactId}, null);
-		while (phone.moveToNext()) {
-			String phoneNum = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-			Contact contact = new Contact(nick, phoneNum);
-			result.add(contact);
+		while (cursor.moveToNext()) {
+			String nick = cursor.getString(cursor.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
+			String contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+			Cursor phone = cr.query(phoneUri, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=?",
+					new String[]{contactId}, null);
+			while (phone.moveToNext()) {
+				String phoneNum = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+				Contact contact = new Contact(nick, phoneNum);
+				result.add(contact);
+			}
+			if (phone != null) {
+				phone.close();
+			}
 		}
-		phone.close();
+
 		cursor.close();
 		return result;
 	}
