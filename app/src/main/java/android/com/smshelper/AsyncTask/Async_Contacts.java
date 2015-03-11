@@ -5,7 +5,6 @@ import android.com.smshelper.interfac.OnReadContactFinished;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
 
@@ -28,24 +27,19 @@ public class Async_Contacts extends AsyncTask<Void, Void, List<Contact>> {
 	protected List<Contact> doInBackground(Void... params) {
 		List<Contact> result = new ArrayList<>();
 		ContentResolver cr = mContext.getContentResolver();
-		Uri contentUri = ContactsContract.Contacts.CONTENT_URI;
-		Cursor cursor = cr.query(contentUri, null, null, null, null);
-		Uri phoneUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+		final String[] mContactsProjection = new String[]{
+				ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
+				ContactsContract.CommonDataKinds.Phone.NUMBER,
+				ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
+		};
+		Cursor cursor = cr.query(
+				ContactsContract.CommonDataKinds.Phone.CONTENT_URI, mContactsProjection, null, null, null);
 		while (cursor.moveToNext()) {
-			String nick = cursor.getString(cursor.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
-			String contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-			Cursor phone = cr.query(phoneUri, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=?",
-					new String[]{contactId}, null);
-			while (phone.moveToNext()) {
-				String phoneNum = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-				Contact contact = new Contact(nick, phoneNum);
-				result.add(contact);
-			}
-			if (phone != null) {
-				phone.close();
-			}
+			final String phone = cursor.getString(1);
+			final String nick = cursor.getString(2);
+			Contact contact = new Contact(nick, phone);
+			result.add(contact);
 		}
-
 		cursor.close();
 		return result;
 	}
