@@ -37,7 +37,6 @@ public class Async_Contacts extends AsyncTask<Void, Void, List<Contact>> {
 		Map<String, String> map = new HashMap();
 		ContentResolver cr = mContext.getContentResolver();
 		final String[] mContactsProjection = new String[]{
-				ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
 				ContactsContract.CommonDataKinds.Phone.NUMBER,
 				ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
 
@@ -45,8 +44,8 @@ public class Async_Contacts extends AsyncTask<Void, Void, List<Contact>> {
 		Cursor cursor = cr.query(
 				ContactsContract.CommonDataKinds.Phone.CONTENT_URI, mContactsProjection, null, null, null);
 		while (cursor.moveToNext()) {
-			final String phone = cursor.getString(1);
-			final String nick = cursor.getString(2);
+			final String phone = cursor.getString(0);
+			final String nick = cursor.getString(1);
 			map.put(phone, nick);
 		}
 		List<Contact> result = new ArrayList<>();
