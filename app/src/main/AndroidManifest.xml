@@ -64,6 +64,13 @@
 				<category android:name = "android.intent.category.DEFAULT" />
 			</intent-filter >
 		</activity >
+		<!--短信记录添加-->
+		<activity android:name = ".activity.ActivitySMS" >
+			<intent-filter >
+				<action android:name = "android.intent.action.SMS" />
+				<category android:name = "android.intent.category.DEFAULT" />
+			</intent-filter >
+		</activity >
 
 		<receiver android:name = ".reciever.SmsReciever" >
 			<intent-filter android:priority = "1000" >

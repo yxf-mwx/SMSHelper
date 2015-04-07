@@ -95,7 +95,9 @@ public class ActivityBlackList extends ActionBarActivity implements View.OnClick
 				startActivityForResult(intent, REQUESTCODE);
 				break;
 			case 2:
-
+				intent = new Intent(this, ActivitySMS.class);
+				startActivityForResult(intent, REQUESTCODE);
+				break;
 			case 3:
 				intent = new Intent(this, ActivityContacts.class);
 				startActivityForResult(intent, REQUESTCODE);
