@@ -8,7 +8,14 @@
 			android:id = "@+id/cb_sms_checkbox"
 			android:layout_width = "wrap_content"
 			android:layout_height = "match_parent"
-			android:layout_alignParentRight = "true" />
+			android:layout_alignParentRight = "true"
+			android:layout_centerVertical = "true" />
+
+	<!--<View-->
+			<!--android:layout_width = "10dp"-->
+			<!--android:layout_height = "match_parent"-->
+			<!--android:background = "@color/opacity_100"-->
+			<!--android:layout_toRightOf = "@id/cb_sms_checkbox" />-->
 
 	<TextView
 			android:id = "@+id/tv_sms_addressorperson"
