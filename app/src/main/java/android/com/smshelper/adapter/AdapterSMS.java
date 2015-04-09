@@ -3,7 +3,6 @@ package android.com.smshelper.adapter;
 import android.com.smshelper.R;
 import android.com.smshelper.Util.DateUtils;
 import android.com.smshelper.entity.ListItemSMS;
-import android.com.smshelper.interfac.OnItemClickListener;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
@@ -21,11 +20,9 @@ import java.util.List;
 public class AdapterSMS extends BaseAdapter {
 	private Context mContext;
 	private List<ListItemSMS> mListData;
-	private OnItemClickListener mListener;
 
-	public AdapterSMS(Context context, List<ListItemSMS> listData, OnItemClickListener listener) {
+	public AdapterSMS(Context context, List<ListItemSMS> listData) {
 		mListData = listData;
-		mListener = listener;
 		mContext = context;
 	}
 
@@ -70,7 +67,7 @@ public class AdapterSMS extends BaseAdapter {
 		final Date date = new Date(item.getDate());
 		String dateStr = DateUtils.getDate(date);
 		holder.date.setText(dateStr);
-		holder.body.setText(item.getBody());
+//		holder.body.setText(item.getBody());
 		return convertView;
 	}
 
