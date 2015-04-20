@@ -49,7 +49,7 @@ public class AdapterSMS extends BaseAdapter {
 			convertView = View.inflate(mContext, R.layout.listitem_sms, null);
 			holder.checkbox = (CheckBox) convertView.findViewById(R.id.cb_sms_checkbox);
 			holder.body = (TextView) convertView.findViewById(R.id.tv_sms_body);
-			holder.personOrAddress = (TextView) convertView.findViewById(R.id.tv_sms_addressorperson);
+			holder.personOrAddress = (TextView) convertView.findViewById(R.id.tv_sms_address_or_person);
 			holder.date = (TextView) convertView.findViewById(R.id.tv_sms_date);
 			convertView.setTag(holder);
 		} else {
@@ -67,7 +67,7 @@ public class AdapterSMS extends BaseAdapter {
 		final Date date = new Date(item.getDate());
 		String dateStr = DateUtils.getDate(date);
 		holder.date.setText(dateStr);
-//		holder.body.setText(item.getBody());
+		holder.body.setText(item.getBody());
 		return convertView;
 	}
 

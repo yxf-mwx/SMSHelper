@@ -4,15 +4,10 @@ package android.com.smshelper.entity;
  * Created by yxf on 15-4-7.
  */
 public class ListItemSMS {
-	//?????????null
 	private String mPersion;
-	//?????
 	private String mAddress;
-	//????
 	private String mBody;
-	//????
 	private long mDate;
-	//?????
 	private boolean mCheck;
 
 	public String getPersion() {
