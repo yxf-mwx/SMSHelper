@@ -9,7 +9,9 @@ import android.os.AsyncTask;
 import android.provider.Telephony;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yxf on 15-4-8.
@@ -18,13 +20,16 @@ public class Async_SMS extends AsyncTask<Void, Void, Void> {
 	private OnReadSMSFinished mListener;
 	private Context mContext;
 	private List<ListItemSMS> mList;
+	private Map<String, ListItemSMS> mMap;
 
 	public Async_SMS(Context context, OnReadSMSFinished listener) {
 		mContext = context;
 		mListener = listener;
 		mList = new ArrayList<>();
+		mMap = new HashMap<>();
 	}
 
+	//???????map????????
 	@Override
 	protected Void doInBackground(Void... params) {
 		ContentResolver cr = mContext.getContentResolver();
@@ -46,6 +51,11 @@ public class Async_SMS extends AsyncTask<Void, Void, Void> {
 			item.setBody(body);
 			item.setDate(date);
 			item.setPersion(person);
+			mMap.put(address, item);
+		}
+
+		for (Map.Entry<String, ListItemSMS> entry : mMap.entrySet()) {
+			ListItemSMS item = entry.getValue();
 			mList.add(item);
 		}
 		return null;
