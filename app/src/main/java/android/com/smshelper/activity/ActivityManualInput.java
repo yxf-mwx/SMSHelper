@@ -6,9 +6,7 @@ import android.com.smshelper.entity.PeopleInfo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by admin on 15-1-9.
  */
-public class ActivityManualInput extends ActionBarActivity implements View.OnClickListener {
+public class ActivityManualInput extends ActivityBase implements View.OnClickListener {
 	private EditText mEdtPhone;
 	private EditText mEdtNick;
 	private Button mBtnAdd;
@@ -36,18 +34,8 @@ public class ActivityManualInput extends ActionBarActivity implements View.OnCli
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		final int id = item.getItemId();
-		switch (id) {
-			case android.R.id.home:
-				this.finish();
-				return true;
-			default:
-				return true;
-		}
-	}
 
-	private void initActionBar() {
+	protected void initActionBar() {
 		final ActionBar actionBar = getSupportActionBar();
 		actionBar.setTitle(getString(R.string.activity_manualinput));
 		actionBar.setDisplayHomeAsUpEnabled(true);

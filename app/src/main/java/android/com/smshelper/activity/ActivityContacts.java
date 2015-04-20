@@ -10,8 +10,6 @@ import android.com.smshelper.interfac.OnReadContactFinished;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,7 +20,7 @@ import java.util.List;
 /**
  * Created by admin on 15-1-20.
  */
-public class ActivityContacts extends ActionBarActivity implements OnReadContactFinished, View.OnClickListener {
+public class ActivityContacts extends ActivityBase implements OnReadContactFinished, View.OnClickListener {
 	private List<Contact> mList;
 
 	private ListView mLvMain;
@@ -46,19 +44,7 @@ public class ActivityContacts extends ActionBarActivity implements OnReadContact
 		thread.execute();
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		final int id = item.getItemId();
-		switch (id) {
-			case android.R.id.home:
-				this.finish();
-				return true;
-			default:
-				return true;
-		}
-	}
-
-	private void initActionBar() {
+	protected void initActionBar() {
 		final ActionBar actionBar = getSupportActionBar();
 		actionBar.setTitle(getString(R.string.activity_contacts));
 		actionBar.setDisplayHomeAsUpEnabled(true);

@@ -11,8 +11,6 @@ import android.com.smshelper.interfac.AsyncCallBack;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,7 +21,7 @@ import java.util.List;
 /**
  * Created by admin on 15-1-20.
  */
-public class ActivityCallLogs extends ActionBarActivity implements View.OnClickListener, AsyncCallBack {
+public class ActivityCallLogs extends ActivityBase implements View.OnClickListener, AsyncCallBack {
 
 	private List<CallLogs> mList;
 	private View mLayout;
@@ -93,19 +91,7 @@ public class ActivityCallLogs extends ActionBarActivity implements View.OnClickL
 		});
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		final int id = item.getItemId();
-		switch (id) {
-			case android.R.id.home:
-				this.finish();
-				return true;
-			default:
-				return true;
-		}
-	}
-
-	private void initActionBar() {
+	protected void initActionBar() {
 		final ActionBar actionBar = getSupportActionBar();
 		actionBar.setTitle(getString(R.string.activity_callogs));
 		actionBar.setDisplayHomeAsUpEnabled(true);

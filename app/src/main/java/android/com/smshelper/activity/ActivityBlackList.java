@@ -12,8 +12,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,7 +22,7 @@ import java.util.List;
 /**
  * Created by admin on 15-1-9.
  */
-public class ActivityBlackList extends ActionBarActivity implements View.OnClickListener, AddInfoListCallback {
+public class ActivityBlackList extends ActivityBase implements View.OnClickListener, AddInfoListCallback {
 	private static final int TYPE = 1;
 	private static final int REQUESTCODE = 0;
 	private ListView mLvMain;
@@ -36,7 +34,6 @@ public class ActivityBlackList extends ActionBarActivity implements View.OnClick
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list);
-		initActionBar();
 		mLvMain = (ListView) findViewById(R.id.lv_main_infolist);
 		mTvBottom = (TextView) findViewById(R.id.tv_add_common);
 		mList = BlackListManager.getInstance(this).getBlackList();
@@ -57,18 +54,7 @@ public class ActivityBlackList extends ActionBarActivity implements View.OnClick
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		final int id = item.getItemId();
-		switch (id) {
-			case android.R.id.home:
-				this.finish();
-				return true;
-			default:
-				return true;
-		}
-	}
-
-	private void initActionBar() {
+	protected void initActionBar() {
 		final ActionBar actionBar = getSupportActionBar();
 		actionBar.setTitle(getString(R.string.blacklist_management));
 		actionBar.setDisplayHomeAsUpEnabled(true);

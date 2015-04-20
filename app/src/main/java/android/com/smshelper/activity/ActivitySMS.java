@@ -6,8 +6,7 @@ import android.com.smshelper.adapter.AdapterSMS;
 import android.com.smshelper.entity.ListItemSMS;
 import android.com.smshelper.interfac.OnReadSMSFinished;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
+import android.support.v7.app.ActionBar;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import java.util.List;
 /**
  * Created by yxf on 15-4-7.
  */
-public class ActivitySMS extends ActionBarActivity implements OnReadSMSFinished {
+public class ActivitySMS extends ActivityBase implements OnReadSMSFinished {
 	private ListView mListView;
 	private List<ListItemSMS> mListData;
 	private AdapterSMS mAdapter;
@@ -40,14 +39,18 @@ public class ActivitySMS extends ActionBarActivity implements OnReadSMSFinished 
 
 	@Override
 	public void onReadSMSFinished(List<ListItemSMS> list) {
-		for (ListItemSMS s : list) {
-			Log.d("sms", s.getAddress());
-		}
 		if (list != null) {
 			mListData.clear();
 			mListData.addAll(list);
 			list.clear();
 			mAdapter.notifyDataSetChanged();
 		}
+	}
+
+	@Override
+	protected void initActionBar() {
+		final ActionBar actionBar = getSupportActionBar();
+		actionBar.setTitle(getString(R.string.activity_sms));
+		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 }

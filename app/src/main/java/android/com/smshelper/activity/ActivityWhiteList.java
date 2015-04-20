@@ -12,8 +12,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,7 +22,7 @@ import java.util.List;
 /**
  * Created by admin on 15-1-18.
  */
-public class ActivityWhiteList extends ActionBarActivity implements View.OnClickListener, AddInfoListCallback {
+public class ActivityWhiteList extends ActivityBase implements View.OnClickListener, AddInfoListCallback {
 	private static final int TYPE = 2;
 	private static final int REQUESTCODE = 0;
 	private ListView mLvMain;
@@ -55,7 +53,8 @@ public class ActivityWhiteList extends ActionBarActivity implements View.OnClick
 		}
 	}
 
-	private void initActionBar() {
+	@Override
+	protected void initActionBar() {
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setTitle("白名单管理");
 		actionBar.setDisplayHomeAsUpEnabled(true);
@@ -84,17 +83,6 @@ public class ActivityWhiteList extends ActionBarActivity implements View.OnClick
 		}
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		final int id = item.getItemId();
-		switch (id) {
-			case android.R.id.home:
-				this.finish();
-				return true;
-			default:
-				return true;
-		}
-	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
