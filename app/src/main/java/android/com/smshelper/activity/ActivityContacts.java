@@ -3,6 +3,7 @@ package android.com.smshelper.activity;
 import android.com.smshelper.AppConstant;
 import android.com.smshelper.AsyncTask.Async_Contacts;
 import android.com.smshelper.R;
+import android.com.smshelper.activity.activitybase.BaseActivitySMS;
 import android.com.smshelper.adapter.AdapterContacts;
 import android.com.smshelper.entity.Contact;
 import android.com.smshelper.entity.PeopleInfo;
@@ -20,7 +21,7 @@ import java.util.List;
 /**
  * Created by admin on 15-1-20.
  */
-public class ActivityContacts extends ActivityBase implements OnReadContactFinished, View.OnClickListener {
+public class ActivityContacts extends BaseActivitySMS implements OnReadContactFinished, View.OnClickListener {
 	private List<Contact> mList;
 
 	private ListView mLvMain;

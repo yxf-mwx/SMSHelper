@@ -2,6 +2,7 @@ package android.com.smshelper.activity;
 
 import android.com.smshelper.AppConstant;
 import android.com.smshelper.R;
+import android.com.smshelper.activity.activitybase.BaseActivitySMS;
 import android.com.smshelper.adapter.AdapterInfoList;
 import android.com.smshelper.entity.PeopleInfo;
 import android.com.smshelper.fragment.DialogFragment_AddList;
@@ -22,7 +23,7 @@ import java.util.List;
 /**
  * Created by admin on 15-1-9.
  */
-public class ActivityBlackList extends ActivityBase implements View.OnClickListener, AddInfoListCallback {
+public class ActivityBlackList extends BaseActivitySMS implements View.OnClickListener, AddInfoListCallback {
 	private static final int TYPE = 1;
 	private static final int REQUESTCODE = 0;
 	private ListView mLvMain;

@@ -1,4 +1,4 @@
-package android.com.smshelper.activity;
+package android.com.smshelper.activity.activitybase;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -12,7 +12,7 @@ import android.view.MenuItem;
  * update  yy-MM-dd
  * @comment balabalabala
  */
-public abstract class ActivityBase extends ActionBarActivity {
+public abstract class BaseActivitySMS extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

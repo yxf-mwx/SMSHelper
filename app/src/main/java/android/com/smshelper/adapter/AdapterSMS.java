@@ -1,5 +1,6 @@
 package android.com.smshelper.adapter;
 
+import android.com.smshelper.AppConstant;
 import android.com.smshelper.R;
 import android.com.smshelper.Util.DateUtils;
 import android.com.smshelper.entity.ListItemSMS;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.Date;
@@ -17,7 +19,7 @@ import java.util.List;
 /**
  * Created by yxf on 15-4-7.
  */
-public class AdapterSMS extends BaseAdapter {
+public class AdapterSMS extends BaseAdapter implements CompoundButton.OnCheckedChangeListener {
 	private Context mContext;
 	private List<ListItemSMS> mListData;
 
@@ -68,7 +70,20 @@ public class AdapterSMS extends BaseAdapter {
 		String dateStr = DateUtils.getDate(date);
 		holder.date.setText(dateStr);
 		holder.body.setText(item.getBody());
+		holder.checkbox.setTag(AppConstant.TAG_POSTION, position);
+		holder.checkbox.setOnCheckedChangeListener(this);
+		holder.checkbox.setChecked(item.isCheck());
 		return convertView;
+	}
+
+	@Override
+	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		Object obj = buttonView.getTag(AppConstant.TAG_POSTION);
+		if (obj instanceof Integer) {
+			int position = (int) obj;
+			ListItemSMS item = mListData.get(position);
+			item.setCheck(isChecked);
+		}
 	}
 
 	private static class ViewHolder {

@@ -2,6 +2,7 @@ package android.com.smshelper.activity;
 
 import android.com.smshelper.AppConstant;
 import android.com.smshelper.R;
+import android.com.smshelper.activity.activitybase.BaseActivitySMS;
 import android.com.smshelper.entity.PeopleInfo;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by admin on 15-1-9.
  */
-public class ActivityManualInput extends ActivityBase implements View.OnClickListener {
+public class ActivityManualInput extends BaseActivitySMS implements View.OnClickListener {
 	private EditText mEdtPhone;
 	private EditText mEdtNick;
 	private Button mBtnAdd;
