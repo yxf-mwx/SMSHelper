@@ -24,6 +24,13 @@ public class DB_InfoList extends SQLiteOpenHelper {
 	private final static String KEY_PHONE = "a";
 	private final static String KEY_NAME = "b";
 
+	private final static String TABLE_KEYWORDS = "C";
+	private final static String KEY_KEYWORD = "a";
+	private final static String SQL_KEYWORD = "CREATE TABLE IF NOT EXITS " + TABLE_KEYWORDS + "("
+			+ "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+			+ KEY_KEYWORD + " VARCHAR(20) NOT NULL"
+			+ ");";
+
 	public static synchronized DB_InfoList getInstance(Context context) {
 		if (instance == null) {
 			mContext = context.getApplicationContext();
@@ -46,8 +53,12 @@ public class DB_InfoList extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("drop table if exit " + TABLE_BLACKLIST);
 		db.execSQL(getCreateSQL(TABLE_BLACKLIST));
+
 		db.execSQL("drop table if exit " + TABLE_WHITELIST);
 		db.execSQL(getCreateSQL(TABLE_WHITELIST));
+
+		db.execSQL("drop table if exit " + TABLE_KEYWORDS);
+		db.execSQL(SQL_KEYWORD);
 	}
 
 	private static String getCreateSQL(String tableName) {

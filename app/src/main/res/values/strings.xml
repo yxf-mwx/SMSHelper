@@ -23,4 +23,5 @@
 	<string name = "activity_callogs" >通话记录</string >
 	<string name = "activity_contacts" >联系人</string >
 	<string name = "activity_sms" >短信息</string >
+	<string name = "activity_keywords" >关键字管理</string >
 </resources >
