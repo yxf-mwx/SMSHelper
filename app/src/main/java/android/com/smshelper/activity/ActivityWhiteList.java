@@ -74,12 +74,21 @@ public class ActivityWhiteList extends BaseActivitySMS implements View.OnClickLi
 		Intent intent;
 		switch (type) {
 			case 0:
+				intent = new Intent(this, ActivityManualInput.class);
+				startActivityForResult(intent, REQUESTCODE);
+				break;
 			case 1:
 				intent = new Intent(this, ActivityCallLogs.class);
 				startActivityForResult(intent, REQUESTCODE);
 				break;
 			case 2:
+				intent = new Intent(this, ActivitySMS.class);
+				startActivityForResult(intent, REQUESTCODE);
+				break;
 			case 3:
+				intent = new Intent(this, ActivityContacts.class);
+				startActivityForResult(intent, REQUESTCODE);
+				break;
 			default:
 		}
 	}
@@ -88,8 +97,21 @@ public class ActivityWhiteList extends BaseActivitySMS implements View.OnClickLi
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		ArrayList<PeopleInfo> infoList = data.getParcelableArrayListExtra("resultlist");
-		WhiteListManager.getInstance(this).addorUpdateInfoList(infoList);
-		mAdapter.notifyDataSetChanged();
+		if (data == null) {
+			return;
+		}
+		switch (requestCode) {
+			case REQUESTCODE:
+//				switch (resultCode) {
+//					case AppConstant.RESULTCODE_CALLLOGS:
+//					case AppConstant.RESULTCODE_CONTACTS:
+//					case AppConstant.RESULTCODE_MANUALINPUT:
+//					case AppConstant.RESULTCODE_SMSLOG:
+//				}
+				ArrayList<PeopleInfo> infoList = data.getParcelableArrayListExtra(AppConstant.ARGS_SELECTLIST);
+				WhiteListManager.getInstance(this).addorUpdateInfoList(infoList);
+				mAdapter.notifyDataSetChanged();
+				break;
+		}
 	}
 }
