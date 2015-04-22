@@ -140,4 +140,23 @@ public class DB_InfoList extends SQLiteOpenHelper {
 	public void deleteWhiteList(PeopleInfo p) {
 		deleteList(TABLE_WHITELIST, p);
 	}
+
+	public void initKeyWordList(List<String> list) {
+		SQLiteDatabase db = getReadableDatabase();
+		Cursor cursor = db.query(TABLE_KEYWORDS, new String[]{KEY_KEYWORD}, null, null, null, null, null);
+		while (cursor.moveToNext()) {
+			final String keyword = cursor.getString(cursor.getColumnIndex(KEY_KEYWORD));
+			list.add(keyword);
+		}
+		if (cursor != null) {
+			cursor.close();
+		}
+		if (db != null) {
+			db.close();
+		}
+	}
+
+	public void addKeyword(String keyword) {
+		
+	}
 }

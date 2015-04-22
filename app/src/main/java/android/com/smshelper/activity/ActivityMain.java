@@ -1,7 +1,7 @@
 package android.com.smshelper.activity;
 
 import android.com.smshelper.R;
-import android.com.smshelper.db.DB_Dm_Mobile;
+import android.com.smshelper.db.db_base.DB_Dm_Mobile;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;

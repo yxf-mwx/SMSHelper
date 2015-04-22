@@ -1,8 +1,8 @@
 package android.com.smshelper.AsyncTask;
 
 import android.com.smshelper.AppConstant;
-import android.com.smshelper.db.DB_CallLogs_Cache;
-import android.com.smshelper.db.DB_Dm_Mobile;
+import android.com.smshelper.db.db_base.DB_CallLogs_Cache;
+import android.com.smshelper.db.db_base.DB_Dm_Mobile;
 import android.com.smshelper.entity.CallLogs;
 import android.com.smshelper.entity.NameValue;
 import android.com.smshelper.interfac.AsyncCallBack;

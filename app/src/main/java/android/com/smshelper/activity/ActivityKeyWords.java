@@ -32,7 +32,6 @@ public class ActivityKeyWords extends BaseActivitySMS implements View.OnClickLis
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_commonlist);
 		mListView = (ListView) findViewById(R.id.lv_main_common);
-		//todo ???????
 		mListData = new ArrayList<>();
 		mAdapter = new AdapterKeyWord(this, mListData, this);
 		mListView.setAdapter(mAdapter);
