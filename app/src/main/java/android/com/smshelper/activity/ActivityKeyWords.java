@@ -4,13 +4,13 @@ import android.com.smshelper.R;
 import android.com.smshelper.activity.activitybase.BaseActivitySMS;
 import android.com.smshelper.adapter.AdapterKeyWord;
 import android.com.smshelper.interfac.OnItemClickListener;
+import android.com.smshelper.manager.KeyWordManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,17 +26,20 @@ public class ActivityKeyWords extends BaseActivitySMS implements View.OnClickLis
 	private TextView mTvAdd;
 	private List<String> mListData;
 	private AdapterKeyWord mAdapter;
+	private View mViewLoading;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_commonlist);
 		mListView = (ListView) findViewById(R.id.lv_main_common);
-		mListData = new ArrayList<>();
+		mListData = KeyWordManager.getInstance().getList();
 		mAdapter = new AdapterKeyWord(this, mListData, this);
 		mListView.setAdapter(mAdapter);
 		mTvAdd = (TextView) findViewById(R.id.tv_add_common);
 		mTvAdd.setOnClickListener(this);
+		mViewLoading = findViewById(R.id.layout_loading_common);
+		mViewLoading.setVisibility(View.GONE);
 	}
 
 	@Override

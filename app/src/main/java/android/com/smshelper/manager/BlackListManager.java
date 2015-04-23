@@ -1,6 +1,6 @@
 package android.com.smshelper.manager;
 
-import android.com.smshelper.db.db_base.DB_Info;
+import android.com.smshelper.db.DB_InfoList;
 import android.com.smshelper.entity.PeopleInfo;
 import android.content.Context;
 import android.text.TextUtils;
@@ -19,7 +19,7 @@ public class BlackListManager {
 	public BlackListManager(Context context) {
 		mContext = context.getApplicationContext();
 		mList = new ArrayList<>();
-		List<PeopleInfo> dbList = DB_Info.getInstance(mContext).getBlackList();
+		List<PeopleInfo> dbList = DB_InfoList.getInstance(mContext).getBlackList();
 		for (PeopleInfo p : dbList) {
 			mList.add(p);
 		}
@@ -47,11 +47,11 @@ public class BlackListManager {
 			final String p = i.getPhone();
 			if (p.equals(phone)) {
 				i.setName(name);
-				DB_Info.getInstance(mContext).addorUpdateBlackList(info);
+				DB_InfoList.getInstance(mContext).addorUpdateBlackList(info);
 				return;
 			}
 		}
-		DB_Info.getInstance(mContext).addorUpdateBlackList(info);
+		DB_InfoList.getInstance(mContext).addorUpdateBlackList(info);
 		mList.add(info);
 	}
 
@@ -71,7 +71,7 @@ public class BlackListManager {
 			info = mList.remove(position);
 		}
 		if (info != null) {
-			DB_Info.getInstance(mContext).deleteBlackList(info);
+			DB_InfoList.getInstance(mContext).deleteBlackList(info);
 		}
 	}
 }

@@ -41,12 +41,15 @@ public class KeyWordManager {
 		thread.start();
 	}
 
-	public synchronized void addKeyWord(Context context,String keyword) {
-		if(mList.contains(keyword)){
+	public synchronized void addKeyWord(Context context, String keyword) {
+		if (mList.contains(keyword)) {
 			return;
 		}
 		mList.add(keyword);
 		DB_InfoList.getInstance(context).addKeyword(keyword);
 	}
 
+	public List<String> getList() {
+		return mList;
+	}
 }

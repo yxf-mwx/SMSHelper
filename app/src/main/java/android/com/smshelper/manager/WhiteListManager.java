@@ -1,6 +1,6 @@
 package android.com.smshelper.manager;
 
-import android.com.smshelper.db.db_base.DB_Info;
+import android.com.smshelper.db.DB_InfoList;
 import android.com.smshelper.entity.PeopleInfo;
 import android.content.Context;
 import android.text.TextUtils;
@@ -17,7 +17,7 @@ public class WhiteListManager {
 
 	public WhiteListManager(Context context) {
 		mContext = context.getApplicationContext();
-		mList = DB_Info.getInstance(context).getWhiteList();
+		mList = DB_InfoList.getInstance(context).getWhiteList();
 	}
 
 	public synchronized static WhiteListManager getInstance(Context context) {
@@ -38,11 +38,11 @@ public class WhiteListManager {
 			final String p = i.getPhone();
 			if (p.equals(phone)) {
 				i.setName(name);
-				DB_Info.getInstance(mContext).addorUpdateWhiteList(info);
+				DB_InfoList.getInstance(mContext).addorUpdateWhiteList(info);
 				return;
 			}
 		}
-		DB_Info.getInstance(mContext).addorUpdateWhiteList(info);
+		DB_InfoList.getInstance(mContext).addorUpdateWhiteList(info);
 		mList.add(info);
 	}
 
@@ -62,7 +62,7 @@ public class WhiteListManager {
 			info = mList.remove(position);
 		}
 		if (info != null) {
-			DB_Info.getInstance(mContext).deleteWhiteList(info);
+			DB_InfoList.getInstance(mContext).deleteWhiteList(info);
 		}
 	}
 }

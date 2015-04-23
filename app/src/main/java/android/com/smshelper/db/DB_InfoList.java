@@ -26,7 +26,7 @@ public class DB_InfoList extends SQLiteOpenHelper {
 
 	private final static String TABLE_KEYWORDS = "C";
 	private final static String KEY_KEYWORD = "a";
-	private final static String SQL_KEYWORD = "CREATE TABLE IF NOT EXITS " + TABLE_KEYWORDS + "("
+	private final static String SQL_KEYWORD = "CREATE TABLE IF NOT EXISTS " + TABLE_KEYWORDS + "("
 			+ "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ KEY_KEYWORD + " VARCHAR(20) NOT NULL"
 			+ ");";
@@ -47,6 +47,7 @@ public class DB_InfoList extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(getCreateSQL(TABLE_BLACKLIST));
 		db.execSQL(getCreateSQL(TABLE_WHITELIST));
+		db.execSQL(SQL_KEYWORD);
 	}
 
 	@Override
@@ -78,10 +79,13 @@ public class DB_InfoList extends SQLiteOpenHelper {
 			PeopleInfo p = new PeopleInfo(name, phone);
 			result.add(p);
 		}
+		if (cursor != null) {
+			cursor.close();
+		}
 		return result;
 	}
 
-	private void addorUpdateList(String listName, PeopleInfo p) {
+	private synchronized void addorUpdateList(String listName, PeopleInfo p) {
 		SQLiteDatabase db = getWritableDatabase();
 		try {
 			final String name = p.getName();
@@ -114,6 +118,9 @@ public class DB_InfoList extends SQLiteOpenHelper {
 			Toast.makeText(mContext, "effect Rows: " + effectRows, Toast.LENGTH_LONG).show();
 		} else {
 			Toast.makeText(mContext, "effect Rows: " + effectRows, Toast.LENGTH_LONG).show();
+		}
+		if (db != null) {
+			db.close();
 		}
 	}
 
@@ -157,6 +164,29 @@ public class DB_InfoList extends SQLiteOpenHelper {
 	}
 
 	public void addKeyword(String keyword) {
-		
+		SQLiteDatabase db = null;
+		Cursor cursor = null;
+		try {
+			db = getWritableDatabase();
+			ContentValues cv = new ContentValues();
+			cv.put(KEY_KEYWORD, keyword);
+			final int effect = db.update(TABLE_KEYWORDS, cv, KEY_KEYWORD + "=?", new String[]{keyword});
+			if (effect == 0) {
+				db.insert(TABLE_KEYWORDS, null, cv);
+				Toast.makeText(mContext, "insert keyword: " + keyword, Toast.LENGTH_SHORT).show();
+			} else {
+				Toast.makeText(mContext, "update keyword: " + keyword, Toast.LENGTH_SHORT).show();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (db != null) {
+				db.close();
+			}
+			if (cursor != null) {
+				cursor.close();
+			}
+		}
+
 	}
 }
