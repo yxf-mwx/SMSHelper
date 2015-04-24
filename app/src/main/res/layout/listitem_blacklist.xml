@@ -31,7 +31,6 @@
 			android:id = "@+id/btn_delete_blacklist"
 			android:text = "@string/delete"
 			android:layout_alignParentRight = "true"
-			style = "@style/TextViewButton"
-			android:background = "@drawable/selector_btn" />
+			style = "@style/TextViewButton"/>
 
 </RelativeLayout >

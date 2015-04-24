@@ -3,6 +3,7 @@ package android.com.smshelper.activity;
 import android.com.smshelper.R;
 import android.com.smshelper.activity.activitybase.BaseActivitySMS;
 import android.com.smshelper.adapter.AdapterKeyWord;
+import android.com.smshelper.fragment.DialogFragment_Keyword;
 import android.com.smshelper.interfac.OnItemClickListener;
 import android.com.smshelper.manager.KeyWordManager;
 import android.os.Bundle;
@@ -21,7 +22,8 @@ import java.util.List;
  * update  yy-MM-dd
  * @comment balabalabala
  */
-public class ActivityKeyWords extends BaseActivitySMS implements View.OnClickListener, OnItemClickListener {
+public class ActivityKeyWords extends BaseActivitySMS implements View.OnClickListener, OnItemClickListener,
+		DialogFragment_Keyword.CallBack {
 	private ListView mListView;
 	private TextView mTvAdd;
 	private List<String> mListData;
@@ -51,11 +53,29 @@ public class ActivityKeyWords extends BaseActivitySMS implements View.OnClickLis
 
 	@Override
 	public void onClick(View v) {
-
+		switch (v.getId()) {
+			case R.id.tv_add_common:
+				DialogFragment_Keyword.newInstance(this).show(getSupportFragmentManager(), "keyword");
+				break;
+		}
 	}
 
 	@Override
 	public void OnItemClick(View view, int position) {
+		switch (view.getId()) {
+			case R.id.layout_listitem_keyword:
+				DialogFragment_Keyword.newInstance(this, mListData.get(position)).show(
+						getSupportFragmentManager(),
+						"keyword");
+				break;
+			case R.id.tv_keyword_delete:
+				break;
+			default:
+		}
+	}
+
+	@Override
+	public void callback(String keyword, String original) {
 
 	}
 }

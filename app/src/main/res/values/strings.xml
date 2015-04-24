@@ -24,4 +24,6 @@
 	<string name = "activity_contacts" >联系人</string >
 	<string name = "activity_sms" >短信息</string >
 	<string name = "activity_keywords" >关键字管理</string >
+	<string name = "add_keyword" >添加关键字</string >
+	<string name = "correct_keyword" >修改关键字</string >
 </resources >

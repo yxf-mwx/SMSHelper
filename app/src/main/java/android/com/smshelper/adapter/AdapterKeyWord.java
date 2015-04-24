@@ -59,23 +59,24 @@ public class AdapterKeyWord extends BaseAdapter implements View.OnClickListener 
 		}
 		final String keyword = mListData.get(position);
 		holder.keyword.setText(keyword);
+
 		holder.delete.setOnClickListener(this);
 		holder.delete.setTag(AppConstant.TAG_POSTION, position);
+
+		convertView.setOnClickListener(this);
+		convertView.setTag(AppConstant.TAG_POSTION, position);
+
 		return convertView;
 	}
 
 	@Override
 	public void onClick(View v) {
-		final int id = v.getId();
-		switch (id) {
-			case R.id.tv_keyword_delete:
-				final Object obj = v.getTag(AppConstant.TAG_POSTION);
-				if (obj instanceof Integer) {
-					final int position = (Integer) obj;
-					if (mListener != null) {
-						mListener.OnItemClick(v, position);
-					}
-				}
+		final Object obj = v.getTag(AppConstant.TAG_POSTION);
+		if (obj instanceof Integer) {
+			final int position = (Integer) obj;
+			if (mListener != null) {
+				mListener.OnItemClick(v, position);
+			}
 		}
 	}
 

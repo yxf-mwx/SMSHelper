@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+              android:id = "@+id/layout_listitem_keyword"
               android:orientation = "horizontal"
               android:layout_width = "match_parent"
-              android:layout_height = "match_parent" >
+              android:layout_height = "match_parent"
+              android:padding = "10dp" >
 
 	<TextView
 			android:id = "@+id/tv_keyword_word"
@@ -12,5 +14,6 @@
 
 	<TextView
 			android:id = "@+id/tv_keyword_delete"
-			style = "@style/TextViewButton" />
+			style = "@style/TextViewButton"
+			android:text = "@string/delete" />
 </LinearLayout >
