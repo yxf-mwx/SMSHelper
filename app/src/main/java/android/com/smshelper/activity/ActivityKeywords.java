@@ -18,10 +18,10 @@ import java.util.List;
 /**
  * @author yxf
  * @date 15-4-21
- * @time ??9:29
+ * @time 下午9:29
  * updater xxx
  * update  yy-MM-dd
- * @comment balabalabala
+ * @comment 关键字界面类
  */
 public class ActivityKeywords extends BaseActivitySMS implements View.OnClickListener, OnItemClickListener,
 		DialogFragment_Keyword.CallBack {

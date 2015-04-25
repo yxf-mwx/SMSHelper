@@ -6,7 +6,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,9 +95,6 @@ public class DB_InfoList extends SQLiteOpenHelper {
 			int effectRows = db.update(listName, cv, KEY_PHONE + " = ?", new String[]{phone});
 			if (effectRows == 0) {
 				long effect = db.insert(listName, null, cv);
-				Toast.makeText(mContext, "insert effectRows: " + effect, Toast.LENGTH_LONG).show();
-			} else {
-				Toast.makeText(mContext, "update EffectRows: " + effectRows, Toast.LENGTH_LONG).show();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -114,11 +110,6 @@ public class DB_InfoList extends SQLiteOpenHelper {
 		final String phone = p.getPhone();
 		SQLiteDatabase db = getWritableDatabase();
 		int effectRows = db.delete(listName, KEY_PHONE + " = ?", new String[]{phone});
-		if (effectRows > 0) {
-			Toast.makeText(mContext, "effect Rows: " + effectRows, Toast.LENGTH_LONG).show();
-		} else {
-			Toast.makeText(mContext, "effect Rows: " + effectRows, Toast.LENGTH_LONG).show();
-		}
 		if (db != null) {
 			db.close();
 		}

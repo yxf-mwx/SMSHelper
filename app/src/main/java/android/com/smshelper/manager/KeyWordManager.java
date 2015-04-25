@@ -10,10 +10,10 @@ import java.util.List;
 /**
  * @author yxf
  * @date 15-4-22
- * @time ??8:23
+ * @time 上午8:23
  * updater xxx
  * update  yy-MM-dd
- * @comment balabalabala
+ * @comment 关键字管理类
  */
 public class KeyWordManager {
 	private static KeyWordManager instance;

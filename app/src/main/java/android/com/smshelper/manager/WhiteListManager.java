@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Created by admin on 15-1-18.
+ * 白名单管理类
  */
 public class WhiteListManager {
 	private static WhiteListManager instance;
@@ -27,23 +28,26 @@ public class WhiteListManager {
 		return instance;
 	}
 
-	public void addorUpdateInfo(PeopleInfo info) {
+	public void addorUpdateInfo(final PeopleInfo info) {
 		final String phone = info.getPhone();
 		final String name = info.getName();
 		if (TextUtils.isEmpty(phone)) {
 			return;
 		}
-
 		for (PeopleInfo i : mList) {
 			final String p = i.getPhone();
 			if (p.equals(phone)) {
 				i.setName(name);
-				DB_InfoList.getInstance(mContext).addorUpdateWhiteList(info);
 				return;
 			}
 		}
-		DB_InfoList.getInstance(mContext).addorUpdateWhiteList(info);
 		mList.add(info);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				DB_InfoList.getInstance(mContext).addorUpdateWhiteList(info);
+			}
+		}).start();
 	}
 
 	public void addorUpdateInfoList(List<PeopleInfo> infoList) {
@@ -57,12 +61,17 @@ public class WhiteListManager {
 	}
 
 	public void delInfo(int position) {
-		PeopleInfo info = null;
-		if (position < mList.size() && position >= 0) {
-			info = mList.remove(position);
+		if (position >= mList.size() && position < 0) {
+			return;
 		}
+		final PeopleInfo info = mList.remove(position);
 		if (info != null) {
-			DB_InfoList.getInstance(mContext).deleteWhiteList(info);
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					DB_InfoList.getInstance(mContext).deleteWhiteList(info);
+				}
+			}).start();
 		}
 	}
 }

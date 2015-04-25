@@ -17,7 +17,7 @@ import java.util.List;
  * @time ??9:36
  * updater xxx
  * update  yy-MM-dd
- * @comment balabalabala
+ * @comment 关键词界面类的适配器
  */
 public class AdapterKeyWord extends BaseAdapter implements View.OnClickListener {
 	private Context mContext;
