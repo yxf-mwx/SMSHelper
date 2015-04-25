@@ -2,7 +2,7 @@ package android.com.smshelper.fragment;
 
 import android.com.smshelper.R;
 import android.com.smshelper.activity.ActivityBlackList;
-import android.com.smshelper.activity.ActivityKeyWords;
+import android.com.smshelper.activity.ActivityKeywords;
 import android.com.smshelper.activity.ActivityWhiteList;
 import android.content.Intent;
 import android.os.Bundle;
@@ -55,7 +55,7 @@ public class Fragment_LeftMenu extends Fragment implements View.OnClickListener 
 				getActivity().startActivity(intent);
 				return;
 			case R.id.tv_keyword_leftmenu:
-				intent = new Intent(getActivity(), ActivityKeyWords.class);
+				intent = new Intent(getActivity(), ActivityKeywords.class);
 				getActivity().startActivity(intent);
 			default:
 				return;

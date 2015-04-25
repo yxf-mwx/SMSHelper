@@ -22,7 +22,7 @@ import java.util.List;
  * update  yy-MM-dd
  * @comment balabalabala
  */
-public class ActivityKeyWords extends BaseActivitySMS implements View.OnClickListener, OnItemClickListener,
+public class ActivityKeywords extends BaseActivitySMS implements View.OnClickListener, OnItemClickListener,
 		DialogFragment_Keyword.CallBack {
 	private ListView mListView;
 	private TextView mTvAdd;

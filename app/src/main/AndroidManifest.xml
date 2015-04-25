@@ -72,7 +72,7 @@
 			</intent-filter >
 		</activity >
 		<!--关键词管理-->
-		<activity android:name = ".activity.ActivityKeyWords" >
+		<activity android:name = ".activity.ActivityKeywords" >
 			<intent-filter >
 				<action android:name = "android.intent.action.KEY_WORDS" />
 				<category android:name = "android.intent.category.default" />
