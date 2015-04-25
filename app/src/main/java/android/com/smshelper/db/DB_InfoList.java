@@ -173,9 +173,6 @@ public class DB_InfoList extends SQLiteOpenHelper {
 			final int effect = db.update(TABLE_KEYWORDS, cv, KEY_KEYWORD + "=?", new String[]{keyword});
 			if (effect == 0) {
 				db.insert(TABLE_KEYWORDS, null, cv);
-				Toast.makeText(mContext, "insert keyword: " + keyword, Toast.LENGTH_SHORT).show();
-			} else {
-				Toast.makeText(mContext, "update keyword: " + keyword, Toast.LENGTH_SHORT).show();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -188,5 +185,19 @@ public class DB_InfoList extends SQLiteOpenHelper {
 			}
 		}
 
+	}
+
+	public void deleteKeyword(String keyword) {
+		SQLiteDatabase db = null;
+		try {
+			db = getWritableDatabase();
+			final int effect = db.delete(TABLE_KEYWORDS, KEY_KEYWORD + "=?", new String[]{keyword});
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (db != null) {
+				db.close();
+			}
+		}
 	}
 }

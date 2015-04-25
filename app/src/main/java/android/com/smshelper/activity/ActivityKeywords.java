@@ -8,6 +8,7 @@ import android.com.smshelper.interfac.OnItemClickListener;
 import android.com.smshelper.manager.KeyWordManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -69,6 +70,8 @@ public class ActivityKeywords extends BaseActivitySMS implements View.OnClickLis
 						"keyword");
 				break;
 			case R.id.tv_keyword_delete:
+				KeyWordManager.getInstance().deleteKeyword(this, mListData.get(position));
+				mAdapter.notifyDataSetChanged();
 				break;
 			default:
 		}
@@ -76,6 +79,12 @@ public class ActivityKeywords extends BaseActivitySMS implements View.OnClickLis
 
 	@Override
 	public void callback(String keyword, String original) {
-
+		if (TextUtils.isEmpty(original)) {
+			KeyWordManager.getInstance().addKeyWord(this, keyword);
+			mAdapter.notifyDataSetChanged();
+		} else {
+			KeyWordManager.getInstance().updateKeyword(this, original, keyword);
+			mAdapter.notifyDataSetChanged();
+		}
 	}
 }

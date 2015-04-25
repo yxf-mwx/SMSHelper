@@ -76,9 +76,9 @@ public class DialogFragment_Keyword extends DialogFragment implements View.OnCli
 				}
 				break;
 			case R.id.tv_input_negetive:
-				dismiss();
 				break;
 		}
+		dismiss();
 	}
 
 	public static interface CallBack {

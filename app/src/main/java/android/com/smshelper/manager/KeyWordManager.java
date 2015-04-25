@@ -41,15 +41,36 @@ public class KeyWordManager {
 		thread.start();
 	}
 
-	public synchronized void addKeyWord(Context context, String keyword) {
+	public synchronized void addKeyWord(final Context context, final String keyword) {
 		if (mList.contains(keyword)) {
 			return;
 		}
 		mList.add(keyword);
-		DB_InfoList.getInstance(context).addKeyword(keyword);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				DB_InfoList.getInstance(context).addKeyword(keyword);
+			}
+		}).start();
 	}
 
 	public List<String> getList() {
 		return mList;
+	}
+
+	public void updateKeyword(Context context, String original, String newKeyword) {
+		deleteKeyword(context, original);
+		addKeyWord(context, newKeyword);
+	}
+
+	public synchronized void deleteKeyword(final Context context, final String keyword) {
+		mList.remove(keyword);
+		Thread thread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				DB_InfoList.getInstance(context).deleteKeyword(keyword);
+			}
+		});
+		thread.start();
 	}
 }
