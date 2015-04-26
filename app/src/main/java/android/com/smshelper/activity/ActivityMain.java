@@ -2,10 +2,11 @@ package android.com.smshelper.activity;
 
 import android.com.smshelper.R;
 import android.com.smshelper.db.DB_Dm_Mobile;
+import android.com.smshelper.service.BackgroudService;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -27,13 +28,7 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 		mTv1.setOnClickListener(this);
 		initActionBar();
 		initMenuDrawer();
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.menu_main, menu);
-		return true;
+		startListener();
 	}
 
 	@Override
@@ -103,5 +98,11 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 	@Override
 	public void onClick(View v) {
 		DB_Dm_Mobile.getInstance().getMobileArea("13450211406");
+	}
+
+	private void startListener() {
+		//打开监听线程
+		Intent intent = new Intent(this, BackgroudService.class);
+		startService(intent);
 	}
 }

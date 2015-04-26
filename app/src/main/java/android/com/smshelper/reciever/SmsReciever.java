@@ -19,6 +19,7 @@ public class SmsReciever extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		String action = intent.getAction();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		if (ACTION_SMS_RECIEVE.equals(action)) {
 			Bundle bundle = intent.getExtras();
 			if (bundle != null) {
@@ -28,7 +29,6 @@ public class SmsReciever extends BroadcastReceiver {
 					msg = SmsMessage.createFromPdu(((byte[]) p));
 					String msgText = msg.getMessageBody();
 					Date date = new Date(msg.getTimestampMillis());
-					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					String receiveTime = format.format(date);
 					String senderNumber = msg.getOriginatingAddress();
 					Log.d("SMS_RECEIVER", msgText);
