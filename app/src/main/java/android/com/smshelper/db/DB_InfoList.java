@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class DB_InfoList extends SQLiteOpenHelper {
 	public static DB_InfoList instance = null;
-	public static Context mContext;
+	private static Context mContext;
 	private final static int VERSION_NAME = 1;
 	private final static String DB_NAME = "INFO";
 
@@ -25,6 +25,24 @@ public class DB_InfoList extends SQLiteOpenHelper {
 	private final static String SQL_KEYWORD = "CREATE TABLE IF NOT EXISTS " + Keyword.TABLE_Name + "("
 			+ "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ Keyword.KEY_KEYWORD + " VARCHAR(20) NOT NULL"
+			+ ");";
+	private final static String SQL_SPAM = "CREATE TABLE IF NOT EXISTS " + SpamList.TABLE_NAME + "("
+			+ SpamList.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+			+ SpamList.KEY_ADDRESS + " VARCHAR(20) NOT NULL, "
+			+ SpamList.KEY_BODY + " TEXT NOT NULL, "
+			+ SpamList.KEY_DATE + " LONG NOT NULL, "
+			+ SpamList.KEY_DATESENT + " LONG NOT NULL,"
+			+ SpamList.KEY_ERROR_CODE + " INT, "
+			+ SpamList.KEY_LOCKED + " BOOLEAN, "
+			+ SpamList.KEY_PROTOCOL + " INT, "
+			+ SpamList.KEY_READ + " BOOLEAN, "
+			+ SpamList.KEY_REPLY_PATH_PRESENT + " BOOLEAN, "
+			+ SpamList.KEY_SEEN + " BOOLEAN, "
+			+ SpamList.KEY_SERVICECENTER + " TEXT, "
+			+ SpamList.KEY_STATUS + " INTEGER, "
+			+ SpamList.KEY_SUBJECT + " TEXT, "
+			+ SpamList.KEY_THREADID + " INT, "
+			+ SpamList.KEY_TYPE + " INTEGER "
 			+ ");";
 
 	public static synchronized DB_InfoList getInstance(Context context) {
@@ -44,18 +62,24 @@ public class DB_InfoList extends SQLiteOpenHelper {
 		db.execSQL(getCreateSQL(BlackList.TABLE_Name));
 		db.execSQL(getCreateSQL(WhiteList.TABLE_Name));
 		db.execSQL(SQL_KEYWORD);
+		db.execSQL(SQL_SPAM);
+		System.out.println(SQL_SPAM);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		db.execSQL("drop table if exit " + BlackList.TABLE_Name);
+		//黑名单列表
+		db.execSQL("drop table if exist " + BlackList.TABLE_Name);
 		db.execSQL(getCreateSQL(BlackList.TABLE_Name));
-
-		db.execSQL("drop table if exit " + WhiteList.TABLE_Name);
+		//白名单列表
+		db.execSQL("drop table if exist " + WhiteList.TABLE_Name);
 		db.execSQL(getCreateSQL(WhiteList.TABLE_Name));
-
-		db.execSQL("drop table if exit " + Keyword.TABLE_Name);
+		//关键字列表
+		db.execSQL("drop table if exist " + Keyword.TABLE_Name);
 		db.execSQL(SQL_KEYWORD);
+		//垃圾短信列表
+		db.execSQL("drop table if exit " + SpamList.TABLE_NAME);
+		db.execSQL(SQL_SPAM);
 	}
 
 	private static String getCreateSQL(String tableName) {
@@ -226,5 +250,22 @@ public class DB_InfoList extends SQLiteOpenHelper {
 		public final static String KEY_LOCKED = "locked";
 		public final static String KEY_ERROR_CODE = "error_code";
 		public final static String KEY_SEEN = "seen";
+
+		/**
+		 * TP-Status: no status received.
+		 */
+		public static final int STATUS_NONE = -1;
+		/**
+		 * TP-Status: complete.
+		 */
+		public static final int STATUS_COMPLETE = 0;
+		/**
+		 * TP-Status: pending.
+		 */
+		public static final int STATUS_PENDING = 32;
+		/**
+		 * TP-Status: failed.
+		 */
+		public static final int STATUS_FAILED = 64;
 	}
 }

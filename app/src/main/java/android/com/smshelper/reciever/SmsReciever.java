@@ -32,6 +32,10 @@ public class SmsReciever extends BroadcastReceiver {
 					String receiveTime = format.format(date);
 					String senderNumber = msg.getOriginatingAddress();
 					Log.d("SMS_RECEIVER", msgText);
+					Log.d("SMS_RECEIVER", receiveTime);
+					Log.d("SMS_RECEIVER", senderNumber);
+
+//					abortBroadcast();
 				}
 			}
 		}
