@@ -12,7 +12,7 @@ import android.os.IBinder;
  * @time 下午5:41
  * updater xxx
  * update  yy-MM-dd
- * @comment balabalabala
+ * @comment 短信过滤类
  */
 public class BackgroudService extends Service {
 	@Override
@@ -28,6 +28,9 @@ public class BackgroudService extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		final SMSEntity sms = intent.getExtras().getParcelable(AppConstant.ARGS_SMSENTITY);
+		final String body = sms.getBody();
+		final String address = sms.getAddress();
+		
 		System.out.println(sms);
 		return super.onStartCommand(intent, flags, startId);
 	}

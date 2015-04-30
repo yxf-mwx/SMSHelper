@@ -9,10 +9,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 
-import java.text.SimpleDateFormat;
-
 /**
  * Created by admin on 15-1-9.
+ * comment 短信接受处理类
  */
 public class SmsReciever extends BroadcastReceiver {
 	private final static String ACTION_SMS_RECIEVE = "android.provider.Telephony.SMS_RECEIVED";
@@ -20,14 +19,10 @@ public class SmsReciever extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		String action = intent.getAction();
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		if (ACTION_SMS_RECIEVE.equals(action)) {
 			Bundle bundle = intent.getExtras();
 			if (bundle != null) {
-
 				Object[] pdusObj = (Object[]) bundle.get("pdus");
-
-
 				SMSEntity entity = createEntityFromSms(pdusObj);
 				Intent i = new Intent(context, BackgroudService.class);
 				i.putExtra(AppConstant.ARGS_SMSENTITY, entity);
