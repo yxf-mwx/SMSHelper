@@ -1,14 +1,15 @@
 package android.com.smshelper.reciever;
 
+import android.com.smshelper.AppConstant;
+import android.com.smshelper.entity.SMSEntity;
+import android.com.smshelper.service.BackgroudService;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
-import android.util.Log;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by admin on 15-1-9.
@@ -23,21 +24,47 @@ public class SmsReciever extends BroadcastReceiver {
 		if (ACTION_SMS_RECIEVE.equals(action)) {
 			Bundle bundle = intent.getExtras();
 			if (bundle != null) {
-				SmsMessage msg = null;
-				Object[] pdusObj = (Object[]) bundle.get("pdus");
-				for (Object p : pdusObj) {
-					msg = SmsMessage.createFromPdu(((byte[]) p));
-					String msgText = msg.getMessageBody();
-					Date date = new Date(msg.getTimestampMillis());
-					String receiveTime = format.format(date);
-					String senderNumber = msg.getOriginatingAddress();
-					Log.d("SMS_RECEIVER", msgText);
-					Log.d("SMS_RECEIVER", receiveTime);
-					Log.d("SMS_RECEIVER", senderNumber);
 
+				Object[] pdusObj = (Object[]) bundle.get("pdus");
+
+
+				SMSEntity entity = createEntityFromSms(pdusObj);
+				Intent i = new Intent(context, BackgroudService.class);
+				i.putExtra(AppConstant.ARGS_SMSENTITY, entity);
+				context.startService(i);
 //					abortBroadcast();
-				}
 			}
 		}
+	}
+
+	private SMSEntity createEntityFromSms(Object[] pdusObj) {
+		SMSEntity sms = new SMSEntity();
+		SmsMessage msg = SmsMessage.createFromPdu(((byte[]) pdusObj[0]));
+		sms.setAddress(msg.getOriginatingAddress());
+		long now = System.currentTimeMillis();
+		long buildDate = 0;
+		if (now < buildDate) {
+			now = msg.getTimestampMillis();
+		}
+		sms.setDate(now);
+		sms.setDateSent(msg.getTimestampMillis());
+		sms.setProtocol(msg.getProtocolIdentifier());
+		sms.setRead(false);
+		sms.setSeen(0);
+		if (msg.getPseudoSubject().length() > 0) {
+			sms.setSubject(msg.getPseudoSubject());
+		}
+		sms.setReplyPathPresent(msg.isReplyPathPresent());
+		sms.setServiceCenter(msg.getServiceCenterAddress());
+
+		StringBuffer sb = new StringBuffer();
+		if (pdusObj.length > 0) {
+			for (int i = 0; i < pdusObj.length; i++) {
+				msg = SmsMessage.createFromPdu(((byte[]) pdusObj[i]));
+				sb.append(msg.getDisplayMessageBody());
+			}
+		}
+		sms.setBody(sb.toString());
+		return sms;
 	}
 }

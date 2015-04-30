@@ -31,4 +31,6 @@ public class AppConstant {
 	public final static int RESULTCODE_SMSLOG = 3;
 
 	public final static String ARGS_SELECTLIST = "resultlist";
+
+	public final static String ARGS_SMSENTITY = "sms_entity";
 }

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.telephony.SmsMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -215,6 +216,9 @@ public class DB_InfoList extends SQLiteOpenHelper {
 		}
 	}
 
+	public void addSpamSMS(SmsMessage msg) {
+	}
+
 	public static final class WhiteList {
 		public final static String TABLE_Name = "B";
 		private final static String KEY_PHONE = "a";
@@ -268,4 +272,5 @@ public class DB_InfoList extends SQLiteOpenHelper {
 		 */
 		public static final int STATUS_FAILED = 64;
 	}
+
 }
