@@ -3,8 +3,12 @@ package android.com.smshelper.service;
 import android.app.Service;
 import android.com.smshelper.AppConstant;
 import android.com.smshelper.entity.SMSEntity;
+import android.com.smshelper.manager.SpamListManager;
 import android.content.Intent;
 import android.os.IBinder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author yxf
@@ -30,8 +34,12 @@ public class BackgroudService extends Service {
 		final SMSEntity sms = intent.getExtras().getParcelable(AppConstant.ARGS_SMSENTITY);
 		final String body = sms.getBody();
 		final String address = sms.getAddress();
-		
-		System.out.println(sms);
+
+		//todo 分类
+
+		List<SMSEntity> list = new ArrayList<>();
+		list.add(sms);
+		SpamListManager.getInstance().addSMS(this, list);
 		return super.onStartCommand(intent, flags, startId);
 	}
 }

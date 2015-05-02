@@ -1,12 +1,12 @@
 package android.com.smshelper.db;
 
 import android.com.smshelper.entity.PeopleInfo;
+import android.com.smshelper.entity.SMSEntity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.telephony.SmsMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -216,7 +216,7 @@ public class DB_InfoList extends SQLiteOpenHelper {
 		}
 	}
 
-	public void addSpamSMS(SmsMessage msg) {
+	public void addSpamSMS(SMSEntity msg) {
 	}
 
 	public static final class WhiteList {
