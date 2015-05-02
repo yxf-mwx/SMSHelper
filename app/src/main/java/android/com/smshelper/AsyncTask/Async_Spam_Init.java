@@ -13,7 +13,7 @@ import java.util.List;
  * @time 3:42 PM
  * updater xxx
  * update  yy-MM-dd
- * @comment balabalabala
+ * @comment 初始化垃圾短信列表的异步类
  */
 public class Async_Spam_Init extends AsyncTask<Void, Void, Void> {
 	private Context mContext;

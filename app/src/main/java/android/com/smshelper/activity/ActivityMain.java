@@ -58,7 +58,6 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 		return super.onOptionsItemSelected(item);
 	}
 
-
 	private void initMenuDrawer() {
 		final int menuSize = getResources().getDisplayMetrics().widthPixels * 2 / 3;
 		mMenuDrawer = MenuDrawer.attach(
