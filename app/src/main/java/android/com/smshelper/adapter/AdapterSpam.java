@@ -1,9 +1,11 @@
 package android.com.smshelper.adapter;
 
+import android.com.smshelper.AppConstant;
 import android.com.smshelper.R;
 import android.com.smshelper.Util.DateUtils;
 import android.com.smshelper.entity.SMSEntity;
 import android.com.smshelper.interfac.OnItemClickListener;
+import android.com.smshelper.interfac.OnItemLongClickListener;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,15 +23,20 @@ import java.util.List;
  * update  yy-MM-dd
  * @comment 垃圾短信的适配器类
  */
-public class AdapterSpam extends BaseAdapter {
+public class AdapterSpam extends BaseAdapter implements View.OnLongClickListener, View.OnClickListener {
 	private Context mContext;
 	private List<SMSEntity> mListData;
 	private OnItemClickListener mListener;
+	private OnItemLongClickListener mLongClickListener;
+	private boolean mIsActionMode;
 
-	public AdapterSpam(Context context, List<SMSEntity> listData, OnItemClickListener listener) {
+	public AdapterSpam(Context context, List<SMSEntity> listData, OnItemClickListener listener,
+	                   OnItemLongClickListener longClickListener) {
 		mContext = context;
 		mListData = listData;
 		mListener = listener;
+		mLongClickListener = longClickListener;
+		mIsActionMode = false;
 	}
 
 	@Override
@@ -68,7 +75,43 @@ public class AdapterSpam extends BaseAdapter {
 		holder.date.setText(dateStr);
 		final String content = entity.getBody();
 		holder.content.setText(content);
+		convertView.setOnLongClickListener(this);
+		convertView.setOnClickListener(this);
+		convertView.setTag(AppConstant.TAG_POSTION, position);
+
 		return convertView;
+	}
+
+	@Override
+	public boolean onLongClick(View v) {
+		final Object obj = v.getTag(AppConstant.TAG_POSTION);
+		if (obj != null) {
+			final int position = (Integer) obj;
+			if (mLongClickListener != null) {
+				mLongClickListener.onItemLongClick(v, position);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public void onClick(View v) {
+		final Object obj = v.getTag(AppConstant.TAG_POSTION);
+		if (obj != null) {
+			final int position = (Integer) obj;
+			if (mListener != null) {
+				mListener.OnItemClick(v, position);
+			}
+		}
+	}
+
+	public boolean isActionMode() {
+		return mIsActionMode;
+	}
+
+	public void setIsActionMode(boolean isActionMode) {
+		mIsActionMode = isActionMode;
 	}
 
 	private static class ViewHolder {

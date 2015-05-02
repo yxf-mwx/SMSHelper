@@ -4,10 +4,14 @@ import android.com.smshelper.R;
 import android.com.smshelper.adapter.AdapterSpam;
 import android.com.smshelper.entity.SMSEntity;
 import android.com.smshelper.interfac.OnItemClickListener;
+import android.com.smshelper.interfac.OnItemLongClickListener;
 import android.com.smshelper.manager.SpamListManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
@@ -22,13 +26,14 @@ import java.util.Observer;
 
 
 public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDrawerStateChangeListener, View
-		.OnClickListener, Observer, OnItemClickListener {
+		.OnClickListener, Observer, OnItemClickListener, OnItemLongClickListener {
 	private MenuDrawer mMenuDrawer;
 	private ListView mListView;
 	private TextView mTvbtn;
 	private View mVLoading;
 	private AdapterSpam mAdapter;
 	private List<SMSEntity> mListData;
+	private boolean mIsActionMode;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +43,7 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 		mTvbtn = (TextView) findViewById(R.id.tv_add_common);
 		mVLoading = findViewById(R.id.layout_loading_common);
 		mListData = SpamListManager.getInstance().getList();
-		mAdapter = new AdapterSpam(this, mListData, this);
+		mAdapter = new AdapterSpam(this, mListData, this, this);
 		mListView.setAdapter(mAdapter);
 		initActionBar();
 		initMenuDrawer();
@@ -121,5 +126,49 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 	@Override
 	public void OnItemClick(View view, int position) {
 
+	}
+
+	private ActionMode.Callback mCallback = new ActionMode.Callback() {
+
+		@Override
+		public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+			mIsActionMode = true;
+			mTvbtn.setText(R.string.select_all);
+
+			mAdapter.setIsActionMode(true);
+			mAdapter.notifyDataSetChanged();
+			return false;
+		}
+
+		@Override
+		public void onDestroyActionMode(ActionMode mode) {
+			mIsActionMode = false;
+			mTvbtn.setText(R.string.add);
+
+			mAdapter.setIsActionMode(false);
+			mAdapter.notifyDataSetChanged();
+		}
+
+		@Override
+		public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+			MenuInflater inflater = mode.getMenuInflater();
+			inflater.inflate(R.menu.actionmenu, menu);
+			return true;
+		}
+
+		@Override
+		public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+			boolean ret = false;
+			if (item.getItemId() == R.id.actionmode_delete) {
+				mode.finish();
+				ret = true;
+			}
+			return ret;
+		}
+	};
+
+	@Override
+	public void onItemLongClick(View view, int position) {
+		startSupportActionMode(mCallback);
 	}
 }
