@@ -10,6 +10,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.Date;
@@ -63,6 +64,7 @@ public class AdapterSpam extends BaseAdapter implements View.OnLongClickListener
 			holder.number = (TextView) convertView.findViewById(R.id.tv_listitem_spam_number);
 			holder.date = (TextView) convertView.findViewById(R.id.tv_listitem_spam_date);
 			holder.content = (TextView) convertView.findViewById(R.id.tv_listitem_spam_content);
+			holder.checkbox = (CheckBox) convertView.findViewById(R.id.cb_listitem_spam);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -78,7 +80,13 @@ public class AdapterSpam extends BaseAdapter implements View.OnLongClickListener
 		convertView.setOnLongClickListener(this);
 		convertView.setOnClickListener(this);
 		convertView.setTag(AppConstant.TAG_POSTION, position);
-
+		holder.checkbox.setClickable(false);
+		if (mIsActionMode) {
+			holder.checkbox.setVisibility(View.VISIBLE);
+			holder.checkbox.setChecked(entity.isCheck());
+		} else {
+			holder.checkbox.setVisibility(View.GONE);
+		}
 		return convertView;
 	}
 
@@ -118,5 +126,6 @@ public class AdapterSpam extends BaseAdapter implements View.OnLongClickListener
 		TextView number;
 		TextView date;
 		TextView content;
+		CheckBox checkbox;
 	}
 }

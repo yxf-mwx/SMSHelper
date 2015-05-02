@@ -5,12 +5,18 @@
                 android:layout_width = "match_parent"
                 android:layout_height = "match_parent"
                 android:padding = "10dp" >
+	<CheckBox
+			android:id = "@+id/cb_listitem_spam"
+			android:layout_width = "wrap_content"
+			android:layout_height = "wrap_content"
+			android:padding = "5dp" />
 
 	<TextView
 			android:id = "@+id/tv_listitem_spam_number"
 			android:layout_width = "wrap_content"
 			android:layout_height = "wrap_content"
-			android:text = "number" />
+			android:text = "number"
+			android:layout_toRightOf = "@id/cb_listitem_spam" />
 
 	<TextView
 			android:id = "@+id/tv_listitem_spam_date"
@@ -24,6 +30,7 @@
 			android:layout_width = "match_parent"
 			android:layout_height = "wrap_content"
 			android:layout_below = "@+id/tv_listitem_spam_number"
+			android:layout_toRightOf = "@id/cb_listitem_spam"
 			android:text = "content"
 			android:maxLines = "2" />
 

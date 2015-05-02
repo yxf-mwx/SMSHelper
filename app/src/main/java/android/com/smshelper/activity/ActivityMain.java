@@ -125,7 +125,11 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 
 	@Override
 	public void OnItemClick(View view, int position) {
-
+		if (mIsActionMode) {
+			SMSEntity entity = mListData.get(position);
+			entity.setIsCheck(!entity.isCheck());
+			mAdapter.notifyDataSetChanged();
+		}
 	}
 
 	private ActionMode.Callback mCallback = new ActionMode.Callback() {
@@ -147,6 +151,9 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 
 			mAdapter.setIsActionMode(false);
 			mAdapter.notifyDataSetChanged();
+			for (SMSEntity entity : mListData) {
+				entity.setIsCheck(false);
+			}
 		}
 
 		@Override
@@ -169,6 +176,9 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 
 	@Override
 	public void onItemLongClick(View view, int position) {
-		startSupportActionMode(mCallback);
+		if (!mIsActionMode) {
+			startSupportActionMode(mCallback);
+			mListData.get(position).setIsCheck(true);
+		}
 	}
 }

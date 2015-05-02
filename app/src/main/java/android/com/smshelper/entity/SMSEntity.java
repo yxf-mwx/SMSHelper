@@ -24,6 +24,7 @@ public class SMSEntity implements Parcelable {
 	private boolean mReplyPathPresent;
 	private long mThreadId;
 	private String mServiceCenter;
+	private boolean mIsCheck;
 
 	public SMSEntity(int errorCode, String body, String address, long date, long dateSent, int protocol, boolean read,
 	                 boolean seen, String subject, boolean replyPathPresent, long threadId, String serviceCenter) {
@@ -39,6 +40,7 @@ public class SMSEntity implements Parcelable {
 		mReplyPathPresent = replyPathPresent;
 		mThreadId = threadId;
 		mServiceCenter = serviceCenter;
+		mIsCheck = false;
 	}
 
 	public int getErrorCode() {
@@ -137,6 +139,18 @@ public class SMSEntity implements Parcelable {
 		mServiceCenter = serviceCenter;
 	}
 
+	public void setIsCheck(boolean isCheck) {
+		mIsCheck = isCheck;
+	}
+
+	public boolean isCheck() {
+		return mIsCheck;
+	}
+
+	public SMSEntity() {
+		mIsCheck = false;
+	}
+
 	@Override
 	public int describeContents() {
 		return 0;
@@ -156,9 +170,6 @@ public class SMSEntity implements Parcelable {
 		dest.writeByte(mReplyPathPresent ? (byte) 1 : (byte) 0);
 		dest.writeLong(this.mThreadId);
 		dest.writeString(this.mServiceCenter);
-	}
-
-	public SMSEntity() {
 	}
 
 	private SMSEntity(Parcel in) {
