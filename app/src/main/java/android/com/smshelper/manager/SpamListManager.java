@@ -1,5 +1,6 @@
 package android.com.smshelper.manager;
 
+import android.com.smshelper.AsyncTask.Async_Spam_Init;
 import android.com.smshelper.db.DB_InfoList;
 import android.com.smshelper.entity.SMSEntity;
 import android.content.Context;
@@ -18,7 +19,7 @@ import java.util.concurrent.Executors;
  * update  yy-MM-dd
  * @comment balabalabala
  */
-public class SpamListManager extends Observable {
+public class SpamListManager extends Observable implements Async_Spam_Init.CallBack {
 	private static SpamListManager mInstance;
 	private List<SMSEntity> mList;
 
@@ -53,7 +54,24 @@ public class SpamListManager extends Observable {
 		}
 	}
 
+	public synchronized void initSpamList(Context context) {
+		Async_Spam_Init initTask = new Async_Spam_Init(context, this);
+		initTask.execute();
+	}
+
 	public List<SMSEntity> getList() {
 		return mList;
+	}
+
+	@Override
+	public void callBack(List<SMSEntity> list) {
+		if (list == null) {
+			return;
+		}
+		for (SMSEntity entity : list) {
+			mList.add(entity);
+		}
+		setChanged();
+		notifyObservers();
 	}
 }

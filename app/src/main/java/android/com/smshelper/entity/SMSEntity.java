@@ -19,12 +19,27 @@ public class SMSEntity implements Parcelable {
 	private long mDateSent;
 	private int mProtocol;
 	private boolean mRead;
-	private int mSeen;
+	private boolean mSeen;
 	private String mSubject;
 	private boolean mReplyPathPresent;
-	private String mTextCenter;
 	private long mThreadId;
 	private String mServiceCenter;
+
+	public SMSEntity(int errorCode, String body, String address, long date, long dateSent, int protocol, boolean read,
+	                 boolean seen, String subject, boolean replyPathPresent, long threadId, String serviceCenter) {
+		mErrorCode = errorCode;
+		mBody = body;
+		mAddress = address;
+		mDate = date;
+		mDateSent = dateSent;
+		mProtocol = protocol;
+		mRead = read;
+		mSeen = seen;
+		mSubject = subject;
+		mReplyPathPresent = replyPathPresent;
+		mThreadId = threadId;
+		mServiceCenter = serviceCenter;
+	}
 
 	public int getErrorCode() {
 		return mErrorCode;
@@ -82,11 +97,11 @@ public class SMSEntity implements Parcelable {
 		mRead = read;
 	}
 
-	public int getSeen() {
+	public boolean isSeen() {
 		return mSeen;
 	}
 
-	public void setSeen(int seen) {
+	public void setSeen(boolean seen) {
 		mSeen = seen;
 	}
 
@@ -104,14 +119,6 @@ public class SMSEntity implements Parcelable {
 
 	public void setReplyPathPresent(boolean replyPathPresent) {
 		mReplyPathPresent = replyPathPresent;
-	}
-
-	public String getTextCenter() {
-		return mTextCenter;
-	}
-
-	public void setTextCenter(String textCenter) {
-		mTextCenter = textCenter;
 	}
 
 	public long getThreadId() {
@@ -144,10 +151,9 @@ public class SMSEntity implements Parcelable {
 		dest.writeLong(this.mDateSent);
 		dest.writeInt(this.mProtocol);
 		dest.writeByte(mRead ? (byte) 1 : (byte) 0);
-		dest.writeInt(this.mSeen);
+		dest.writeByte(mSeen ? (byte) 1 : (byte) 0);
 		dest.writeString(this.mSubject);
 		dest.writeByte(mReplyPathPresent ? (byte) 1 : (byte) 0);
-		dest.writeString(this.mTextCenter);
 		dest.writeLong(this.mThreadId);
 		dest.writeString(this.mServiceCenter);
 	}
@@ -163,10 +169,9 @@ public class SMSEntity implements Parcelable {
 		this.mDateSent = in.readLong();
 		this.mProtocol = in.readInt();
 		this.mRead = in.readByte() != 0;
-		this.mSeen = in.readInt();
+		this.mSeen = in.readInt() != 0;
 		this.mSubject = in.readString();
 		this.mReplyPathPresent = in.readByte() != 0;
-		this.mTextCenter = in.readString();
 		this.mThreadId = in.readLong();
 		this.mServiceCenter = in.readString();
 	}
@@ -194,7 +199,6 @@ public class SMSEntity implements Parcelable {
 				", mSeen=" + mSeen +
 				", mSubject='" + mSubject + '\'' +
 				", mReplyPathPresent=" + mReplyPathPresent +
-				", mTextCenter='" + mTextCenter + '\'' +
 				", mThreadId=" + mThreadId +
 				", mServiceCenter='" + mServiceCenter + '\'' +
 				'}';

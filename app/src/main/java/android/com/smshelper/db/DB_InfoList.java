@@ -34,11 +34,11 @@ public class DB_InfoList extends SQLiteOpenHelper {
 			+ SpamList.KEY_DATE + " LONG NOT NULL, "
 			+ SpamList.KEY_DATESENT + " LONG NOT NULL,"
 			+ SpamList.KEY_ERROR_CODE + " INT, "
-			+ SpamList.KEY_LOCKED + " BOOLEAN, "
+			+ SpamList.KEY_LOCKED + " INT, "
 			+ SpamList.KEY_PROTOCOL + " INT, "
-			+ SpamList.KEY_READ + " BOOLEAN, "
+			+ SpamList.KEY_READ + " INT, "
 			+ SpamList.KEY_REPLY_PATH_PRESENT + " BOOLEAN, "
-			+ SpamList.KEY_SEEN + " BOOLEAN, "
+			+ SpamList.KEY_SEEN + " INT, "
 			+ SpamList.KEY_SERVICECENTER + " TEXT, "
 			+ SpamList.KEY_STATUS + " INTEGER, "
 			+ SpamList.KEY_SUBJECT + " TEXT, "
@@ -216,7 +216,81 @@ public class DB_InfoList extends SQLiteOpenHelper {
 		}
 	}
 
-	public void addSpamSMS(SMSEntity msg) {
+	public synchronized void addSpamSMS(SMSEntity msg) {
+		SQLiteDatabase db = null;
+		try {
+			db = getWritableDatabase();
+			final long code = db.insert(SpamList.TABLE_NAME, null, getCVFromSMS(msg));
+			System.out.println("spam insert code: " + code);
+		} catch (Exception e) {
+		} finally {
+			if (db != null) {
+				db.close();
+			}
+		}
+	}
+
+	private ContentValues getCVFromSMS(SMSEntity msg) {
+		ContentValues cv = new ContentValues();
+		cv.put(SpamList.KEY_ADDRESS, msg.getAddress());
+		cv.put(SpamList.KEY_BODY, msg.getBody());
+		cv.put(SpamList.KEY_DATE, msg.getDate());
+		cv.put(SpamList.KEY_DATESENT, msg.getDateSent());
+		cv.put(SpamList.KEY_ERROR_CODE, msg.getErrorCode());
+//		cv.put(SpamList.KEY_LOCKED);
+		cv.put(SpamList.KEY_PROTOCOL, msg.getProtocol());
+		cv.put(SpamList.KEY_READ, msg.isRead() ? 1 : 0);
+		cv.put(SpamList.KEY_REPLY_PATH_PRESENT, msg.isReplyPathPresent() ? 1 : 0);
+		cv.put(SpamList.KEY_SEEN, msg.isSeen() ? 1 : 0);
+		cv.put(SpamList.KEY_SERVICECENTER, msg.getServiceCenter());
+//		cv.put(SpamList.KEY_STATUS,msg.get);
+		cv.put(SpamList.KEY_SUBJECT, msg.getSubject());
+		cv.put(SpamList.KEY_THREADID, msg.getThreadId());
+//		cv.put(SpamList.KEY_TYPE,msg.get);
+		return cv;
+	}
+
+	public List<SMSEntity> initSpamList() {
+		SQLiteDatabase db = null;
+		Cursor cursor = null;
+		try {
+			db = getReadableDatabase();
+			cursor = db.query(SpamList.TABLE_NAME, SpamList.projection, null, null, null, null, null);
+			return getSpamListFromCursor(cursor);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (db != null) {
+				db.close();
+			}
+			if (cursor != null) {
+				cursor.close();
+			}
+		}
+		return null;
+	}
+
+	private List<SMSEntity> getSpamListFromCursor(Cursor cursor) {
+		List<SMSEntity> result = new ArrayList<>();
+		while (cursor.moveToNext()) {
+			final String address = cursor.getString(cursor.getColumnIndex(SpamList.KEY_ADDRESS));
+			final String body = cursor.getString(cursor.getColumnIndex(SpamList.KEY_BODY));
+			final long date = cursor.getLong(cursor.getColumnIndex(SpamList.KEY_DATE));
+			final long dateSent = cursor.getLong(cursor.getColumnIndex(SpamList.KEY_DATESENT));
+			final int errorCode = cursor.getInt(cursor.getColumnIndex(SpamList.KEY_ERROR_CODE));
+			final int protocol = cursor.getInt(cursor.getColumnIndex(SpamList.KEY_PROTOCOL));
+			final boolean read = cursor.getInt(cursor.getColumnIndex(SpamList.KEY_READ)) != 0;
+			final boolean seen = cursor.getInt(cursor.getColumnIndex(SpamList.KEY_SEEN)) != 0;
+			final String subject = cursor.getString(cursor.getColumnIndex(SpamList.KEY_SUBJECT));
+			final boolean replyPathPresent =
+					cursor.getInt(cursor.getColumnIndex(SpamList.KEY_REPLY_PATH_PRESENT)) != 0;
+			final long threadId = cursor.getLong(cursor.getColumnIndex(SpamList.KEY_THREADID));
+			final String serviceCenter = cursor.getString(cursor.getColumnIndex(SpamList.KEY_SERVICECENTER));
+			SMSEntity entity = new SMSEntity(errorCode, body, address, date, dateSent, protocol, read, seen, subject,
+					replyPathPresent, threadId, serviceCenter);
+			result.add(entity);
+		}
+		return result;
 	}
 
 	public static final class WhiteList {
@@ -271,6 +345,25 @@ public class DB_InfoList extends SQLiteOpenHelper {
 		 * TP-Status: failed.
 		 */
 		public static final int STATUS_FAILED = 64;
+
+		public static final String[] projection = new String[]{
+				KEY_ID,
+				KEY_THREADID,
+				KEY_ADDRESS,
+				KEY_DATE,
+				KEY_DATESENT,
+				KEY_PROTOCOL,
+				KEY_READ,
+				KEY_STATUS,
+				KEY_TYPE,
+				KEY_REPLY_PATH_PRESENT,
+				KEY_SUBJECT,
+				KEY_BODY,
+				KEY_SERVICECENTER,
+				KEY_LOCKED,
+				KEY_ERROR_CODE,
+				KEY_SEEN
+		};
 	}
 
 }

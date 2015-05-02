@@ -45,7 +45,7 @@ public class SmsReciever extends BroadcastReceiver {
 		sms.setDateSent(msg.getTimestampMillis());
 		sms.setProtocol(msg.getProtocolIdentifier());
 		sms.setRead(false);
-		sms.setSeen(0);
+		sms.setSeen(false);
 		if (msg.getPseudoSubject().length() > 0) {
 			sms.setSubject(msg.getPseudoSubject());
 		}
