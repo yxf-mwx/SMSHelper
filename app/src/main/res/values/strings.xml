@@ -27,4 +27,5 @@
 	<string name = "add_keyword" >添加关键字</string >
 	<string name = "correct_keyword" >修改关键字</string >
 	<string name = "select_all" >全选</string >
+	<string name = "reset" >重置</string >
 </resources >

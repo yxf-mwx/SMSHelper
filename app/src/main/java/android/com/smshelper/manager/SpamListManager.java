@@ -75,4 +75,16 @@ public class SpamListManager extends Observable implements Async_Spam_Init.CallB
 		setChanged();
 		notifyObservers();
 	}
+
+	public void removeSpam(final Context context, final List<SMSEntity> list) {
+		for (SMSEntity entity : list) {
+			mList.remove(entity);
+		}
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				DB_InfoList.getInstance(context).removeSpam(list);
+			}
+		}).start();
+	}
 }

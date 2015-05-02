@@ -294,6 +294,26 @@ public class DB_InfoList extends SQLiteOpenHelper {
 		return result;
 	}
 
+	public void removeSpam(List<SMSEntity> list) {
+		SQLiteDatabase db = null;
+		try {
+			db = getWritableDatabase();
+			for (SMSEntity entity : list) {
+				db.delete(
+						SpamList.TABLE_NAME,
+						SpamList.KEY_DATE + "=?",
+						new String[]{String.valueOf(entity.getDate())}
+				);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (db != null) {
+				db.close();
+			}
+		}
+	}
+
 	public static final class WhiteList {
 		public final static String TABLE_Name = "B";
 		private final static String KEY_PHONE = "a";

@@ -20,6 +20,7 @@ import android.widget.TextView;
 import net.simonvt.menudrawer.MenuDrawer;
 import net.simonvt.menudrawer.Position;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -41,6 +42,7 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 		setContentView(R.layout.activity_commonlist);
 		mListView = (ListView) findViewById(R.id.lv_main_common);
 		mTvbtn = (TextView) findViewById(R.id.tv_add_common);
+		mTvbtn.setOnClickListener(this);
 		mVLoading = findViewById(R.id.layout_loading_common);
 		mListData = SpamListManager.getInstance().getList();
 		mAdapter = new AdapterSpam(this, mListData, this, this);
@@ -114,7 +116,23 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 
 	@Override
 	public void onClick(View v) {
-
+		if (mIsActionMode) {
+			switch (v.getId()) {
+				case R.id.tv_add_common:
+					if (isAllSelect()) {
+						for (SMSEntity entity : mListData) {
+							entity.setIsCheck(false);
+						}
+					} else {
+						for (SMSEntity entity : mListData) {
+							entity.setIsCheck(true);
+						}
+					}
+			}
+			mAdapter.notifyDataSetChanged();
+			updateBtnText();
+		} else {
+		}
 	}
 
 	@Override
@@ -129,6 +147,9 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 			SMSEntity entity = mListData.get(position);
 			entity.setIsCheck(!entity.isCheck());
 			mAdapter.notifyDataSetChanged();
+			updateBtnText();
+		} else {
+
 		}
 	}
 
@@ -137,7 +158,7 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 		@Override
 		public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
 			mIsActionMode = true;
-			mTvbtn.setText(R.string.select_all);
+			updateBtnText();
 
 			mAdapter.setIsActionMode(true);
 			mAdapter.notifyDataSetChanged();
@@ -167,6 +188,13 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 		public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 			boolean ret = false;
 			if (item.getItemId() == R.id.actionmode_delete) {
+				List<SMSEntity> list = new ArrayList<>();
+				for (SMSEntity entity : mListData) {
+					if (entity.isCheck()) {
+						list.add(entity);
+					}
+				}
+				SpamListManager.getInstance().removeSpam(ActivityMain.this, list);
 				mode.finish();
 				ret = true;
 			}
@@ -177,8 +205,25 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 	@Override
 	public void onItemLongClick(View view, int position) {
 		if (!mIsActionMode) {
-			startSupportActionMode(mCallback);
 			mListData.get(position).setIsCheck(true);
+			startSupportActionMode(mCallback);
 		}
+	}
+
+	private void updateBtnText() {
+		if (isAllSelect()) {
+			mTvbtn.setText(R.string.reset);
+		} else {
+			mTvbtn.setText(R.string.select_all);
+		}
+	}
+
+	private boolean isAllSelect() {
+		for (SMSEntity entity : mListData) {
+			if (!entity.isCheck()) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
