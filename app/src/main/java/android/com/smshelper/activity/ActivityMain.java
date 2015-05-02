@@ -46,6 +46,7 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 		setContentView(R.layout.activity_commonlist);
 		mListView = (ListView) findViewById(R.id.lv_main_common);
 		mTvbtn = (TextView) findViewById(R.id.tv_add_common);
+		mTvbtn.setText("从短信中导入");
 		mTvbtn.setOnClickListener(this);
 		mVLoading = findViewById(R.id.layout_loading_common);
 		mListData = SpamListManager.getInstance().getList();
