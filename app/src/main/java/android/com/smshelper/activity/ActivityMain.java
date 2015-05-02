@@ -1,38 +1,52 @@
 package android.com.smshelper.activity;
 
 import android.com.smshelper.R;
-import android.com.smshelper.db.DB_Dm_Mobile;
+import android.com.smshelper.adapter.AdapterSpam;
+import android.com.smshelper.entity.SMSEntity;
+import android.com.smshelper.interfac.OnItemClickListener;
+import android.com.smshelper.manager.SpamListManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import net.simonvt.menudrawer.MenuDrawer;
 import net.simonvt.menudrawer.Position;
 
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+
 
 public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDrawerStateChangeListener, View
-		.OnClickListener {
-	MenuDrawer mMenuDrawer;
-	TextView mTv1;
+		.OnClickListener, Observer, OnItemClickListener {
+	private MenuDrawer mMenuDrawer;
+	private ListView mListView;
+	private TextView mTvbtn;
+	private View mVLoading;
+	private AdapterSpam mAdapter;
+	private List<SMSEntity> mListData;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		mTv1 = (TextView) findViewById(R.id.tv1_main_activity);
-		mTv1.setOnClickListener(this);
+		setContentView(R.layout.activity_commonlist);
+		mListView = (ListView) findViewById(R.id.lv_main_common);
+		mTvbtn = (TextView) findViewById(R.id.tv_add_common);
+		mVLoading = findViewById(R.id.layout_loading_common);
+		mListData = SpamListManager.getInstance().getList();
+		mAdapter = new AdapterSpam(this, mListData, this);
+		mListView.setAdapter(mAdapter);
 		initActionBar();
 		initMenuDrawer();
+		SpamListManager.getInstance().addObserver(this);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		switch (id) {
 			case android.R.id.home:
@@ -79,6 +93,7 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		SpamListManager.getInstance().deleteObserver(this);
 		mMenuDrawer.setOnDrawerStateChangeListener(null);
 		mMenuDrawer = null;
 	}
@@ -94,6 +109,17 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 
 	@Override
 	public void onClick(View v) {
-		DB_Dm_Mobile.getInstance().getMobileArea("13450211406");
+
+	}
+
+	@Override
+	public void update(Observable observable, Object data) {
+		mVLoading.setVisibility(View.GONE);
+		mAdapter.notifyDataSetChanged();
+	}
+
+	@Override
+	public void OnItemClick(View view, int position) {
+
 	}
 }

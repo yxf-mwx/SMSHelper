@@ -53,5 +53,7 @@ public class SpamListManager extends Observable {
 		}
 	}
 
-
+	public List<SMSEntity> getList() {
+		return mList;
+	}
 }
