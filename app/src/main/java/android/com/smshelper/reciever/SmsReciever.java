@@ -27,7 +27,7 @@ public class SmsReciever extends BroadcastReceiver {
 				Intent i = new Intent(context, BackgroudService.class);
 				i.putExtra(AppConstant.ARGS_SMSENTITY, entity);
 				context.startService(i);
-					abortBroadcast();
+				abortBroadcast();
 			}
 		}
 	}

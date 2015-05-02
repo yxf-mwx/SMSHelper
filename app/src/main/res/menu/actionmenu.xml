@@ -5,4 +5,8 @@
 			android:id = "@+id/actionmode_delete"
 			android:title = "@string/delete"
 			app:showAsAction = "always" />
+	<item
+			android:id = "@+id/actionmode_recover"
+			android:title = "@string/recover"
+			app:showAsAction = "always" />
 </menu >

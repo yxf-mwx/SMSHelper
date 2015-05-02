@@ -1,6 +1,7 @@
 package android.com.smshelper.activity;
 
 import android.com.smshelper.AppConstant;
+import android.com.smshelper.AsyncTask.Async_Spam_Recover;
 import android.com.smshelper.R;
 import android.com.smshelper.adapter.AdapterSpam;
 import android.com.smshelper.entity.SMSEntity;
@@ -192,13 +193,19 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 		@Override
 		public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 			boolean ret = false;
-			if (item.getItemId() == R.id.actionmode_delete) {
-				List<SMSEntity> list = new ArrayList<>();
-				for (SMSEntity entity : mListData) {
-					if (entity.isCheck()) {
-						list.add(entity);
-					}
+			List<SMSEntity> list = new ArrayList<>();
+			for (SMSEntity entity : mListData) {
+				if (entity.isCheck()) {
+					list.add(entity);
 				}
+			}
+			if (item.getItemId() == R.id.actionmode_delete) {
+				SpamListManager.getInstance().removeSpam(ActivityMain.this, list);
+				mode.finish();
+				ret = true;
+			} else if (item.getItemId() == R.id.actionmode_recover) {
+				Async_Spam_Recover asyncRecover = new Async_Spam_Recover(ActivityMain.this, list);
+				asyncRecover.execute();
 				SpamListManager.getInstance().removeSpam(ActivityMain.this, list);
 				mode.finish();
 				ret = true;
