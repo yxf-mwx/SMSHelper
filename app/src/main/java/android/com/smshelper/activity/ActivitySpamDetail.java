@@ -17,7 +17,7 @@ import java.util.Date;
  * @time 8:00 PM
  * updater xxx
  * update  yy-MM-dd
- * @comment balabalabala
+ * @comment 短信详情类
  */
 public class ActivitySpamDetail extends BaseActivitySMS {
 	private TextView mTvAddress;
