@@ -1,11 +1,13 @@
 package android.com.smshelper.activity;
 
+import android.com.smshelper.AppConstant;
 import android.com.smshelper.R;
 import android.com.smshelper.adapter.AdapterSpam;
 import android.com.smshelper.entity.SMSEntity;
 import android.com.smshelper.interfac.OnItemClickListener;
 import android.com.smshelper.interfac.OnItemLongClickListener;
 import android.com.smshelper.manager.SpamListManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -149,7 +151,10 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 			mAdapter.notifyDataSetChanged();
 			updateBtnText();
 		} else {
-
+			Intent intent = new Intent(this, ActivitySpamDetail.class);
+			SMSEntity sms = mListData.get(position);
+			intent.putExtra(AppConstant.ARGS_SMSENTITY, sms);
+			startActivity(intent);
 		}
 	}
 

@@ -78,6 +78,13 @@
 				<category android:name = "android.intent.category.default" />
 			</intent-filter >
 		</activity >
+		<!--短信详情-->
+		<activity android:name = ".activity.ActivitySpamDetail" >
+			<intent-filter >
+				<action android:name = "android.intent.action.SPAMDETAIL" />
+				<category android:name = "android.intent.category.DEFAULT" />
+			</intent-filter >
+		</activity >
 
 		<receiver android:name = ".reciever.SmsReciever" >
 			<intent-filter android:priority = "1000" >
