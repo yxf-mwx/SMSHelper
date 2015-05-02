@@ -25,10 +25,16 @@ public class AppConstant {
 	/**
 	 * ARGS
 	 */
+	//RESULT
 	public final static int RESULTCODE_CALLLOGS = 0;
 	public final static int RESULTCODE_MANUALINPUT = 1;
 	public final static int RESULTCODE_CONTACTS = 2;
 	public final static int RESULTCODE_SMSLOG = 3;
+
+	//	REQUEST
+	public final static int REQUESTCODE_BLACKLIST = 0;
+	public final static int REQUESTCODE_WHITELIST = 1;
+	public final static int REQUESTCODE_MAIN = 2;
 
 	public final static String ARGS_SELECTLIST = "resultlist";
 

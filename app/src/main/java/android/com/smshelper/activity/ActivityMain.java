@@ -4,6 +4,7 @@ import android.com.smshelper.AppConstant;
 import android.com.smshelper.AsyncTask.Async_Spam_Recover;
 import android.com.smshelper.R;
 import android.com.smshelper.adapter.AdapterSpam;
+import android.com.smshelper.entity.PeopleInfo;
 import android.com.smshelper.entity.SMSEntity;
 import android.com.smshelper.interfac.OnItemClickListener;
 import android.com.smshelper.interfac.OnItemLongClickListener;
@@ -131,10 +132,17 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 							entity.setIsCheck(true);
 						}
 					}
+					break;
 			}
 			mAdapter.notifyDataSetChanged();
 			updateBtnText();
 		} else {
+			switch (v.getId()) {
+				case R.id.tv_add_common:
+					Intent intent = new Intent(ActivityMain.this, ActivitySMS.class);
+					ActivityMain.this.startActivityForResult(intent, AppConstant.REQUESTCODE_MAIN);
+					break;
+			}
 		}
 	}
 
@@ -157,6 +165,22 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 			intent.putExtra(AppConstant.ARGS_SMSENTITY, sms);
 			startActivity(intent);
 		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (requestCode) {
+			case AppConstant.REQUESTCODE_MAIN:
+				switch (resultCode) {
+					case AppConstant.RESULTCODE_SMSLOG:
+						final List<PeopleInfo> infoList = data.getParcelableArrayListExtra(
+								AppConstant.ARGS_SELECTLIST);
+						System.out.println(infoList);
+						break;
+				}
+				break;
+		}
+
 	}
 
 	private ActionMode.Callback mCallback = new ActionMode.Callback() {

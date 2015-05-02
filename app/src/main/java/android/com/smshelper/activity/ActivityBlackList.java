@@ -25,7 +25,6 @@ import java.util.List;
  */
 public class ActivityBlackList extends BaseActivitySMS implements View.OnClickListener, AddInfoListCallback {
 	private static final int TYPE = 1;
-	private static final int REQUESTCODE = 0;
 	private ListView mLvMain;
 	private List<PeopleInfo> mList;
 	private AdapterInfoList mAdapter;
@@ -75,19 +74,19 @@ public class ActivityBlackList extends BaseActivitySMS implements View.OnClickLi
 		switch (type) {
 			case 0:
 				intent = new Intent(this, ActivityManualInput.class);
-				startActivityForResult(intent, REQUESTCODE);
+				startActivityForResult(intent, AppConstant.REQUESTCODE_BLACKLIST);
 				break;
 			case 1:
 				intent = new Intent(this, ActivityCallLogs.class);
-				startActivityForResult(intent, REQUESTCODE);
+				startActivityForResult(intent, AppConstant.REQUESTCODE_BLACKLIST);
 				break;
 			case 2:
 				intent = new Intent(this, ActivitySMS.class);
-				startActivityForResult(intent, REQUESTCODE);
+				startActivityForResult(intent, AppConstant.REQUESTCODE_BLACKLIST);
 				break;
 			case 3:
 				intent = new Intent(this, ActivityContacts.class);
-				startActivityForResult(intent, REQUESTCODE);
+				startActivityForResult(intent, AppConstant.REQUESTCODE_BLACKLIST);
 				break;
 			default:
 		}
@@ -100,7 +99,7 @@ public class ActivityBlackList extends BaseActivitySMS implements View.OnClickLi
 			return;
 		}
 		switch (requestCode) {
-			case REQUESTCODE:
+			case AppConstant.REQUESTCODE_BLACKLIST:
 //				switch (resultCode) {
 //					case AppConstant.RESULTCODE_CALLLOGS:
 //					case AppConstant.RESULTCODE_CONTACTS:
