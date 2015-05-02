@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by admin on 15-1-9.
+ * Created by yxf on 15-1-9.
+ * 短信助手的主要数据库类
  */
 public class DB_InfoList extends SQLiteOpenHelper {
 	public static DB_InfoList instance = null;

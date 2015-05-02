@@ -68,6 +68,7 @@ public class SpamListManager extends Observable implements Async_Spam_Init.CallB
 		if (list == null) {
 			return;
 		}
+		mList.clear();
 		for (SMSEntity entity : list) {
 			mList.add(entity);
 		}
