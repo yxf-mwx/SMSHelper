@@ -31,15 +31,7 @@ public class BackgroudService extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		final SMSEntity sms = intent.getExtras().getParcelable(AppConstant.ARGS_SMSENTITY);
-		final String body = sms.getBody();
-		final String address = sms.getAddress();
 
-		//todo 分类
-
-		List<SMSEntity> list = new ArrayList<>();
-		list.add(sms);
-		SpamListManager.getInstance().addSMS(this, list);
 		return super.onStartCommand(intent, flags, startId);
 	}
 }

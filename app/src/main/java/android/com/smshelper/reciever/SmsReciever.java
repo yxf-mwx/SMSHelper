@@ -1,13 +1,16 @@
 package android.com.smshelper.reciever;
 
-import android.com.smshelper.AppConstant;
+import android.com.smshelper.classify.ClassifyCenter;
 import android.com.smshelper.entity.SMSEntity;
-import android.com.smshelper.service.BackgroudService;
+import android.com.smshelper.manager.SpamListManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by admin on 15-1-9.
@@ -24,10 +27,17 @@ public class SmsReciever extends BroadcastReceiver {
 			if (bundle != null) {
 				Object[] pdusObj = (Object[]) bundle.get("pdus");
 				SMSEntity entity = createEntityFromSms(pdusObj);
-				Intent i = new Intent(context, BackgroudService.class);
-				i.putExtra(AppConstant.ARGS_SMSENTITY, entity);
-				context.startService(i);
-				abortBroadcast();
+				final String body = entity.getBody();
+				final String address = entity.getAddress();
+
+				//用分类器分辨是否为垃圾短信，如果是做处理，不是就不需要处理
+				if (ClassifyCenter.getInstance().classify(body, address) == ClassifyCenter.SPAM) {
+					List<SMSEntity> list = new ArrayList<>();
+					list.add(entity);
+					SpamListManager.getInstance().addSMS(context, list);
+					abortBroadcast();
+				}
+
 			}
 		}
 	}
