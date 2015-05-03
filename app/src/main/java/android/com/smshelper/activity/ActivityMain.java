@@ -1,6 +1,7 @@
 package android.com.smshelper.activity;
 
 import android.com.smshelper.AppConstant;
+import android.com.smshelper.AsyncTask.Async_Spam_Import;
 import android.com.smshelper.AsyncTask.Async_Spam_Recover;
 import android.com.smshelper.R;
 import android.com.smshelper.adapter.AdapterSpam;
@@ -31,7 +32,7 @@ import java.util.Observer;
 
 
 public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDrawerStateChangeListener, View
-		.OnClickListener, Observer, OnItemClickListener, OnItemLongClickListener {
+		.OnClickListener, Observer, OnItemClickListener, OnItemLongClickListener, Async_Spam_Import.CallBack {
 	private MenuDrawer mMenuDrawer;
 	private ListView mListView;
 	private TextView mTvbtn;
@@ -174,9 +175,11 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 			case AppConstant.REQUESTCODE_MAIN:
 				switch (resultCode) {
 					case AppConstant.RESULTCODE_SMSLOG:
+						mVLoading.setVisibility(View.VISIBLE);
 						final List<PeopleInfo> infoList = data.getParcelableArrayListExtra(
 								AppConstant.ARGS_SELECTLIST);
-						System.out.println(infoList);
+						Async_Spam_Import asyncTask = new Async_Spam_Import(this, infoList, this);
+						asyncTask.execute();
 						break;
 				}
 				break;
@@ -262,5 +265,10 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public void callBack(List<SMSEntity> list) {
+		SpamListManager.getInstance().addSMS(this, list);
 	}
 }
