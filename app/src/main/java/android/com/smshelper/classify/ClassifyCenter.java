@@ -4,6 +4,7 @@ import android.com.smshelper.classify.classifier.Classfier;
 import android.com.smshelper.classify.classifier.ClassfierBlackList;
 import android.com.smshelper.classify.classifier.ClassiferWhiteList;
 import android.com.smshelper.classify.classifier.ClassifierKeyword;
+import android.content.Context;
 
 /**
  * @author yxf
@@ -14,8 +15,9 @@ import android.com.smshelper.classify.classifier.ClassifierKeyword;
  * @comment 过滤器的管理类
  */
 public class ClassifyCenter {
-	public static final int NORM = 0;
-	public static final int SPAM = 1;
+	public static final int UNKNOWN = 0;
+	public static final int WHITE = 1;
+	public static final int SPAM = 2;
 
 	private static ClassifyCenter instance;
 
@@ -23,23 +25,28 @@ public class ClassifyCenter {
 	private Classfier mWhiteListClassfier;
 	private Classfier mKeyWordClassfier;
 
-	public synchronized static ClassifyCenter getInstance() {
+	private static Context mContext;
+
+	public synchronized static ClassifyCenter getInstance(Context context) {
 		if (instance == null) {
-			instance = new ClassifyCenter();
+			mContext = context.getApplicationContext();
+			instance = new ClassifyCenter(mContext);
 		}
 		return instance;
 	}
 
-	private ClassifyCenter() {
-		mBlackListClassfier = new ClassfierBlackList();
-		mWhiteListClassfier = new ClassiferWhiteList();
+	private ClassifyCenter(Context context) {
+		mBlackListClassfier = new ClassfierBlackList(context);
+		mWhiteListClassfier = new ClassiferWhiteList(context);
 		mKeyWordClassfier = new ClassifierKeyword();
 	}
 
 	public int classify(String body, String address) {
-		if (mWhiteListClassfier.classify(body, address) == NORM) {
+		System.out.println("body: " + body + "\n" + "address: " + address);
+		if (mWhiteListClassfier.classify(body, address) == WHITE) {
+
 			//如果在白名单中直接判定为正常短信
-			return NORM;
+			return WHITE;
 		} else {
 			//不在白名单中进行接下来的分类
 			if (mBlackListClassfier.classify(body, address) == SPAM) {
@@ -50,7 +57,7 @@ public class ClassifyCenter {
 				return SPAM;
 			}
 			//如果没有被判定为垃圾短信则为正常短信
-			return NORM;
+			return WHITE;
 		}
 	}
 }

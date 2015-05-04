@@ -31,7 +31,7 @@ public class SmsReciever extends BroadcastReceiver {
 				final String address = entity.getAddress();
 
 				//用分类器分辨是否为垃圾短信，如果是做处理，不是就不需要处理
-				if (ClassifyCenter.getInstance().classify(body, address) == ClassifyCenter.SPAM) {
+				if (ClassifyCenter.getInstance(context).classify(body, address) == ClassifyCenter.SPAM) {
 					List<SMSEntity> list = new ArrayList<>();
 					list.add(entity);
 					SpamListManager.getInstance().addSMS(context, list);

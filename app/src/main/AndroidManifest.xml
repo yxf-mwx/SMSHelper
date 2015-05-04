@@ -92,12 +92,6 @@
 			</intent-filter >
 		</receiver >
 
-		<service android:name = ".service.BackgroudService" >
-			<intent-filter >
-				<action android:name = "android.provider.Telephony.SMS_SERVICE" />
-			</intent-filter >
-		</service >
-
 	</application >
 
 </manifest >
