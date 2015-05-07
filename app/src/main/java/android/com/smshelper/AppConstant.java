@@ -14,6 +14,7 @@ public class AppConstant {
 	 */
 	public final static String DB_BASEPATH = Environment.getExternalStorageDirectory() + "/com.android.smshelper/db";
 	public final static String DB_DM_MOBILE = "/a.db";
+	public final static String DB_SMART = "/data.db";
 
 	public static String DB_CALLLOGS_CACHE = "b.db";
 	/**

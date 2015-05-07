@@ -13,7 +13,7 @@ import java.util.List;
  * update  yy-MM-dd
  * @comment 关键字过滤
  */
-public class ClassifierKeyword implements Classfier {
+public class ClassifierKeyword implements Classifier {
 
 	@Override
 	public int classify(String body, String address) {

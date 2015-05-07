@@ -1,7 +1,8 @@
 package android.com.smshelper.classify;
 
-import android.com.smshelper.classify.classifier.Classfier;
-import android.com.smshelper.classify.classifier.ClassfierBlackList;
+import android.com.smshelper.classify.classifier.Classifier;
+import android.com.smshelper.classify.classifier.ClassifierBlackList;
+import android.com.smshelper.classify.classifier.ClassifierSmart;
 import android.com.smshelper.classify.classifier.ClassiferWhiteList;
 import android.com.smshelper.classify.classifier.ClassifierKeyword;
 import android.content.Context;
@@ -21,9 +22,10 @@ public class ClassifyCenter {
 
 	private static ClassifyCenter instance;
 
-	private Classfier mBlackListClassfier;
-	private Classfier mWhiteListClassfier;
-	private Classfier mKeyWordClassfier;
+	private Classifier mBlackListClassifier;
+	private Classifier mWhiteListClassifier;
+	private Classifier mKeyWordClassifier;
+	private Classifier mSmartClassifier;
 
 	private static Context mContext;
 
@@ -36,28 +38,37 @@ public class ClassifyCenter {
 	}
 
 	private ClassifyCenter(Context context) {
-		mBlackListClassfier = new ClassfierBlackList(context);
-		mWhiteListClassfier = new ClassiferWhiteList(context);
-		mKeyWordClassfier = new ClassifierKeyword();
+		mBlackListClassifier = new ClassifierBlackList(context);
+		mWhiteListClassifier = new ClassiferWhiteList(context);
+		mKeyWordClassifier = new ClassifierKeyword();
+		mSmartClassifier = new ClassifierSmart();
 	}
 
 	public int classify(String body, String address) {
 		System.out.println("body: " + body + "\n" + "address: " + address);
-		if (mWhiteListClassfier.classify(body, address) == WHITE) {
 
+		if (mWhiteListClassifier.classify(body, address) == WHITE) {
 			//如果在白名单中直接判定为正常短信
 			return WHITE;
-		} else {
-			//不在白名单中进行接下来的分类
-			if (mBlackListClassfier.classify(body, address) == SPAM) {
-				//黑名单中判定为垃圾短信直接判定为垃圾短信
-				return SPAM;
-			} else if (mKeyWordClassfier.classify(body, address) == SPAM) {
-				//关键字判定为垃圾短信，也判定为垃圾短信
-				return SPAM;
-			}
-			//如果没有被判定为垃圾短信则为正常短信
-			return WHITE;
 		}
+		//不在白名单中进行接下来的分类
+
+		//黑名单中判定为垃圾短信直接判定为垃圾短信
+		if (mBlackListClassifier.classify(body, address) == SPAM) {
+			return SPAM;
+		}
+
+		//关键字判定为垃圾短信，也判定为垃圾短信
+		if (mKeyWordClassifier.classify(body, address) == SPAM) {
+			return SPAM;
+		}
+
+		//智能分类
+		if (mKeyWordClassifier.classify(body, address) == SPAM) {
+			return SPAM;
+		}
+
+		//如果没有被判定为垃圾短信则为正常短信
+		return WHITE;
 	}
 }

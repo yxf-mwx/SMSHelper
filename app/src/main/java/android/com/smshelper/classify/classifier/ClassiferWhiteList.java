@@ -15,7 +15,7 @@ import java.util.List;
  * update  yy-MM-dd
  * @comment 白名单过滤器
  */
-public class ClassiferWhiteList implements Classfier {
+public class ClassiferWhiteList implements Classifier {
 	private Context mContext;
 
 	public ClassiferWhiteList(Context context) {

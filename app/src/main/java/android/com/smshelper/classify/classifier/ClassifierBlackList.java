@@ -15,10 +15,10 @@ import java.util.List;
  * update  yy-MM-dd
  * @comment 黑名单分类器
  */
-public class ClassfierBlackList implements Classfier {
+public class ClassifierBlackList implements Classifier {
 	private Context mContext;
 
-	public ClassfierBlackList(Context context) {
+	public ClassifierBlackList(Context context) {
 		mContext = context;
 	}
 
