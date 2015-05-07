@@ -36,6 +36,8 @@ public class SmsReciever extends BroadcastReceiver {
 					list.add(entity);
 					SpamListManager.getInstance().addSMS(context, list);
 					abortBroadcast();
+				}else{
+					
 				}
 
 			}

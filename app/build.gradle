@@ -34,4 +34,5 @@ dependencies {
 	compile project(':extra_libs:MenuDrawerLibrary')
 	compile 'com.android.support:appcompat-v7:21.0.3'
 	compile files('libs/pinyin4j-2.5.0.jar')
+	compile files('libs/IKAnalyzer2012FF_u1.jar')
 }
