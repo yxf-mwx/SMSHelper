@@ -1,6 +1,6 @@
 package android.com.smshelper.manager;
 
-import android.com.smshelper.db.DB_InfoList;
+import android.com.smshelper.database.DB_InfoList;
 import android.content.Context;
 import android.os.Process;
 

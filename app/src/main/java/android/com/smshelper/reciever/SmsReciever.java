@@ -1,6 +1,6 @@
 package android.com.smshelper.reciever;
 
-import android.com.smshelper.classify.ClassifyCenter;
+import android.com.smshelper.classifyer.ClassifyCenter;
 import android.com.smshelper.entity.SMSEntity;
 import android.com.smshelper.manager.SpamListManager;
 import android.content.BroadcastReceiver;

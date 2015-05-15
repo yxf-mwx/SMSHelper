@@ -2,7 +2,7 @@ package android.com.smshelper.adapter;
 
 import android.com.smshelper.AppConstant;
 import android.com.smshelper.R;
-import android.com.smshelper.Util.DateUtils;
+import android.com.smshelper.util.DateUtils;
 import android.com.smshelper.entity.CallLogs;
 import android.content.Context;
 import android.provider.CallLog;

@@ -1,4 +1,4 @@
-package android.com.smshelper.AsyncTask;
+package android.com.smshelper.asynctask;
 
 import android.com.smshelper.entity.SMSEntity;
 import android.content.ContentResolver;

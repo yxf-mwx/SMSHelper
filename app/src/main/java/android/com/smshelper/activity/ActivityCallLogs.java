@@ -1,11 +1,11 @@
 package android.com.smshelper.activity;
 
 import android.com.smshelper.AppConstant;
-import android.com.smshelper.AsyncTask.Async_CallLogs;
+import android.com.smshelper.asynctask.Async_CallLogs;
 import android.com.smshelper.R;
 import android.com.smshelper.activity.activitybase.BaseActivitySMS;
 import android.com.smshelper.adapter.AdapterCallLogs;
-import android.com.smshelper.db.DB_CallLogs_Cache;
+import android.com.smshelper.database.DB_CallLogs_Cache;
 import android.com.smshelper.entity.CallLogs;
 import android.com.smshelper.entity.PeopleInfo;
 import android.com.smshelper.interfac.AsyncCallBack;

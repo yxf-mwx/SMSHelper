@@ -1,7 +1,7 @@
 package android.com.smshelper.manager;
 
-import android.com.smshelper.AsyncTask.Async_Spam_Init;
-import android.com.smshelper.db.DB_InfoList;
+import android.com.smshelper.asynctask.Async_Spam_Init;
+import android.com.smshelper.database.DB_InfoList;
 import android.com.smshelper.entity.SMSEntity;
 import android.content.Context;
 

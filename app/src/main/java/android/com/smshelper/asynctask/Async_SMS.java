@@ -1,4 +1,4 @@
-package android.com.smshelper.AsyncTask;
+package android.com.smshelper.asynctask;
 
 import android.com.smshelper.entity.ListItemSMS;
 import android.com.smshelper.interfac.OnReadSMSFinished;

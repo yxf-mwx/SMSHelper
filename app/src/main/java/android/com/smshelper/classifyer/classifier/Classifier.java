@@ -1,4 +1,4 @@
-package android.com.smshelper.classify.classifier;
+package android.com.smshelper.classifyer.classifier;
 
 /**
  * @author yxf

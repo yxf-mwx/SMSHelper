@@ -1,4 +1,4 @@
-package android.com.smshelper.db;
+package android.com.smshelper.database;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.telephony.SmsMessage;

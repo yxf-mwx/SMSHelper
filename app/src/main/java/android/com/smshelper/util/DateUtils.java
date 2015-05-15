@@ -1,4 +1,4 @@
-package android.com.smshelper.Util;
+package android.com.smshelper.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

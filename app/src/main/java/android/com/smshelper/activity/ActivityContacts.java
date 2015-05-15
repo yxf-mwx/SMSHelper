@@ -1,7 +1,7 @@
 package android.com.smshelper.activity;
 
 import android.com.smshelper.AppConstant;
-import android.com.smshelper.AsyncTask.Async_Contacts;
+import android.com.smshelper.asynctask.Async_Contacts;
 import android.com.smshelper.R;
 import android.com.smshelper.activity.activitybase.BaseActivitySMS;
 import android.com.smshelper.adapter.AdapterContacts;

@@ -1,8 +1,8 @@
 package android.com.smshelper.activity;
 
 import android.com.smshelper.AppConstant;
-import android.com.smshelper.AsyncTask.Async_Spam_Import;
-import android.com.smshelper.AsyncTask.Async_Spam_Recover;
+import android.com.smshelper.asynctask.Async_Spam_Import;
+import android.com.smshelper.asynctask.Async_Spam_Recover;
 import android.com.smshelper.R;
 import android.com.smshelper.adapter.AdapterSpam;
 import android.com.smshelper.entity.PeopleInfo;

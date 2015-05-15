@@ -1,6 +1,6 @@
-package android.com.smshelper.classify.classifier;
+package android.com.smshelper.classifyer.classifier;
 
-import android.com.smshelper.classify.ClassifyCenter;
+import android.com.smshelper.classifyer.ClassifyCenter;
 import android.com.smshelper.entity.PeopleInfo;
 import android.com.smshelper.manager.BlackListManager;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package android.com.smshelper.db;
+package android.com.smshelper.database;
 
 import android.com.smshelper.AppConstant;
 import android.com.smshelper.entity.CallLogs;

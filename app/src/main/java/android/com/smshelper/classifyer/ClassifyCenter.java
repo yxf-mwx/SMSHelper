@@ -1,10 +1,10 @@
-package android.com.smshelper.classify;
+package android.com.smshelper.classifyer;
 
-import android.com.smshelper.classify.classifier.Classifier;
-import android.com.smshelper.classify.classifier.ClassifierBlackList;
-import android.com.smshelper.classify.classifier.ClassifierSmart;
-import android.com.smshelper.classify.classifier.ClassiferWhiteList;
-import android.com.smshelper.classify.classifier.ClassifierKeyword;
+import android.com.smshelper.classifyer.classifier.ClassiferWhiteList;
+import android.com.smshelper.classifyer.classifier.Classifier;
+import android.com.smshelper.classifyer.classifier.ClassifierBlackList;
+import android.com.smshelper.classifyer.classifier.ClassifierKeyword;
+import android.com.smshelper.classifyer.classifier.ClassifierSmart;
 import android.content.Context;
 
 /**
@@ -41,11 +41,10 @@ public class ClassifyCenter {
 		mBlackListClassifier = new ClassifierBlackList(context);
 		mWhiteListClassifier = new ClassiferWhiteList(context);
 		mKeyWordClassifier = new ClassifierKeyword();
-		mSmartClassifier = new ClassifierSmart();
+		mSmartClassifier = new ClassifierSmart(context);
 	}
 
 	public int classify(String body, String address) {
-		System.out.println("body: " + body + "\n" + "address: " + address);
 
 		if (mWhiteListClassifier.classify(body, address) == WHITE) {
 			//如果在白名单中直接判定为正常短信
@@ -62,12 +61,10 @@ public class ClassifyCenter {
 		if (mKeyWordClassifier.classify(body, address) == SPAM) {
 			return SPAM;
 		}
-
 		//智能分类
-		if (mKeyWordClassifier.classify(body, address) == SPAM) {
+		if (mSmartClassifier.classify(body, address) == SPAM) {
 			return SPAM;
 		}
-
 		//如果没有被判定为垃圾短信则为正常短信
 		return WHITE;
 	}
