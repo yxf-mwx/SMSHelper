@@ -20,12 +20,12 @@ public class DB_CallLogs_Cache extends SQLiteOpenHelper {
 	private final static int DB_VERSION = 1;
 
 	private final String TABLE_CACHE = "A";
-	private final String KEY_CACHENAME = "a";
-	private final String KEY_NUMBER = "b";
-	private final String KEY_TYPE = "c";
-	private final String KEY_DATE = "d";
-	private final String KEY_NUMBERAREA = "e";
-	private final String KEY_NUMBERTYPE = "f";
+	private final String KEY_CACHENAME = "name";
+	private final String KEY_NUMBER = "number";
+	private final String KEY_TYPE = "type";
+	private final String KEY_DATE = "date";
+	private final String KEY_NUMBERAREA = "number_area";
+	private final String KEY_NUMBERTYPE = "number_type";
 
 	public static synchronized DB_CallLogs_Cache getInstance(Context context) {
 		if (instance == null) {

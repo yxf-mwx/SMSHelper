@@ -1,7 +1,7 @@
 package android.com.smshelper.activity;
 
 import android.com.smshelper.R;
-import android.com.smshelper.activity.activitybase.BaseActivitySMS;
+import android.com.smshelper.activity.base.BaseActivitySMS;
 import android.com.smshelper.adapter.AdapterKeyWord;
 import android.com.smshelper.fragment.DialogFragment_Keyword;
 import android.com.smshelper.interfac.OnItemClickListener;

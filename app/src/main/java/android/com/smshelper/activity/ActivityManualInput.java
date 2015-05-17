@@ -2,7 +2,7 @@ package android.com.smshelper.activity;
 
 import android.com.smshelper.AppConstant;
 import android.com.smshelper.R;
-import android.com.smshelper.activity.activitybase.BaseActivitySMS;
+import android.com.smshelper.activity.base.BaseActivitySMS;
 import android.com.smshelper.entity.PeopleInfo;
 import android.content.Intent;
 import android.os.Bundle;

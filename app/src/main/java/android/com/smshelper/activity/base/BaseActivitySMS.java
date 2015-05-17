@@ -1,4 +1,4 @@
-package android.com.smshelper.activity.activitybase;
+package android.com.smshelper.activity.base;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;

@@ -3,7 +3,7 @@ package android.com.smshelper.activity;
 import android.com.smshelper.AppConstant;
 import android.com.smshelper.R;
 import android.com.smshelper.util.DateUtils;
-import android.com.smshelper.activity.activitybase.BaseActivitySMS;
+import android.com.smshelper.activity.base.BaseActivitySMS;
 import android.com.smshelper.entity.SMSEntity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
