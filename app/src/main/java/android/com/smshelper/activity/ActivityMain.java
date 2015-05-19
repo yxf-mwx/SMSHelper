@@ -1,10 +1,10 @@
 package android.com.smshelper.activity;
 
 import android.com.smshelper.AppConstant;
-import android.com.smshelper.asynctask.Async_Spam_Import;
-import android.com.smshelper.asynctask.Async_Spam_Recover;
 import android.com.smshelper.R;
 import android.com.smshelper.adapter.AdapterSpam;
+import android.com.smshelper.asynctask.Async_Spam_Import;
+import android.com.smshelper.asynctask.Async_Spam_Recover;
 import android.com.smshelper.entity.PeopleInfo;
 import android.com.smshelper.entity.SMSEntity;
 import android.com.smshelper.interfac.OnItemClickListener;
@@ -59,6 +59,9 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 		SpamListManager.getInstance().addObserver(this);
 	}
 
+	/**
+	 * 这里点击页面左上方home键的时候打开LeftMenu左侧菜单
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
@@ -67,10 +70,10 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 				mMenuDrawer.openMenu();
 				break;
 		}
-
 		return super.onOptionsItemSelected(item);
 	}
 
+	//	左侧菜单的初始化
 	private void initMenuDrawer() {
 		final int menuSize = getResources().getDisplayMetrics().widthPixels * 2 / 3;
 		mMenuDrawer = MenuDrawer.attach(
@@ -85,6 +88,7 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 		mMenuDrawer.setOnDrawerStateChangeListener(this);
 	}
 
+	//左侧菜单状态变化时的监听事件
 	@Override
 	public void onDrawerStateChange(int oldState, int newState) {
 		int logoRes = 0;
@@ -98,6 +102,7 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 		}
 	}
 
+	//左侧菜单滑动时的监听事件
 	@Override
 	public void onDrawerSlide(float openRatio, int offsetPixels) {
 
@@ -187,6 +192,7 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 
 	}
 
+	//actionMode回调实例
 	private ActionMode.Callback mCallback = new ActionMode.Callback() {
 
 		@Override
@@ -242,6 +248,7 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 		}
 	};
 
+	//列表项目长时间点击触发actionMode
 	@Override
 	public void onItemLongClick(View view, int position) {
 		if (!mIsActionMode) {
