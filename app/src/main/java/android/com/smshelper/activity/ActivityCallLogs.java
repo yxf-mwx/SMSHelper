@@ -43,6 +43,7 @@ public class ActivityCallLogs extends BaseActivitySMS implements View.OnClickLis
 		mLvMain.setAdapter(mAdapter);
 		mTvConfirm.setOnClickListener(this);
 		initActionBar();
+		//同步通话记录缓存数据库
 		synchronizeCallLog();
 	}
 

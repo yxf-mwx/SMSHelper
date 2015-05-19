@@ -41,8 +41,10 @@ public class Async_CallLogs implements Runnable {
 	public void run() {
 		//先检查字典是否已经就绪
 		copyDmMobile();
+
 		//拿最后通话的时间
 		final long lastUpdateCacheTime = DB_CallLogs_Cache.getInstance(mContext).getLastUpdateTime();
+
 		//根据最后通话的时间选择copy到cache中
 		copyToCache(lastUpdateCacheTime);
 		if (mListener != null) {
@@ -52,6 +54,7 @@ public class Async_CallLogs implements Runnable {
 		mContext = null;
 	}
 
+	//把通话记录的从系统数据库copy到app本地数据缓存目录下
 	private void copyToCache(long lastUpdateTime) {
 		Set<String> map = new HashSet<>();
 		List<CallLogs> insertList = new ArrayList<>();
@@ -108,6 +111,7 @@ public class Async_CallLogs implements Runnable {
 		DB_CallLogs_Cache.getInstance(mContext).insertAll(insertList);
 	}
 
+	//根据是否已经存在号码归属地数据库，决定是否需要copy
 	private void copyDmMobile() {
 		SharedPreferences sp = mContext.getSharedPreferences(AppConstant.SP_FILENAME, Context.MODE_PRIVATE);
 		boolean isFirstInited = sp.getBoolean(AppConstant.SP_INIT_FIRST, false);
@@ -119,6 +123,7 @@ public class Async_CallLogs implements Runnable {
 		}
 	}
 
+	//将数据库从app拷贝到数据目录下
 	private void copy() {
 		boolean copyResult = true;
 		final String path = AppConstant.DB_BASEPATH + AppConstant.DB_DM_MOBILE;

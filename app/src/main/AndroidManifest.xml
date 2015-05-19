@@ -3,10 +3,14 @@
           package = "android.com.smshelper" >
 
 	<uses-permission android:name = "android.permission.RECEIVE_SMS" />
-	<uses-permission android:name = "android.permission.READ_SMS" />
 	<uses-permission android:name = "android.permission.WRITE_SMS" />
+	<!--读短信权限-->
+	<uses-permission android:name = "android.permission.READ_SMS" />
+	<!--读联系人权限-->
 	<uses-permission android:name = "android.permission.READ_CONTACTS" />
+	<!--写文件权限-->
 	<uses-permission android:name = "android.permission.WRITE_EXTERNAL_STORAGE" />
+	<!--读文件权限-->
 	<uses-permission android:name = "android.permission.READ_EXTERNAL_STORAGE" />
 
 	<application
