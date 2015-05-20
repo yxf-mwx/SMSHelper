@@ -1,5 +1,6 @@
 package android.com.smshelper.fragment;
 
+import android.com.smshelper.AppInstance;
 import android.com.smshelper.R;
 import android.com.smshelper.activity.ActivityBlackList;
 import android.com.smshelper.activity.ActivityKeywords;
@@ -10,15 +11,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 /**
  * Created by admin on 15-1-11.
  */
-public class Fragment_LeftMenu extends Fragment implements View.OnClickListener {
+public class Fragment_LeftMenu extends Fragment implements View.OnClickListener, CompoundButton
+		.OnCheckedChangeListener {
 	TextView mTVBlackList;
 	TextView mTVWhiteList;
 	TextView mTVKeyWord;
+	CheckBox mCbSmart;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,9 @@ public class Fragment_LeftMenu extends Fragment implements View.OnClickListener 
 		mTVWhiteList.setOnClickListener(this);
 		mTVKeyWord = (TextView) view.findViewById(R.id.tv_keyword_leftmenu);
 		mTVKeyWord.setOnClickListener(this);
+		mCbSmart = (CheckBox) view.findViewById(R.id.cb_smartfilter_leftmenu);
+		mCbSmart.setChecked(AppInstance.getInstance().isSmartOn());
+		mCbSmart.setOnCheckedChangeListener(this);
 	}
 
 	@Override
@@ -60,5 +68,10 @@ public class Fragment_LeftMenu extends Fragment implements View.OnClickListener 
 			default:
 				return;
 		}
+	}
+
+	@Override
+	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		AppInstance.getInstance().setIsSmartOn(isChecked);
 	}
 }

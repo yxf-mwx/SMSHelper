@@ -22,6 +22,7 @@ public class AppConstant {
 	 */
 	public final static String SP_FILENAME = "app.xml";
 	public final static String SP_INIT_FIRST = "a";
+	public final static String SP_IS_SMART_ON = "b";
 
 	/**
 	 * ARGS
