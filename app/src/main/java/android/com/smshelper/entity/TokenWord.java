@@ -45,4 +45,13 @@ public class TokenWord {
 	public void setNonSpam(int nonSpam) {
 		mNonSpam = nonSpam;
 	}
+
+	@Override
+	public String toString() {
+		return "TokenWord{" +
+				"mToken='" + mToken + '\'' +
+				", mSpam=" + mSpam +
+				", mNonSpam=" + mNonSpam +
+				'}';
+	}
 }

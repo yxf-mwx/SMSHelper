@@ -1,7 +1,5 @@
 package android.com.smshelper.classifyer.classifier;
 
-import android.com.smshelper.database.DB_Data_Smart;
-import android.com.smshelper.entity.TokenWord;
 import android.content.Context;
 
 import org.wltea.analyzer.core.IKSegmenter;
@@ -29,29 +27,31 @@ public class ClassifierSmart implements Classifier {
 
 	@Override
 	public int classify(final String body, String address) {
-
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				List<String> tokens = new ArrayList<>();
-				StringReader sr = new StringReader(body);
-				IKSegmenter iks = new IKSegmenter(sr, true);
-				Lexeme lex = null;
-				try {
-					while ((lex = iks.next()) != null) {
-						tokens.add(lex.getLexemeText());
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				} finally {
-					if (sr != null) {
-						sr.close();
-					}
-				}
-				List<TokenWord> list = DB_Data_Smart.getInstance(mContext).getTokenInformation(tokens);
-
+		List<String> tokens = new ArrayList<>();
+		StringReader sr = new StringReader(body);
+		IKSegmenter iks = new IKSegmenter(sr, true);
+		Lexeme lex = null;
+		try {
+			while ((lex = iks.next()) != null) {
+				tokens.add(lex.getLexemeText());
 			}
-		}).start();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (sr != null) {
+				sr.close();
+			}
+		}
+//		Map<String, Integer> spamReflect = SmartKeyListManager.getInstance().getSpamReflect();
+//		Map<String, Integer> nonSpamReflect = SmartKeyListManager.getInstance().getNonSpamReflect();
+		List<Double> spamRadioList = new ArrayList<>();
+		for (String token : tokens) {
+//			final Integer count = spamReflect.get(token);
+			System.out.println(token);
+//			final double radio = count * 1.0 / spamReflect.size();
+//			spamRadioList.add(radio);
+		}
+
 		return 5;
 	}
 

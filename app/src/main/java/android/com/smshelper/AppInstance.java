@@ -2,6 +2,7 @@ package android.com.smshelper;
 
 import android.app.Application;
 import android.com.smshelper.manager.KeyWordManager;
+import android.com.smshelper.manager.SmartKeyListManager;
 import android.content.SharedPreferences;
 
 import java.io.File;
@@ -29,9 +30,12 @@ public class AppInstance extends Application {
 		mIsSmartOn = sp.getBoolean(AppConstant.SP_IS_SMART_ON, false);
 		KeyWordManager.getInstance().initKeyWordList(this);
 		final File smartDataFile = new File(AppConstant.DB_BASEPATH + AppConstant.DB_SMART);
+
 		if (!smartDataFile.exists()) {
 			copySmartData(smartDataFile);
 		}
+
+		SmartKeyListManager.getInstance().init(this);
 	}
 
 	public boolean isSmartOn() {

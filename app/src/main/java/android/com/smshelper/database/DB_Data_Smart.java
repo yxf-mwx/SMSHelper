@@ -1,13 +1,12 @@
 package android.com.smshelper.database;
 
 import android.com.smshelper.AppConstant;
-import android.com.smshelper.entity.TokenWord;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author yxf
@@ -38,37 +37,67 @@ public class DB_Data_Smart {
 		mDB = SQLiteDatabase.openOrCreateDatabase(AppConstant.DB_BASEPATH + AppConstant.DB_SMART, null);
 	}
 
-	public List<TokenWord> getTokenInformation(List<String> wordList) {
-		List<TokenWord> tokenWordList = new ArrayList<>();
-		for (String s : wordList) {
-			Cursor cursor = null;
-			try {
-				cursor = mDB.query(TABLE_NAME,
-						new String[]{
-								KEY_TOKEN,
-								KEY_SPAM,
-								KEY_NON_SPAM,
-						},
-						KEY_TOKEN + "=?",
-						new String[]{s},
-						null,
-						null,
-						null);
-				if (cursor.getCount() == 0) {
-					tokenWordList.add(new TokenWord(s, 0, 0));
-				} else {
-					final int spam = cursor.getInt(cursor.getColumnIndex(KEY_SPAM));
-					final int non_spam = cursor.getInt(cursor.getColumnIndex(KEY_NON_SPAM));
-					tokenWordList.add(new TokenWord(s, spam, non_spam));
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				if (cursor != null) {
-					cursor.close();
+	public Map<String, Integer> getSpamReflect() {
+		Map<String, Integer> result = new HashMap<>();
+		Cursor cursor = null;
+		try {
+			cursor = mDB.query(TABLE_NAME,
+					new String[]{
+							KEY_TOKEN,
+							KEY_SPAM
+					},
+					null,
+					null,
+					null,
+					null,
+					null);
+			while (cursor.moveToNext()) {
+				final String token = cursor.getString(cursor.getColumnIndex(KEY_TOKEN));
+				final int spam = cursor.getInt(cursor.getColumnIndex(KEY_SPAM));
+				if (spam > 0) {
+					result.put(token, spam);
 				}
 			}
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (cursor != null) {
+				cursor.close();
+			}
 		}
-		return tokenWordList;
+		return null;
+	}
+
+	public Map<String, Integer> getNonSpamReflect() {
+		Map<String, Integer> result = new HashMap<>();
+		Cursor cursor = null;
+		try {
+			cursor = mDB.query(TABLE_NAME,
+					new String[]{
+							KEY_TOKEN,
+							KEY_NON_SPAM
+					},
+					null,
+					null,
+					null,
+					null,
+					null);
+			while (cursor.moveToNext()) {
+				final String token = cursor.getString(cursor.getColumnIndex(KEY_TOKEN));
+				final int non_spam = cursor.getInt(cursor.getColumnIndex(KEY_NON_SPAM));
+				if (non_spam > 0) {
+					result.put(token, non_spam);
+				}
+			}
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (cursor != null) {
+				cursor.close();
+			}
+		}
+		return null;
 	}
 }
