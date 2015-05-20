@@ -12,7 +12,7 @@ public class AppConstant {
 	/**
 	 * DB
 	 */
-	public final static String DB_BASEPATH = Environment.getExternalStorageDirectory() + "/com.android.smshelper/db";
+	public final static String DB_BASEPATH = Environment.getDataDirectory() + "/data/android.com.smshelper/databases";
 	public final static String DB_DM_MOBILE = "/a.db";
 	public final static String DB_SMART = "/data.db";
 

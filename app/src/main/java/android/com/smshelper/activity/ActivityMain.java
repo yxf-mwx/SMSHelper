@@ -55,8 +55,8 @@ public class ActivityMain extends ActionBarActivity implements MenuDrawer.OnDraw
 		mListView.setAdapter(mAdapter);
 		initActionBar();
 		initMenuDrawer();
-		SpamListManager.getInstance().initSpamList(this);
 		SpamListManager.getInstance().addObserver(this);
+		SpamListManager.getInstance().initSpamList(this);
 	}
 
 	/**
