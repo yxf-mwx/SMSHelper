@@ -1,5 +1,6 @@
 package android.com.smshelper.classifyer.classifier;
 
+import android.com.smshelper.manager.SmartKeyListManager;
 import android.content.Context;
 
 import org.wltea.analyzer.core.IKSegmenter;
@@ -9,6 +10,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author yxf
@@ -42,14 +44,17 @@ public class ClassifierSmart implements Classifier {
 				sr.close();
 			}
 		}
-//		Map<String, Integer> spamReflect = SmartKeyListManager.getInstance().getSpamReflect();
-//		Map<String, Integer> nonSpamReflect = SmartKeyListManager.getInstance().getNonSpamReflect();
+		Map<String, Integer> spamReflect = SmartKeyListManager.getInstance().getSpamReflect();
+		Map<String, Integer> nonSpamReflect = SmartKeyListManager.getInstance().getNonSpamReflect();
 		List<Double> spamRadioList = new ArrayList<>();
+		List<Double> nonSpamRadioList = new ArrayList<>();
 		for (String token : tokens) {
-//			final Integer count = spamReflect.get(token);
-			System.out.println(token);
-//			final double radio = count * 1.0 / spamReflect.size();
-//			spamRadioList.add(radio);
+			final Integer countSpam = spamReflect.get(token);
+			final double radio = countSpam * 1.0 / spamReflect.size();
+			spamRadioList.add(radio);
+			final Integer countNonSpam = nonSpamReflect.get(token);
+
+			System.out.println(radio);
 		}
 
 		return 5;
