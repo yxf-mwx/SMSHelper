@@ -1,5 +1,6 @@
 package android.com.smshelper.classifyer.classifier;
 
+import android.com.smshelper.classifyer.ClassifyCenter;
 import android.com.smshelper.manager.SmartKeyListManager;
 import android.content.Context;
 
@@ -29,6 +30,24 @@ public class ClassifierSmart implements Classifier {
 
 	@Override
 	public int classify(final String body, String address) {
+		List<String> tokens = divide(body);
+		Map<String, Integer> spamReflect = SmartKeyListManager.getInstance().getSpamReflect();
+		Map<String, Integer> nonSpamReflect = SmartKeyListManager.getInstance().getNonSpamReflect();
+		List<Double> spamRadioList = new ArrayList<>();
+		List<Double> nonSpamRadioList = new ArrayList<>();
+		for (String token : tokens) {
+			final Integer countSpam = spamReflect.get(token);
+			final double spamRadio = countSpam * 1.0 / spamReflect.size();
+			spamRadioList.add(spamRadio);
+			final Integer countNonSpam = nonSpamReflect.get(token);
+			final double nonSpamRadio = countNonSpam * 1.0 / spamReflect.size();
+			nonSpamRadioList.add(nonSpamRadio);
+		}
+
+		return ClassifyCenter.WHITE;
+	}
+
+	private List<String> divide(String body) {
 		List<String> tokens = new ArrayList<>();
 		StringReader sr = new StringReader(body);
 		IKSegmenter iks = new IKSegmenter(sr, true);
@@ -37,6 +56,7 @@ public class ClassifierSmart implements Classifier {
 			while ((lex = iks.next()) != null) {
 				tokens.add(lex.getLexemeText());
 			}
+			return tokens;
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -44,20 +64,9 @@ public class ClassifierSmart implements Classifier {
 				sr.close();
 			}
 		}
-		Map<String, Integer> spamReflect = SmartKeyListManager.getInstance().getSpamReflect();
-		Map<String, Integer> nonSpamReflect = SmartKeyListManager.getInstance().getNonSpamReflect();
-		List<Double> spamRadioList = new ArrayList<>();
-		List<Double> nonSpamRadioList = new ArrayList<>();
-		for (String token : tokens) {
-			final Integer countSpam = spamReflect.get(token);
-			final double radio = countSpam * 1.0 / spamReflect.size();
-			spamRadioList.add(radio);
-			final Integer countNonSpam = nonSpamReflect.get(token);
-
-			System.out.println(radio);
-		}
-
-		return 5;
+		return null;
 	}
+
+
 
 }
