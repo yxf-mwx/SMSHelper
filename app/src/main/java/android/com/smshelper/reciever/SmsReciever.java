@@ -2,6 +2,7 @@ package android.com.smshelper.reciever;
 
 import android.com.smshelper.classifyer.ClassifyCenter;
 import android.com.smshelper.entity.SMSEntity;
+import android.com.smshelper.manager.SmartKeyListManager;
 import android.com.smshelper.manager.SpamListManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -31,12 +32,14 @@ public class SmsReciever extends BroadcastReceiver {
 				final String address = entity.getAddress();
 
 				//用分类器分辨是否为垃圾短信，如果是做处理，不是就不需要处理
-				if (ClassifyCenter.getInstance(context).classify(body, address) == ClassifyCenter.SPAM) {
+				final int smsType = ClassifyCenter.getInstance(context).classify(body, address);
+				SmartKeyListManager.getInstance().updateSmartData(body, smsType);
+				if (smsType == ClassifyCenter.SPAM) {
 					List<SMSEntity> list = new ArrayList<>();
 					list.add(entity);
 					SpamListManager.getInstance().addSMS(context, list);
 					abortBroadcast();
-				}else{
+				} else {
 
 				}
 

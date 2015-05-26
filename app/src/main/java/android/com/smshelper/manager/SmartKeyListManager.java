@@ -11,7 +11,7 @@ import java.util.Map;
  * @time 10:44 PM
  * updater xxx
  * update  yy-MM-dd
- * @comment balabalabala
+ * @comment 智能过滤管理类
  */
 public class SmartKeyListManager {
 	private static SmartKeyListManager mInstance;
@@ -37,5 +37,11 @@ public class SmartKeyListManager {
 
 	public Map<String, Integer> getNonSpamReflect() {
 		return mNonSpamReflect;
+	}
+
+	//更新过滤算法数据库
+	public void updateSmartData(String body, int type) {
+		int x = 0;
+		x++;
 	}
 }
